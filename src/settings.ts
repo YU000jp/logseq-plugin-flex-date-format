@@ -16,9 +16,9 @@ export const settingsTemplate: SettingSchemaDesc[] = [
         key: "booleanJournalLinkDateFormat",
         title: t("Enable selected date format"),
         type: "boolean",
-        default: false,
+        default: true,
         //グラフには影響を与えない
-        description: "default: `false`",
+        description: "default: `true`",
     },
     {//date format
         key: "dateFormat",
@@ -66,7 +66,7 @@ export const settingsTemplate: SettingSchemaDesc[] = [
 
     {
         key: "headingAddLocalizeDayOfWeek",
-        title: t("Localized day of the week (except `Localize`)"),
+        title: t("Localized day of the week (except `Localize` mode)"),
         type: "heading",
         default: "",
         //グラフには影響を与えない
