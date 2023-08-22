@@ -1,6 +1,6 @@
 # Logseq Plugin: Flex date format
 
-- Localize date format. Or switch to display of the selected format.
+- Localize date format. Or switch to style of the selected format.
 
 - Development stage 👷🚧
 
@@ -15,7 +15,7 @@
 
 ## Features
 
-### Switch to display of the selected date format 🆕
+### Switch to style of the selected date format 🆕
 
 - journal links or journal title
 - Select "localize" mode or another date format
@@ -44,7 +44,7 @@
 
 ### Plugin settings
 
-#### Switch to display of the selected date format
+#### Switch to style of the selected date format
 
 - Enable selected date format: toggle
   - `true` default
