@@ -90,6 +90,10 @@
 
 - [Legacy date format plugin](https://github.com/YU000jp/logseq-plugin-legacy-date-format)
 
+#### Need to week number
+
+- [Show Weekday and Week-number plugin](https://github.com/YU000jp/logseq-plugin-show-weekday-and-week-number/)
+
 ## Showcase / Questions / Ideas / Help
 
 > Go to the [discussion](https://github.com/YU000jp/logseq-plugin-flex-date-format/discussions) tab to ask and find this kind of things.
