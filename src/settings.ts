@@ -6,7 +6,7 @@ import { t } from 'logseq-l10n';
 export const settingsTemplate: SettingSchemaDesc[] = [
     {
         key: "headingAddLocalizeDayOfWeek",
-        title: t("Switch to display of the selected date format"),
+        title: t("Switch to style of the selected date format"),
         type: "heading",
         default: "",
         //グラフには影響を与えない
