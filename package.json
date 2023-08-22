@@ -1,6 +1,6 @@
 {
     "name": "logseq-plugin-flex-date-format",
-    "description": "A template for Logseq plugin written in TypeScript",
+    "description": "Localize date format. Or switch to the selected format.",
     "repository": "https://github.com/YU000jp/logseq-plugin-flex-date-format.git",
     "author": "YU000jp",
     "license": "MIT",
