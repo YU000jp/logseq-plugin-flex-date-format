@@ -22,6 +22,7 @@
 
 ### (Option) Localize day of the week in journal links 🆙
 
+- Except "Localize" mode
 - If the day of the week is not included in user date format, add the localized day of the week to the journal link
 - If it is included in the format, localize the day of the week in the journal link
 - 2023/07/22 => 2023/07/22 (Sat)
