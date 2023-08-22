@@ -1,5 +1,7 @@
 # Logseq Plugin: Flex date format
 
+- Localize date format. Or switch to the selected format.
+
 - Development stage 👷🚧
 
 - *This plugin does not affect the graph or files*
@@ -13,9 +15,11 @@
 
 ## Features
 
-### Force display of date format (journal links or journal title)
+### Switch to the selected date format 🆕
 
-### Localize day of the week in journal links 🆕
+- journal links or journal title
+
+### Localize day of the week in journal links 🆙
 
 - If the day of the week is not included in user date format, add the localized day of the week to the journal link
 - If it is included in the format, localize the day of the week in the journal link
