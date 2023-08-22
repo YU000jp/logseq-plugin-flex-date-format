@@ -1,6 +1,6 @@
 import '@logseq/libs'; //https://plugins-doc.logseq.com/
 import { settingsTemplate } from './settings';
-import { setup as l10nSetup, t } from "logseq-l10n"; //https://github.com/sethyuan/logseq-l10n
+import { setup as l10nSetup } from "logseq-l10n"; //https://github.com/sethyuan/logseq-l10n
 import ja from "./translations/ja.json";
 import { journalLink } from './journalLink';
 import { AppUserConfigs, LSPluginBaseInfo } from '@logseq/libs/dist/LSPlugin.user';
@@ -11,7 +11,6 @@ import { openStartWindow } from './demoDateFormat';
 const main = () => {
   (async () => {
     try {
-      //翻訳
       await l10nSetup({ builtinTranslations: { ja } });
     } finally {
       /* user settings */
@@ -121,7 +120,7 @@ const revertQuerySelectorAllLinks = () => {
     .forEach(
       async (titleElement) => {
         titleElement.removeAttribute("data-localize");
-        titleElement.textContent = titleElement.dataset.ref as string;
+        if (titleElement.dataset.ref) titleElement.textContent = titleElement.dataset.ref as string;
       }
     );
 };
