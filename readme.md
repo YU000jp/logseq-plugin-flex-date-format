@@ -18,9 +18,11 @@
 ### Switch to display of the selected date format 🆕
 
 - journal links or journal title
+- Select "localize" mode or another date format
 
-### Localize day of the week in journal links 🆙
+### (Option) Localize day of the week in journal links 🆙
 
+- Except "Localize" mode
 - If the day of the week is not included in user date format, add the localized day of the week to the journal link
 - If it is included in the format, localize the day of the week in the journal link
 - 2023/07/22 => 2023/07/22 (Sat)
@@ -33,14 +35,56 @@
 ### Install from Logseq Marketplace (Coming👷🚧)
 
 - Press [`---`] on the top right toolbar to open [`Plugins`]
-- Select marketplace
-- Type `WORD` in the search field, select it from the search results and install
+- Select `Marketplace`
+- Type `Flex` in the search field, select it from the search results and install
 
-### Usage
+#### ⚠️If using `Show Weekday and Week-number` plugin, overlapping "days of the week".
+
+  > Turn it off in the plugin settings.
+
+### Plugin settings
+
+#### Switch to display of the selected date format
+
+- Enable selected date format: toggle
+  - `true` default
+  - `false`
+- Select date format  (if the above option is enabled): select
+  - `Localize`
+  - `MM/dd/yyyy`
+  - `dd-MM-yyyy`
+  - `dd.MM.yyyy`
+  - `yyyy/MM/dd`
+  - `MM-dd-yyyy`
+  - `MM/dd/yyyy`
+  - `MMM do, yyyy`
+  - `MMMM do, yyyy`
+  - `MM_dd_yyyy`
+  - `dd-MM-yyyy`
+  - `do MMM yyyy`
+  - `do MMMM yyyy`
+  - `yyyy-MM-dd`
+  - `yyyy-MM-dd EEEE`
+  - `yyyy/MM/dd`
+  - `yyyyMMdd`
+  - `yyyy_MM_dd`
+  - `yyyy年MM月dd日`
+-  Display relative time on hover the journal link: toggle
+  - `true` default
+  - `false`
+
+#### Localized day of the week (except `Localize` mode)
+
+- If the day of the week is included in user date format, localize the day of the week in the date link
+  - `true` default
+  - `false`
+- If the day of the week is not included in user date format, add the localized day of the week to the date link
+  - `true` default
+  - `false`
 
 ---
 
-### Recoommend
+### Recommend
 
 #### If changed user date format
 
