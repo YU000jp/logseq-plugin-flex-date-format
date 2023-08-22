@@ -1,17 +1,26 @@
-# Logseq Plugin: Template for TypeScript
+# Logseq Plugin: Flex date format
 
 - Development stage 👷🚧
 
-> This plugin still has room for improvement. Please let me know if you encounter any issues or have any ideas for enhancement.
+- *This plugin does not affect the graph or files*
 
-[![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-template-typescript)](https://github.com/YU000jp/logseq-plugin-template-typescript/releases)
-[![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-template-typescript?color=blue)](https://github.com/YU000jp/logseq-plugin-template-typescript/LICENSE)
-[![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-template-typescript/total.svg)](https://github.com/YU000jp/logseq-plugin-template-typescript/releases)
+[![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
+[![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-flex-date-format?color=blue)](https://github.com/YU000jp/logseq-plugin-flex-date-format/LICENSE)
+[![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-flex-date-format/total.svg)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
 <!-- Published 2023 -->
 
 ---
 
 ## Features
+
+### Force display of date format (journal links or journal title)
+
+### Localize day of the week in journal links 🆕
+
+- If the day of the week is not included in user date format, add the localized day of the week to the journal link
+- If it is included in the format, localize the day of the week in the journal link
+- 2023/07/22 => 2023/07/22 (Sat)
+  > `(Sat)` is the localized day of the week.
 
 ---
 
@@ -29,17 +38,11 @@
 
 ## Showcase / Questions / Ideas / Help
 
-> Go to the [discussion](./discussions) tab to ask and find this kind of things.
+> Go to the [discussion](https://github.com/YU000jp/logseq-plugin-flex-date-format/discussions) tab to ask and find this kind of things.
 
 ## Author
 
 - GitHub: [YU000jp](https://github.com/YU000jp)
-
-## Prior art & Credit
-
-### Icon
-
-- [icooon-mono.com](https://icooon-mono.com/)
 
 ---
 

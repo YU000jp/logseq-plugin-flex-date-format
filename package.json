@@ -1,13 +1,13 @@
 {
-    "name": "logseq-plugin-template-typescript",
+    "name": "logseq-plugin-flex-date-format",
     "description": "A template for Logseq plugin written in TypeScript",
-    "repository": "https://github.com/YU000jp/logseq-plugin-template-typescript.git",
+    "repository": "https://github.com/YU000jp/logseq-plugin-flex-date-format.git",
     "author": "YU000jp",
     "license": "MIT",
     "logseq": {
-        "id": "template-typescript",
-        "title": "Template TypeScript",
-        "icon": "./icon.svg",
+        "id": "flex-date-format",
+        "title": "Flex date format",
+        "icon": "./icon.png",
         "main": "./dist/index.html"
     },
     "effect": true,
@@ -18,21 +18,23 @@
         "prod": "vite build"
     },
     "dependencies": {
-        "@logseq/libs": "^0.0.15"
+        "@logseq/libs": "^0.0.15",
+        "date-fns": "^2.30.0",
+        "logseq-l10n": "^0.2.0"
     },
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/exec": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
-        "@types/node": "^20.4.4",
-        "conventional-changelog-conventionalcommits": "^5.0.0",
+        "@types/node": "^20.5.2",
+        "conventional-changelog-conventionalcommits": "^6.1.0",
         "cz-conventional-changelog": "^3.3.0",
-        "jest": "^29.6.1",
+        "jest": "^29.6.3",
         "npx": "^10.2.2",
         "rollup-plugin-string": "^3.0.0",
-        "semantic-release": "^21.0.7",
+        "semantic-release": "^21.0.9",
         "typescript": "^5.1.6",
-        "vite": "^4.4.7",
+        "vite": "^4.4.9",
         "vite-plugin-logseq": "^1.1.2"
     },
     "config": {

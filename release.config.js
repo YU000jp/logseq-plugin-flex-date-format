@@ -12,7 +12,7 @@ module.exports = {
         '@semantic-release/git',
         ['@semantic-release/exec', {
             prepareCmd:
-                `zip -qq -r ${PLUGIN_NAME}-` + "${nextRelease.version}.zip dist icon.svg package.json README.md LICENSE",
+                `zip -qq -r ${PLUGIN_NAME}-` + "${nextRelease.version}.zip dist icon.png package.json README.md LICENSE",
         }],
         ['@semantic-release/github', {
             assets: `${PLUGIN_NAME}-*.zip`,
