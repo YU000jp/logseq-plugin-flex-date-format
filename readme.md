@@ -40,6 +40,12 @@
 
 ---
 
+### Recoommend
+
+#### If changed user date format
+
+- [Legacy date format plugin](https://github.com/YU000jp/logseq-plugin-legacy-date-format)
+
 ## Showcase / Questions / Ideas / Help
 
 > Go to the [discussion](https://github.com/YU000jp/logseq-plugin-flex-date-format/discussions) tab to ask and find this kind of things.
