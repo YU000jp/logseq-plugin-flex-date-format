@@ -38,7 +38,45 @@
 - Select marketplace
 - Type `WORD` in the search field, select it from the search results and install
 
-### Usage
+### Plugin settings
+
+#### Switch to display of the selected date format
+
+- Enable selected date format: toggle
+  - `true` default
+  - `false`
+- Select date format  (if the above option is enabled): select
+  - `Localize`
+  - `MM/dd/yyyy`
+  - `dd-MM-yyyy`
+  - `dd.MM.yyyy`
+  - `yyyy/MM/dd`
+  - `MM-dd-yyyy`
+  - `MM/dd/yyyy`
+  - `MMM do, yyyy`
+  - `MMMM do, yyyy`
+  - `MM_dd_yyyy`
+  - `dd-MM-yyyy`
+  - `do MMM yyyy`
+  - `do MMMM yyyy`
+  - `yyyy-MM-dd`
+  - `yyyy-MM-dd EEEE`
+  - `yyyy/MM/dd`
+  - `yyyyMMdd`
+  - `yyyy_MM_dd`
+  - `yyyy年MM月dd日`
+-  Display relative time on hover the journal link: toggle
+  - `true` default
+  - `false`
+
+#### Localized day of the week (except `Localize` mode)
+
+- If the day of the week is included in user date format, localize the day of the week in the date link
+  - `true` default
+  - `false`
+- If the day of the week is not included in user date format, add the localized day of the week to the date link
+  - `true` default
+  - `false`
 
 ---
 
