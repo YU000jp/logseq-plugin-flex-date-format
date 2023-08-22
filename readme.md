@@ -35,8 +35,12 @@
 ### Install from Logseq Marketplace (Coming👷🚧)
 
 - Press [`---`] on the top right toolbar to open [`Plugins`]
-- Select marketplace
-- Type `WORD` in the search field, select it from the search results and install
+- Select `Marketplace`
+- Type `Flex` in the search field, select it from the search results and install
+
+#### ⚠️If using `Show Weekday and Week-number` plugin, overlapping "days of the week".
+
+  > Turn it off in the plugin settings.
 
 ### Plugin settings
 
