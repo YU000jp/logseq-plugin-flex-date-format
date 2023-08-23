@@ -81,7 +81,7 @@
   - `true` default
   - `false`
 #### Advanced options for `Localize` mode
-> This setting may change.
+> This setting may change. It cannot be used when creating links. Create it based on the user date format.
 - Select locale: select
   - `default`              // Gregorian calendar (default)  
   - `en-US`                // English (United States) - Gregorian calendar (default)  
