@@ -44,7 +44,7 @@ const main = () => {
 
 
 const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseInfo["settings"], oldSet: LSPluginBaseInfo["settings"]) => {
-  if (newSet.booleanJournalLinkDateFormat === true && newSet.dateFormat !== oldSet.dateFormat) {
+  if (newSet.booleanJournalLinkDateFormat === true && newSet.dateFormat !== oldSet.dateFormat || newSet.selectLocale !== oldSet.selectLocale) {
     revertQuerySelectorAllLinks();
     setTimeout(() => querySelectorAllLinks(), 50);
   } else

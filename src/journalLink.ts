@@ -18,7 +18,7 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
     if (logseq.settings!.booleanJournalLinkDateFormat === true) {
       journalLinkElement.dataset.ref = journalLinkElement.textContent;
       if (logseq.settings!.dateFormat === "Localize") {
-        journalLinkElement.textContent = journalDate.toLocaleDateString("default", { weekday: "short", year: "numeric", month: "short", day: "numeric" }).replace(/,/g, "");//ローカライズ
+        journalLinkElement.textContent = journalDate.toLocaleDateString(logseq.settings!.selectLocale || "default", { weekday: "short", year: "numeric", month: "short", day: "numeric" }).replace(/,/g, "");//ローカライズ
       }
       else journalLinkElement.textContent = format(journalDate, logseq.settings!.dateFormat);
       journalLinkElement.dataset.localize = "true";
