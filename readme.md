@@ -74,12 +74,28 @@
 
 #### Localized day of the week (except `Localize` mode)
 
-- If the day of the week is included in user date format, localize the day of the week in the date link
+- If the day of the week is included in user date format, localize the day of the week in the date link: toggle
   - `true` default
   - `false`
-- If the day of the week is not included in user date format, add the localized day of the week to the date link
+- If the day of the week is not included in user date format, add the localized day of the week to the date link: toggle
   - `true` default
   - `false`
+#### Advanced options for `Localize` mode
+- Select locale: select
+  - `default`              // Gregorian calendar (default)  
+  - `en-US`                // English (United States) - Gregorian calendar (default)  
+  - `en-GB-u-ca-islamic`   // English (United Kingdom) - Islamic calendar  
+  - `ja-JP-u-ca-japanese`   // Japanese (Japan) - Japanese calendar  
+  - `zh-Hans-CN`            // Chinese (China) - Gregorian calendar (default)  
+  - `zh-TW-u-ca-roc`        // Chinese (Taiwan) - Minguo calendar (Republic of China era)  
+  - `zh-Hant-TW-u-ca-taiwan`// Chinese (Taiwan) - Gregorian calendar (default)  
+  - `zh-CN-u-ca-chinese`    // Chinese (China) - Chinese calendar  
+  - `th-TH-u-nu-thai`       // Thai (Thailand) - Thai digits  
+  - `ar-SA-u-ca-islamic-umalqura`   // Arabic (Saudi Arabia) - Islamic (Umm al-Qura) calendar  
+  - `fa-IR-u-ca-persian`    // Persian (Iran) - Persian calendar (Jalali)  
+  - `he-IL-u-ca-hebrew`     // Hebrew (Israel) - Hebrew calendar  
+  - `th-TH-u-ca-buddhist`   // Thai (Thailand) - Buddhist calendar  
+  - `am-ET-u-ca-ethiopic`   // Amharic (Ethiopia) - Ethiopian calendar
 
 ---
 
