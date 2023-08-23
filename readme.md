@@ -105,6 +105,10 @@
 
 ### Recommend
 
+#### Parsing for date input
+
+[date nlp plugin](https://github.com/hkgnp/logseq-datenlp-plugin)
+
 #### If changed user date format
 
 - [Legacy date format plugin](https://github.com/YU000jp/logseq-plugin-legacy-date-format)
