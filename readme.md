@@ -1,8 +1,9 @@
 # Logseq Plugin: Flex date format
 
 - Localize date format. Or switch to style of the selected format.
-
+- Separate the date format recorded in files from the format displayed.
 - *This plugin does not affect the graph or files*
+> Only markdown format supported
 
 [![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
 [![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-flex-date-format?color=blue)](https://github.com/YU000jp/logseq-plugin-flex-date-format/LICENSE)
