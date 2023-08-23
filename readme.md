@@ -19,11 +19,6 @@
 - journal links or journal title
 - Select "localize" mode or another date format
 
-- example ("Localize" mode)
-  - ![image](https://github.com/YU000jp/logseq-plugin-flex-date-format/assets/111847207/1b9675b5-98bf-476a-81b7-e6b3c66aeb76) → ![image](https://github.com/YU000jp/logseq-plugin-flex-date-format/assets/111847207/93ff1e7d-6221-42f0-ac4b-b2233aae81b3) (This is Japanese)
-
-
-
 ### (Option) Localize day of the week in journal links 🆙
 
 - Except "Localize" mode
