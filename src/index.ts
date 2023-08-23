@@ -76,7 +76,7 @@ async function querySelectorAllLinks(): Promise<void> {
     (await logseq.App.getUserConfigs()) as AppUserConfigs;
   parent.document
     .querySelectorAll(
-      "div#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), div:is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), div#left-sidebar li span.page-title:not([data-localize])"
+      "div#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), div:is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), div#left-sidebar li span.page-title:not([data-localize]), div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis:not([data-localize])"
     )
     .forEach(
       async (titleElement) => await journalLink(titleElement as HTMLElement, preferredDateFormat)
@@ -115,7 +115,7 @@ const observerMainRight = () => {
 const revertQuerySelectorAllLinks = () => {
   (parent.document
     .querySelectorAll(
-      "div#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], div:is(#main-content-container,#right-sidebar) a[data-ref][data-localize]:not([data-checked]), div#left-sidebar li span.page-title[data-localize]:not([data-checked])"
+      "div#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], div:is(#main-content-container,#right-sidebar) a[data-ref][data-localize]:not([data-checked]), div#left-sidebar li span.page-title[data-localize], div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis[data-localize]"
     ) as NodeListOf<HTMLElement>)
     .forEach(
       async (titleElement) => {
