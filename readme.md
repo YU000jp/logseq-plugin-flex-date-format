@@ -81,6 +81,7 @@
   - `true` default
   - `false`
 #### Advanced options for `Localize` mode
+> This setting may change.
 - Select locale: select
   - `default`              // Gregorian calendar (default)  
   - `en-US`                // English (United States) - Gregorian calendar (default)  
