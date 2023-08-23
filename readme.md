@@ -49,6 +49,7 @@
   - `true` default
   - `false`
 - Select date format  (if the above option is enabled): select
+  > ⚠️ It cannot be used when creating links. Create it based on the user date format.
   - `Localize`
   - `MM/dd/yyyy`
   - `dd-MM-yyyy`
@@ -68,7 +69,7 @@
   - `yyyyMMdd`
   - `yyyy_MM_dd`
   - `yyyy年MM月dd日`
--  Display relative time on hover the journal link: toggle
+- Display relative time on hover the journal link: toggle
   - `true` default
   - `false`
 
@@ -80,9 +81,11 @@
 - If the day of the week is not included in user date format, add the localized day of the week to the date link: toggle
   - `true` default
   - `false`
+
 #### Advanced options for `Localize` mode
-> This setting may change.
+
 - Select locale: select
+  > ⚠️ It cannot be used when creating links. Create it based on the user date format.
   - `default`              // Gregorian calendar (default)  
   - `en-US`                // English (United States) - Gregorian calendar (default)  
   - `en-GB-u-ca-islamic`   // English (United Kingdom) - Islamic calendar  
