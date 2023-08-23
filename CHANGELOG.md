@@ -1,3 +1,15 @@
+# [1.1.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.0.2...v1.1.0) (2023-08-23)
+
+
+### Bug Fixes
+
+* right sidebar, page-title ([933d02a](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/933d02ab4027b0c0f2ffb42d4ac88fd74b6828b9))
+
+
+### Features
+
+* **Add:** Advanced option Localize locale ([f013980](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/f013980a319ff9408bf7961387891218317156f0))
+
 ## [1.0.2](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.0.1...v1.0.2) (2023-08-22)
 
 
