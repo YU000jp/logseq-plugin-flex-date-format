@@ -47,7 +47,7 @@ export const settingsTemplate: SettingSchemaDesc[] = [
             "yyyy年MM月dd日",
         ],
         default: "Localize",
-        description: "",
+        description: "⚠️ It cannot be used when creating links. Create it based on the user date format.",
     },
     {//日付フォーマットのデモンストレーション
         key: "loadDateFormatDemo",
@@ -115,6 +115,6 @@ export const settingsTemplate: SettingSchemaDesc[] = [
 
         ],
         default: "default",
-        description: "",
+        description: "⚠️ It cannot be used when creating links. Create it based on the user date format.",
     },
 ];
