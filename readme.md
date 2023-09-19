@@ -12,14 +12,14 @@
 
 ---
 
-## Features
+## Options
 
 ### Switch to style of the selected date format 🆕
 
 - journal links or journal title
 - Select "localize" mode or another date format
 
-### (Option) Localize day of the week in journal links 🆙
+### Localize day of the week in journal links 🆙
 
 - Except "Localize" mode
 - If the day of the week is not included in user date format, add the localized day of the week to the journal link
