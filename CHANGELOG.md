@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.1.0...v1.2.0) (2023-09-30)
+
+
+### Bug Fixes
+
+* **doc:** plugin settings ([7f69407](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/7f69407a71ff396bdea8504a12bf0478d8225d1a))
+
+
+### Features
+
+* **translation:** ja ([9961262](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/9961262b6d2316a8418aef27748acc6574f7b1f5))
+
 # [1.1.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.0.2...v1.1.0) (2023-08-23)
 
 
