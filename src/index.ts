@@ -12,7 +12,7 @@ const main = () => {
   (async () => {
     await l10nSetup({ builtinTranslations: { ja } });
     /* user settings */
-    logseq.useSettingsSchema(settingsTemplate);
+    logseq.useSettingsSchema(settingsTemplate());
     if (!logseq.settings!.firstLoad) {
       setTimeout(() => logseq.showSettingsUI(), 300);
       logseq.updateSettings({ firstLoad: "20230823no01" });

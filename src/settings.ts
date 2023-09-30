@@ -3,7 +3,7 @@ import { t } from 'logseq-l10n';
 
 /* user setting */
 // https://logseq.github.io/plugins/types/SettingSchemaDesc.html
-export const settingsTemplate: SettingSchemaDesc[] = [
+export const settingsTemplate = (): SettingSchemaDesc[] => [
     {
         key: "headingAddLocalizeDayOfWeek",
         title: t("Switch to style of the selected date format"),
@@ -47,14 +47,14 @@ export const settingsTemplate: SettingSchemaDesc[] = [
             "yyyy年MM月dd日",
         ],
         default: "Localize",
-        description: "⚠️ It cannot be used when creating links. Create it based on the user date format.",
+        description: t("⚠️ It cannot be used when creating links. Create it based on the user date format."),
     },
     {//日付フォーマットのデモンストレーション
         key: "loadDateFormatDemo",
         title: t("All date format demo"),
         type: "boolean",
         default: false,
-        description: "Open the dialog on click",
+        description: t("Open the dialog on click"),
     },
     {//booleanRelativeTime
         key: "booleanRelativeTime",
@@ -115,6 +115,6 @@ export const settingsTemplate: SettingSchemaDesc[] = [
 
         ],
         default: "default",
-        description: "⚠️ It cannot be used when creating links. Create it based on the user date format.",
+        description: t("⚠️ It cannot be used when creating links. Create it based on the user date format."),
     },
 ];

@@ -1,11 +1,15 @@
 {
-"Switch to display of the selected date format": "選択された日付フォーマットに切り替える",
-"*This setting does not affect the graph or files*": "*この設定はグラフやファイルには影響しません*",
-"Enable selected date format": "選択された日付フォーマットを有効にする",
-"Journal link: Select date format  (if the above option is enabled)": "日付フォーマットを選択する",
-"All date format demo": "日付フォーマットのデモ",
-"Display relative time on hover the journal link": "日付の上にマウスを置くと相対時間を表示する",
-"Localized day of the week (except `Localize`)": "曜日をローカライズする（`Localize`以外）",
-"If the day of the week is included in user date format, localize the day of the week in the date link": "ユーザーの日付フォーマットに曜日が含まれている場合、日付リンクの曜日をローカライズする",
-"If the day of the week is not included in user date format, add the localized day of the week to the date link": "ユーザーの日付フォーマットに曜日が含まれていない場合、日付リンクにローカライズされた曜日を追加する"
+    "Switch to style of the selected date format": "選択された日付フォーマットに切り替える",
+    "*This setting does not affect the graph or files*": "*この設定はグラフやファイルには影響しません*",
+    "Enable selected date format": "選択された日付フォーマットを有効にする",
+    "Select date format  (if the above option is enabled)": "日付フォーマットを選択する（上記のオプションが有効な場合）",
+    "All date format demo": "日付フォーマットのデモ",
+    "Display relative time on hover the journal link": "日付の上にマウスを置くと相対時間を表示する",
+    "Localized day of the week (except `Localize` mode)": "曜日をローカライズする（`Localize`以外）",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "ユーザーの日付フォーマットに曜日が含まれている場合、日付リンクの曜日をローカライズする",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "ユーザーの日付フォーマットに曜日が含まれていない場合、日付リンクにローカライズされた曜日を追加する",
+    "Advanced options for `Localize` mode": "`Localize`モードの詳細オプション",
+    "Select locale": "ロケールを選択する",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ リンクを作成するときには使用できません。ユーザーの日付フォーマットに基づいて作成してください。",
+    "Open the dialog on click": "クリックでダイアログを開く"
 }
