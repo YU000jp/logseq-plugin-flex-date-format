@@ -1,9 +1,7 @@
 # Logseq Plugin: Flex date format
 
 - Localize date format. Or switch to style of the selected format.
-- Separate the date format recorded in files from the format displayed.
-- *This plugin does not affect the graph or files*
-> Only markdown format supported
+- Separate the date format recorded in files from the format displayed. *This plugin does not affect the graph or files*
 
 [![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
 [![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-flex-date-format?color=blue)](https://github.com/YU000jp/logseq-plugin-flex-date-format/LICENSE)
@@ -31,11 +29,11 @@
 
 ## Getting Started
 
+> Only markdown format supported
+
 ### Install from Logseq Marketplace
 
-- Press [`---`] on the top right toolbar to open [`Plugins`]
-- Select `Marketplace`
-- Type `Flex` in the search field, select it from the search results and install
+- Press [`---`] on the top right toolbar to open [`Plugins`]. Select `Marketplace`. Type `Flex` in the search field, select it from the search results and install.
 
 #### ⚠️If using `Show Weekday and Week-number` plugin, overlapping "days of the week".
 
