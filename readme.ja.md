@@ -98,7 +98,7 @@ Logseq マーケットプレースからインストールしてください
 
 日付入力の解析 > [日付 NLP プラグイン](https://github.com/hkgnp/logseq-datenlp-plugin)
 
-ユーザーの日付形式を変更した場合 > [旧式日付形式プラグイン](https://github.com/YU000jp/logseq-plugin-legacy-date-format)
+ユーザーの日付形式を変更した場合 > [変更以前の日付形式を置換するプラグイン](https://github.com/YU000jp/logseq-plugin-legacy-date-format)
 
 週番号が必要な場合 > [曜日と週番号を表示するプラグイン](https://github.com/YU000jp/logseq-plugin-show-weekday-and-week-number/)
 
