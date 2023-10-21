@@ -13,7 +13,7 @@
 
 ## Options
 
-1. Switch to style of the selected date format 🆕
+1. **Switch to style of the selected date format** 🆕
    - journal links or journal title
    - Select "localize" mode or another date format
 
