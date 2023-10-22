@@ -74,15 +74,15 @@ async function querySelectorAllLinks(): Promise<void> {
   processingTitleQuery = true;
   const { preferredDateFormat } =
     (await logseq.App.getUserConfigs()) as AppUserConfigs;
-  parent.document
-    .querySelectorAll(
+  (parent.document.querySelector("body>div#root>div>main") as HTMLElement | null)?.querySelectorAll(
       "div#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), div:is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), div#left-sidebar li span.page-title:not([data-localize]), div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis:not([data-localize])"
     )
     .forEach(
       async (titleElement) => await journalLink(titleElement as HTMLElement, preferredDateFormat)
     );
 
-  processingTitleQuery = false;
+  setTimeout(() => processingTitleQuery = false, 100);
+  
 }
 
 //observer
