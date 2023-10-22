@@ -1,5 +1,5 @@
-import { SettingSchemaDesc } from '@logseq/libs/dist/LSPlugin.user';
-import { t } from 'logseq-l10n';
+import { SettingSchemaDesc } from '@logseq/libs/dist/LSPlugin.user'
+import { t } from 'logseq-l10n'
 
 /* user setting */
 // https://logseq.github.io/plugins/types/SettingSchemaDesc.html
@@ -117,4 +117,4 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         default: "default",
         description: t("⚠️ It cannot be used when creating links. Create it based on the user date format."),
     },
-];
+]
