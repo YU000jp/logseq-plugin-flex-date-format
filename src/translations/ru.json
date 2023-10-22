@@ -1,0 +1,15 @@
+{
+    "Switch to style of the selected date format": "Переключиться на стиль выбранного формата даты",
+    "*This setting does not affect the graph or files*": "*Эта настройка не влияет на график или файлы*",
+    "Enable selected date format": "Включить выбранный формат даты",
+    "Select date format  (if the above option is enabled)": "Выберите формат даты (если включена вышеуказанная опция)",
+    "All date format demo": "Демонстрация всех форматов дат",
+    "Display relative time on hover the journal link": "Отображать относительное время при наведении на ссылку на журнал",
+    "Localized day of the week (except `Localize` mode)": "Локализовать день недели (кроме режима `Локализация`)",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "Если день недели включен в пользовательский формат даты, локализуйте день недели в ссылке на дату",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Если день недели не включен в пользовательский формат даты, добавьте локализованный день недели в ссылку на дату",
+    "Advanced options for `Localize` mode": "Расширенные параметры для режима `Локализация`",
+    "Select locale": "Выберите локаль",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Нельзя использовать при создании ссылок. Создайте его на основе формата даты пользователя.",
+    "Open the dialog on click": "Открывать диалоговое окно при нажатии"
+}

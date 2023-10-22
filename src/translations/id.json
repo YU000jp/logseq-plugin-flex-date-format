@@ -1,0 +1,15 @@
+{
+    "Switch to style of the selected date format": "Beralih ke gaya format tanggal yang dipilih",
+    "*This setting does not affect the graph or files*": "*Pengaturan ini tidak mempengaruhi grafik atau file*",
+    "Enable selected date format": "Aktifkan format tanggal yang dipilih",
+    "Select date format  (if the above option is enabled)": "Pilih format tanggal (jika opsi di atas diaktifkan)",
+    "All date format demo": "Demo format tanggal",
+    "Display relative time on hover the journal link": "Tampilkan waktu relatif saat mengarahkan kursor ke tautan jurnal",
+    "Localized day of the week (except `Localize` mode)": "Hari dalam seminggu yang diterjemahkan (kecuali mode 'Lokalisasi')",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "Jika hari dalam seminggu termasuk dalam format tanggal pengguna, terjemahkan hari dalam seminggu dalam tautan tanggal",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Jika hari dalam seminggu tidak termasuk dalam format tanggal pengguna, tambahkan hari dalam seminggu yang diterjemahkan ke tautan tanggal",
+    "Advanced options for `Localize` mode": "Opsi lanjutan untuk mode 'Lokalisasi'",
+    "Select locale": "Pilih lokasi",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Ini tidak dapat digunakan saat membuat tautan. Buat berdasarkan format tanggal pengguna.",
+    "Open the dialog on click": "Buka dialog saat diklik"
+}

@@ -1,0 +1,15 @@
+{
+    "Switch to style of the selected date format": "切换到选定日期格式的样式",
+    "*This setting does not affect the graph or files*": "*此设置不会影响图表或文件*",
+    "Enable selected date format": "启用选定的日期格式",
+    "Select date format  (if the above option is enabled)": "选择日期格式（如果上述选项已启用）",
+    "All date format demo": "所有日期格式演示",
+    "Display relative time on hover the journal link": "悬停在日志链接上时显示相对时间",
+    "Localized day of the week (except `Localize` mode)": "本地化的星期几（除`本地化`模式外）",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "如果星期几包含在用户的日期格式中，在日期链接中本地化星期几",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "如果星期几不包含在用户的日期格式中，请将本地化的星期几添加到日期链接",
+    "Advanced options for `Localize` mode": "`本地化`模式的高级选项",
+    "Select locale": "选择区域设置",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ 在创建链接时无法使用。请根据用户的日期格式创建。",
+    "Open the dialog on click": "单击时打开对话框"
+}

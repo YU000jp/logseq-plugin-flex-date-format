@@ -1,0 +1,15 @@
+{
+    "Switch to style of the selected date format": "Bytt til stilen til valgt datoformat",
+    "*This setting does not affect the graph or files*": "*Denne innstillingen påvirker ikke grafen eller filene*",
+    "Enable selected date format": "Aktiver valgt datoformat",
+    "Select date format (if the above option is enabled)": "Velg datoformat (hvis ovennevnte alternativ er aktivert)",
+    "All date format demo": "Datoformatdemonstrasjon",
+    "Display relative time on hover the journal link": "Vis relativ tid når du holder musen over journalen",
+    "Localized day of the week (except `Localize` mode)": "Lokalisert ukedag (unntatt `Lokaliser`-modus)",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "Hvis ukedagen er inkludert i brukerens datoformat, lokaliser ukedagen i datolinken",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Hvis ukedagen ikke er inkludert i brukerens datoformat, legg til den lokaliserte ukedagen i datolinken",
+    "Advanced options for `Localize` mode": "Avanserte alternativer for `Lokaliser`-modus",
+    "Select locale": "Velg lokalitet",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Kan ikke brukes ved oppretting av lenker. Opprett den basert på brukerens datoformat.",
+    "Open the dialog on click": "Åpne dialogen ved å klikke"
+}

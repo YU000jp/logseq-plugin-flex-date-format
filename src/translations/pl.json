@@ -1,0 +1,15 @@
+{
+    "Switch to style of the selected date format": "Przełącz na styl wybranego formatu daty",
+    "*This setting does not affect the graph or files*": "*Ta opcja nie wpływa na wykres ani pliki*",
+    "Enable selected date format": "Włącz wybrany format daty",
+    "Select date format (if the above option is enabled)": "Wybierz format daty (jeśli powyższa opcja jest włączona)",
+    "All date format demo": "Wszystkie formaty daty",
+    "Display relative time on hover the journal link": "Wyświetl względną godzinę po najechaniu myszką na łącze dziennika",
+    "Localized day of the week (except `Localize` mode)": "Zlokalizowany dzień tygodnia (oprócz trybu „Localize”)",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "Jeśli dzień tygodnia jest uwzględniony w formacie daty użytkownika, zlokalizuj dzień tygodnia w łączu daty",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Jeśli dzień tygodnia nie jest uwzględniony w formacie daty użytkownika, dodaj zlokalizowany dzień tygodnia do łącza daty",
+    "Advanced options for `Localize` mode": "Zaawansowane opcje trybu „Localize”",
+    "Select locale": "Wybierz lokalizację",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Nie można go używać podczas tworzenia łączy. Twórz je na podstawie formatu daty użytkownika.",
+    "Open the dialog on click": "Otwórz okno dialogowe po kliknięciu"
+}

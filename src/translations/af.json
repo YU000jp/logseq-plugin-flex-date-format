@@ -1,0 +1,15 @@
+{
+    "Switch to style of the selected date format": "Oorskakel na die styl van die gekose datumformaat",
+    "*This setting does not affect the graph or files*": "*Hierdie instelling het geen invloed op die grafiek of lêers nie*",
+    "Enable selected date format": "Stel die gekose datumformaat in werking",
+    "Select date format  (if the above option is enabled)": "Kies 'n datumformaat (indien die bostaande opsie ingeskakel is)",
+    "All date format demo": "Alle datumformaat demonstrasie",
+    "Display relative time on hover the journal link": "Wys relatiewe tyd as jy oor die joernaal skakel",
+    "Localized day of the week (except `Localize` mode)": "Gelokaliseerde dag van die week (behalwe `Localize`-modus)",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "As die dag van die week in die gebruiker se datumformaat ingesluit is, lokaliseer die dag van die week in die datumskakel",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "As die dag van die week nie in die gebruiker se datumformaat ingesluit is nie, voeg die gelokaliseerde dag van die week by die datumskakel",
+    "Advanced options for `Localize` mode": "Gevorderde opsies vir `Lokaliseer`-modus",
+    "Select locale": "Kies 'n lokaliteit",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Dit kan nie gebruik word wanneer skakels geskep word nie. Skep dit gebaseer op die gebruiker se datumformaat.",
+    "Open the dialog on click": "Maak die dialoog oop wanneer daar geklik word"
+}

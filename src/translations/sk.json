@@ -1,0 +1,15 @@
+{
+    "Switch to style of the selected date format": "Prepnúť na štýl zvoleného dátumu",
+    "*This setting does not affect the graph or files*": "*Toto nastavenie neovplyvňuje graf alebo súbory*",
+    "Enable selected date format": "Povoliť zvolený dátumový formát",
+    "Select date format  (if the above option is enabled)": "Vybrať dátumový formát (ak je vyššie uvedená možnosť povolená)",
+    "All date format demo": "Všetky demo dátumové formáty",
+    "Display relative time on hover the journal link": "Zobraziť relatívny čas pri najazdení na odkaz denníka",
+    "Localized day of the week (except `Localize` mode)": "Lokalizovaný deň v týždni (okrem módu `Localizovať`)",
+    "If the day of the week is included in user date format, localize the day of the week in the date link": "Ak je deň v týždni zahrnutý v používateľskom dátumovom formáte, lokalizujte deň v týždni v dátumovom odkaze",
+    "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Ak deň v týždni nie je zahrnutý v používateľskom dátumovom formáte, pridajte lokalizovaný deň v týždni do dátumového odkazu",
+    "Advanced options for `Localize` mode": "Pokročilé možnosti pre mód `Localizovať`",
+    "Select locale": "Vybrať lokalitu",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Pri vytváraní odkazov to nie je možné použiť. Vytvorte ho na základe dátumového formátu používateľa.",
+    "Open the dialog on click": "Otvoriť dialógové okno kliknutím"
+}
