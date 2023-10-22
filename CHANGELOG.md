@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.2.0...v1.3.0) (2023-10-22)
+
+
+### Features
+
+* **Full Translations:** af, de, es, fr, id, it, ko, nb-NO, nl, pl, pt-BR pt-PT, ru, sk, tr, uk, zh-CN, zh-Hant" ([3320e25](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/3320e2570d1805763b323f82baf1893e749295d3))
+
 # [1.2.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.1.0...v1.2.0) (2023-09-30)
 
 
