@@ -26,12 +26,12 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
 
     if (logseq.settings!.booleanJournalLinkAddLocalizeDayOfWeek as boolean === true && !(logseq.settings!.booleanJournalLinkDateFormat === true && logseq.settings!.dateFormat === "Localize")) {
       journalLinkElement.dataset.ref = journalLinkElement.textContent
-      //日付フォーマットに曜日が含まれている場合、ジャーナルリンクから日付を取得し、曜日を置換する
+      //日付フォーマットに曜日が含まれている場合、日誌リンクから日付を取得し、曜日を置換する
       if (preferredDateFormat.includes("E") === true
         || (logseq.settings!.booleanJournalLinkDateFormat === true && logseq.settings!.dateFormat.includes("E"))
       ) titleElementReplaceLocalizeDayOfWeek(journalDate, journalLinkElement)
-      //日付フォーマットに曜日が含まれていない場合、ジャーナルリンクから日付を取得し、曜日を追加する
-      else if (journalLinkElement.classList.contains("title") === false) {//ジャーナルページのタイトル以外の場合のみ
+      //日付フォーマットに曜日が含まれていない場合、日誌リンクから日付を取得し、曜日を追加する
+      else if (journalLinkElement.classList.contains("title") === false) {//日誌ページのタイトル以外の場合のみ
         journalLinkElement.textContent = `${journalLinkElement.textContent} (${localizeDayOfWeek("short", journalDate, logseq.settings?.localizeOrEnglish)})`//曜日を追加  
       }
       journalLinkElement.dataset.localize = "true"
