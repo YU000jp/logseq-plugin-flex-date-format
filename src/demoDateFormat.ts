@@ -55,7 +55,7 @@ export const openStartWindow = async () => {
       </div>
       <style>
         button#legacyDateFormatStartButton{
-            background: var(--ls-block-properties-background-color--);
+            background-color: var(--ls-block-properties-background-color--);
             border: 1px solid var(--ls-block-properties-text-color);
             border-radius: 5px;
             padding: 1em;
@@ -67,7 +67,7 @@ export const openStartWindow = async () => {
             `,
     style: {
       color: "var(--ls-primary-text-color)",
-      background: "var(--ls-primary-background-color)",
+      background-color: "var(--ls-primary-background-color)",
       padding: "0.5em",
       margin: "0.2em",
       borderRadius: "5px",
