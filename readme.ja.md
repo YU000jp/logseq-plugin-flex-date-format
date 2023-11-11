@@ -106,6 +106,8 @@ Logseq マーケットプレースからインストールしてください
 
 > 質問やこのような情報を探すには、[ディスカッション](https://github.com/YU000jp/logseq-plugin-flex-date-format/discussions) タブに移動してください。
 
-製作者 > [YU000jp（GitHub）](https://github.com/YU000jp)
+1. このプラグインは、Logseq の DOM 構造に依存しています。Logseq のバージョン更新により DOM 構造が変更された場合、スタイルが適用されない場合があります。CSSを調整して対応します。何か気づいたら、issueを提起してください。
+
+製作者 > [@YU000jp](https://github.com/YU000jp)
 
 <a href="https://www.buymeacoffee.com/yu000japan" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-violet.png" alt="🍌コーヒーを買ってください" style="height: 42px;width: 152px" ></a>
