@@ -101,7 +101,7 @@ Advanced options for `Localize` mode
 
 Parsing for date input > [date nlp plugin](https://github.com/hkgnp/logseq-datenlp-plugin)
 
-If changed user date format > [Legacy date format plugin](https://github.com/YU000jp/logseq-plugin-legacy-date-format)
+If changed user date format > [Old date format plugin](https://github.com/YU000jp/logseq-plugin-legacy-date-format)
 
 Need to week number > [Show Weekday and Week-number plugin](https://github.com/YU000jp/logseq-plugin-show-weekday-and-week-number/)
 
