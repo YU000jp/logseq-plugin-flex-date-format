@@ -6,7 +6,7 @@
     "license": "MIT",
     "logseq": {
         "id": "flex-date-format",
-        "title": "Flex date format",
+        "title": "Flexible date format",
         "icon": "./icon.png",
         "main": "./dist/index.html"
     },

@@ -1,4 +1,4 @@
-# Logseq Plugin: Flex date format
+# Logseq Plugin: Flexible date format
 
 [English](https://github.com/YU000jp/logseq-plugin-flex-date-format) | [日本語](https://github.com/YU000jp/logseq-plugin-flex-date-format/blob/main/readme.ja.md)
 
