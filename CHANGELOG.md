@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.3.0...v1.4.0) (2024-1-2)
+
+
+### Features
+
+* **Add:** New format > `d MMMM yyyy` , `dd MMMM yyyy` ([4b8bd81](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/4b8bd8161d73f90d24b62e4ac1459278df9c1a45))
+
 # [1.3.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.2.0...v1.3.0) (2023-10-22)
 
 
