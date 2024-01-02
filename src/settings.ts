@@ -45,6 +45,8 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
             "yyyyMMdd",
             "yyyy_MM_dd",
             "yyyy年MM月dd日",
+            "d MMMM yyyy",
+            "dd MMMM yyyy",
         ],
         default: "Localize",
         description: t("⚠️ It cannot be used when creating links. Create it based on the user date format."),

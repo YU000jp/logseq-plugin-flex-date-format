@@ -65,6 +65,8 @@ Switch to style of the selected date format
     - `yyyyMMdd`
     - `yyyy_MM_dd`
     - `yyyy年MM月dd日`
+    - `d MMMM yyyy`
+    - `dd MMMM yyyy`
   - Display relative time on hover the journal link: toggle
     - `true` default
     - `false`

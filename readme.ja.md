@@ -62,6 +62,8 @@ Logseq マーケットプレースからインストールしてください
     - `yyyyMMdd`
     - `yyyy_MM_dd`
     - `yyyy年MM月dd日`
+    - `d MMMM yyyy`
+    - `dd MMMM yyyy`
   - 日付リンクをホバーした際に相対的な時間を表示する: トグル
     - `true` デフォルト
     - `false`
