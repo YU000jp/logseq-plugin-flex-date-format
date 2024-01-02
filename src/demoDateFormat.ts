@@ -28,6 +28,8 @@ export const openStartWindow = async () => {
     "yyyyMMdd",
     "yyyy_MM_dd",
     "yyyy年MM月dd日",
+    "d MMMM yyyy",
+    "dd MMMM yyyy",
   ];
 
   let tr: [string] = [""];
@@ -67,7 +69,7 @@ export const openStartWindow = async () => {
             `,
     style: {
       color: "var(--ls-primary-text-color)",
-      background-color: "var(--ls-primary-background-color)",
+      backgroundColor: "var(--ls-primary-background-color)",
       padding: "0.5em",
       margin: "0.2em",
       borderRadius: "5px",
