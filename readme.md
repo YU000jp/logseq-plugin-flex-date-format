@@ -111,7 +111,7 @@ Need to week number > [Show Weekday and Week-number plugin](https://github.com/Y
 
 > Go to the [discussion](https://github.com/YU000jp/logseq-plugin-flex-date-format/discussions) tab to ask and find this kind of things.
 
-1. This plugin relies on Logseq's DOM structure. If the DOM structure changes due to a Logseq version update, styles may not be applied. We will adjust the CSS to deal with it. If you notice something, please raise an issue.
+1. This plugin relies on Logseq's DOM (Document Object Model) structure. If the DOM structure changes due to a Logseq version update, styles may not be applied. We will adjust the CSS to deal with it. If you notice something, please raise an issue.
 
 Author > [@YU000jp](https://github.com/YU000jp)
 
