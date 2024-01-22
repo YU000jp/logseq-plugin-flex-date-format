@@ -2,9 +2,10 @@
 
 [English](https://github.com/YU000jp/logseq-plugin-flex-date-format) | [日本語](https://github.com/YU000jp/logseq-plugin-flex-date-format/blob/main/readme.ja.md)
 
-- 日付表示形式をローカライズします。または選択した形式のスタイルに切り替えます。
-- ファイルに記録された日付形式を、表示される形式から分離します。
-   > *このプラグインはグラフやファイルに影響を与えません*
+1. 選択した日付形式のスタイルを適用します。
+   - ファイルに記録された日付形式を、表示される形式から分離します。     
+1. 日付表示形式をローカライズします。
+> *このプラグインはグラフやファイルに影響を与えません*
 
 [![最新リリースバージョン](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
 [![ライセンス](https://img.shields.io/github/license/YU000jp/logseq-plugin-flex-date-format?color=blue)](https://github.com/YU000jp/logseq-plugin-flex-date-format/LICENSE)
@@ -13,8 +14,8 @@
 
 ## 概要
 
-1. メイン: **選択した日付形式のスタイルに切り替える** 🆕
-   - 日付リンクまたは日付タイトル
+1. メイン: **選択した日付形式のスタイルを適用する** 🆕
+   - 日付リンクまたは日付タイトルがターゲットです。
    - "ローカライズ" モードまたは別の日付形式を選択
 
 1. オプション: 日付リンクの曜日をローカライズ 🆙

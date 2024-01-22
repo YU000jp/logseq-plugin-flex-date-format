@@ -2,9 +2,10 @@
 
 [English](https://github.com/YU000jp/logseq-plugin-flex-date-format) | [日本語](https://github.com/YU000jp/logseq-plugin-flex-date-format/blob/main/readme.ja.md)
 
-- Localize date format. / Switch to style of the selected format.
-- Separate the date format recorded in files from the format displayed.
-   > *This plugin does not affect the graph or files*
+1. Localize date format
+1. Switch to style of the selected format
+   - Separate the date format recorded in files from the format displayed.
+> *This plugin does not affect the graph or files*
 
 [![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
 [![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-flex-date-format?color=blue)](https://github.com/YU000jp/logseq-plugin-flex-date-format/LICENSE)
@@ -15,7 +16,7 @@
 
 1. Main: **Switch to style of the selected date format**
    > Select "localize" mode or another date format
-   - journal links or journal title
+   - targets are journal links or journal titles
 
 1. Option: Localize day of the week in journal links
    > Except "Localize" mode
