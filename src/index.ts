@@ -156,4 +156,5 @@ const revertQuerySelectorAllLinks = () => {
     )
 }
 
+
 logseq.ready(main).catch(console.error)
