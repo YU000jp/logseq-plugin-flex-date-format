@@ -9,17 +9,17 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
       && logseq.settings!.booleanJournalLinkAddLocalizeDayOfWeek === false
       && logseq.settings!.booleanJournalLinkDateFormat === false)
   ) return
-  const page = await logseq.Editor.getPage(journalLinkElement.textContent!) as PageEntity | null
+  const page = await logseq.Editor.getPage(journalLinkElement.textContent!) as { journalDay: PageEntity["journalDay"] } | null
   if (page && page.journalDay) {
     const journalDate: Date = getJournalDayDate(String(page.journalDay))
 
     //日付フォーマット変更
     if (logseq.settings!.booleanJournalLinkDateFormat === true) {
       journalLinkElement.dataset.ref = journalLinkElement.textContent
-      if (logseq.settings!.dateFormat === "Localize") {
-        journalLinkElement.textContent = journalDate.toLocaleDateString(logseq.settings!.selectLocale as string || "default", { weekday: "short", year: "numeric", month: "short", day: "numeric" }).replace(/,/g, "")//ローカライズ
-      }
-      else journalLinkElement.textContent = format(journalDate, logseq.settings!.dateFormat as string)
+
+      journalLinkElement.textContent = logseq.settings!.dateFormat === "Localize" ?
+        journalDate.toLocaleDateString(logseq.settings!.selectLocale as string || "default", { weekday: "short", year: "numeric", month: "short", day: "numeric" }).replace(/,/g, "")//ローカライズ
+        : format(journalDate, logseq.settings!.dateFormat as string)
       journalLinkElement.dataset.localize = "true"
     }
 
@@ -27,12 +27,14 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
       journalLinkElement.dataset.ref = journalLinkElement.textContent
       //日付フォーマットに曜日が含まれている場合、日誌リンクから日付を取得し、曜日を置換する
       if (preferredDateFormat.includes("E") === true
-        || (logseq.settings!.booleanJournalLinkDateFormat === true && (logseq.settings!.dateFormat as string).includes("E"))
+        || (logseq.settings!.booleanJournalLinkDateFormat === true
+          && (logseq.settings!.dateFormat as string).includes("E"))
       ) titleElementReplaceLocalizeDayOfWeek(journalDate, journalLinkElement)
       //日付フォーマットに曜日が含まれていない場合、日誌リンクから日付を取得し、曜日を追加する
-      else if (journalLinkElement.classList.contains("title") === false) {//日誌ページのタイトル以外の場合のみ
-        journalLinkElement.textContent = `${journalLinkElement.textContent} (${localizeDayOfWeek("short", journalDate, logseq.settings!.localizeOrEnglish as string)})`//曜日を追加  
-      }
+      else
+        if (journalLinkElement.classList.contains("title") === false) {//日誌ページのタイトル以外の場合のみ
+          journalLinkElement.textContent = `${journalLinkElement.textContent} (${localizeDayOfWeek("short", journalDate, logseq.settings!.localizeOrEnglish as string)})`//曜日を追加  
+        }
       journalLinkElement.dataset.localize = "true"
     }
     if (logseq.settings!.booleanRelativeTime === true) journalLinkElement.title = formatRelativeDate(journalDate)//相対時間表示

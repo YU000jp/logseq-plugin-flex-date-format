@@ -24,23 +24,29 @@ import zhHant from "./translations/zh-Hant.json"
 import { journalLink } from './journalLink'
 import { AppUserConfigs, LSPluginBaseInfo } from '@logseq/libs/dist/LSPlugin.user'
 import { openStartWindow } from './demoDateFormat'
+let userDateFormat: string = ""
+
+const checkUserDateFormat = async () => {
+  const { preferredDateFormat } = await logseq.App.getUserConfigs() as { preferredDateFormat: AppUserConfigs["preferredDateFormat"] }
+  userDateFormat = preferredDateFormat
+}
 
 
 /* main */
-const main = () => {
-  (async () => {
-    await l10nSetup({
-      builtinTranslations: {//Full translations
-        ja, af, de, es, fr, id, it, ko, "nb-NO": nbNO, nl, pl, "pt-BR": ptBR, "pt-PT": ptPT, ru, sk, tr, uk, "zh-CN": zhCN, "zh-Hant": zhHant
-      }
-    })
-    /* user settings */
-    logseq.useSettingsSchema(settingsTemplate())
-    if (!logseq.settings!.firstLoad) {
-      setTimeout(() => logseq.showSettingsUI(), 300)
-      logseq.updateSettings({ firstLoad: "20230823no01" })
+const main = async () => {
+  await l10nSetup({
+    builtinTranslations: {//Full translations
+      ja, af, de, es, fr, id, it, ko, "nb-NO": nbNO, nl, pl, "pt-BR": ptBR, "pt-PT": ptPT, ru, sk, tr, uk, "zh-CN": zhCN, "zh-Hant": zhHant
     }
-  })()
+  })
+  /* user settings */
+  logseq.useSettingsSchema(settingsTemplate())
+  if (!logseq.settings!.firstLoad) {
+    setTimeout(() => logseq.showSettingsUI(), 300)
+    logseq.updateSettings({ firstLoad: "20230823no01" })
+  }
+
+  await checkUserDateFormat()
 
   //Logseqを開いたときに実行
   setTimeout(() => querySelectorAllLinks(), 100)
@@ -67,18 +73,23 @@ const main = () => {
 
 
 const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseInfo["settings"], oldSet: LSPluginBaseInfo["settings"]) => {
-  if (newSet.booleanJournalLinkDateFormat === true && newSet.dateFormat !== oldSet.dateFormat || newSet.selectLocale !== oldSet.selectLocale) {
+  if (newSet.booleanJournalLinkDateFormat === true
+    && newSet.dateFormat !== oldSet.dateFormat
+    || newSet.selectLocale !== oldSet.selectLocale) {
     revertQuerySelectorAllLinks()
     setTimeout(() => querySelectorAllLinks(), 50)
   } else
-    if (oldSet.booleanJournalLInkDateFormat === false && newSet.booleanJournalLinkDateFormat === true) {
+    if (oldSet.booleanJournalLInkDateFormat === false
+      && newSet.booleanJournalLinkDateFormat === true) {
       querySelectorAllLinks()
     } else
-      if (oldSet.booleanJournalLinkDateFormat === true && newSet.booleanJournalLinkDateFormat === false) {
+      if (oldSet.booleanJournalLinkDateFormat === true
+        && newSet.booleanJournalLinkDateFormat === false) {
         revertQuerySelectorAllLinks()
         if (newSet.booleanJournalLinkAddLocalizeDayOfWeek === true) querySelectorAllLinks()
       }
-  if (oldSet.loadDateFormatDemo === false && newSet.loadDateFormatDemo === true) {
+  if (oldSet.loadDateFormatDemo === false
+    && newSet.loadDateFormatDemo === true) {
     openStartWindow()
     setTimeout(() => logseq.updateSettings({ loadDateFormatDemo: false }), 300)
   }
@@ -92,19 +103,16 @@ const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseIn
 
 //querySelectorAll
 let processingTitleQuery: boolean = false
-async function querySelectorAllLinks(): Promise<void> {
+const querySelectorAllLinks = async (): Promise<void> => {
   if (processingTitleQuery) return
-  processingTitleQuery = true
-  const { preferredDateFormat } =
-    (await logseq.App.getUserConfigs()) as AppUserConfigs;
-  (parent.document.querySelector("body>div#root>div>main") as HTMLElement | null)?.querySelectorAll(
+  processingTitleQuery = true;
+
+  (parent.document.body.querySelector("div#root>div>main") as HTMLElement | null)?.querySelectorAll(
     "div#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), div:is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), div#left-sidebar li span.page-title:not([data-localize]), div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis:not([data-localize])"
   )
-    .forEach(
-      async (titleElement) => await journalLink(titleElement as HTMLElement, preferredDateFormat)
-    )
+    .forEach(async (titleElement) => await journalLink(titleElement as HTMLElement, userDateFormat))
 
-  setTimeout(() => processingTitleQuery = false, 100)
+  setTimeout(() => processingTitleQuery = false, 20)
 
 }
 
