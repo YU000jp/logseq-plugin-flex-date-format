@@ -39,7 +39,7 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
     }
 
     //保存に使われる日付フォーマットを表示
-    journalLinkElement.title += format(journalDate, preferredDateFormat)
+    journalLinkElement.title = format(journalDate, preferredDateFormat)
 
     //相対時間表示
     if (logseq.settings!.booleanRelativeTime === true) journalLinkElement.title += "\n" + formatRelativeDate(journalDate)
