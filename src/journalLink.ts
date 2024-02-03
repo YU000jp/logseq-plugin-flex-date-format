@@ -10,7 +10,8 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
       && logseq.settings!.booleanJournalLinkDateFormat === false)
   ) return
   const page = await logseq.Editor.getPage(journalLinkElement.textContent!) as { journalDay: PageEntity["journalDay"] } | null
-  if (page && page.journalDay) {
+  if (page
+    && page.journalDay) {
     const journalDate: Date = getJournalDayDate(String(page.journalDay))
 
     //日付フォーマット変更
@@ -23,7 +24,9 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
       journalLinkElement.dataset.localize = "true"
     }
 
-    if (logseq.settings!.booleanJournalLinkAddLocalizeDayOfWeek as boolean === true && !(logseq.settings!.booleanJournalLinkDateFormat === true && logseq.settings!.dateFormat === "Localize")) {
+    if (logseq.settings!.booleanJournalLinkAddLocalizeDayOfWeek as boolean === true
+      && !(logseq.settings!.booleanJournalLinkDateFormat === true
+        && logseq.settings!.dateFormat === "Localize")) {
       journalLinkElement.dataset.ref = journalLinkElement.textContent
       //日付フォーマットに曜日が含まれている場合、日誌リンクから日付を取得し、曜日を置換する
       if (preferredDateFormat.includes("E") === true
