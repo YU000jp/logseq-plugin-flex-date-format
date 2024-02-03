@@ -49,4 +49,3 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
 
   }
 }//journalLink end
-
