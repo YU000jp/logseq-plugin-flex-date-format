@@ -1,15 +1,29 @@
 
-import { format } from "date-fns";
+import { format } from "date-fns"
 
 //設定画面から項目をオンにする→スタート画面が出る
 
 //設定項目がオンになったとき
 export const openStartWindow = async () => {
   //今日の日付でフォーマットしてみる
-  const today = new Date();
+  const today = new Date()
 
   const list = [
     "Localize",
+    "E, d MMMM yyyy",
+    "E, MM/dd/yyyy",
+    "E, dd-MM-yyyy",
+    "E, dd.MM.yyyy",
+    "E, yyyy/MM/dd",
+    "EEE, MM/dd/yyyy",
+    "EEE, dd-MM-yyyy",
+    "EEE, dd.MM.yyyy",
+    "EEE, yyyy/MM/dd",
+    "EEEE, MM/dd/yyyy",
+    "EEEE, dd-MM-yyyy",
+    "EEEE, dd.MM.yyyy",
+    "EEEE, yyyy/MM/dd",
+    "MM-dd-yyyy",
     "MM/dd/yyyy",
     "dd-MM-yyyy",
     "dd.MM.yyyy",
@@ -28,15 +42,13 @@ export const openStartWindow = async () => {
     "yyyyMMdd",
     "yyyy_MM_dd",
     "yyyy年MM月dd日",
-    "d MMMM yyyy",
-    "dd MMMM yyyy",
-  ];
+  ]
 
-  let tr: [string] = [""];
+  let tr: [string] = [""]
   list.forEach((item) => tr.push(`<tr><td>${item}</td><td>${item === "Localize" ?
     today.toLocaleDateString("default", { weekday: "short", year: "numeric", month: "short", day: "numeric" }).replace(/,/g, "")
     : format(today, item)
-    }</td></tr>`));
+    }</td></tr>`))
   //スタート画面を表示
   logseq.provideUI({
     key: "dateFormatDemo",
@@ -82,5 +94,5 @@ export const openStartWindow = async () => {
       width: "500px",
       height: "820px",
     },
-  });
-};
+  })
+}
