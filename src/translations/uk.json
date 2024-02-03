@@ -1,15 +1,18 @@
 {
-    "Switch to style of the selected date format": "Перемкнутися на стиль обраного формату дати",
     "*This setting does not affect the graph or files*": "*Ця настройка не впливає на графік або файли*",
-    "Enable selected date format": "Увімкнути обраний формат дати",
-    "Select date format  (if the above option is enabled)": "Виберіть формат дати (якщо ввімкнено вищезазначену опцію)",
+    "*This setting takes precedence over other settings.*": "*Ця настройка має пріоритет перед іншими настройками.*",
+    "Advanced options for `Localize` mode": "Розширені параметри для режиму 'Локалізація'",
     "All date format demo": "Демонстрація всіх форматів дат",
+    "Common settings": "Загальні настройки",
     "Display relative time on hover the journal link": "Показувати відносний час при наведенні на посилання на журнал",
-    "Localized day of the week (except `Localize` mode)": "Локалізований день тижня (крім режиму 'Локалізація')",
+    "Enable selected date format": "Увімкнути обраний формат дати",
     "If the day of the week is included in user date format, localize the day of the week in the date link": "Якщо день тижня включений у користувацький формат дати, локалізуйте день тижня у посиланні на дату",
     "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Якщо день тижня не включений у користувацький формат дати, додайте локалізований день тижня до посилання на дату",
-    "Advanced options for `Localize` mode": "Розширені параметри для режиму 'Локалізація'",
+    "Localized day of the week (except `Localize` mode)": "Локалізований день тижня (крім режиму 'Локалізація')",
+    "Open the dialog on click": "Відкрити діалогове вікно при натисканні",
+    "Select date format  (if the above option is enabled)": "Виберіть формат дати (якщо ввімкнено вищезазначену опцію)",
     "Select locale": "Виберіть локаль",
-    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Неможливо використовувати при створенні посилань. Створіть його на основі формату дати користувача.",
-    "Open the dialog on click": "Відкрити діалогове вікно при натисканні"
+    "Shorten the day of the week": "Скоротити день тижня",
+    "Switch to style of the selected date format": "Перемкнутися на стиль обраного формату дати",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Неможливо використовувати при створенні посилань. Створіть його на основі формату дати користувача."
 }

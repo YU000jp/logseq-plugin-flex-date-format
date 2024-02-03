@@ -1,15 +1,18 @@
 {
-    "Switch to style of the selected date format": "Schakel over naar de stijl van het geselecteerde datumformaat",
     "*This setting does not affect the graph or files*": "*Deze instelling heeft geen invloed op de grafiek of bestanden*",
-    "Enable selected date format": "Geselecteerd datumformaat inschakelen",
-    "Select date format  (if the above option is enabled)": "Selecteer datumformaat (indien de bovenstaande optie is ingeschakeld)",
+    "*This setting takes precedence over other settings.*": "*Deze instelling heeft voorrang op andere instellingen.*",
+    "Advanced options for `Localize` mode": "Geavanceerde opties voor de 'Lokaliseren'-modus",
     "All date format demo": "Datumformaat demonstratie",
+    "Common settings": "Algemene instellingen",
     "Display relative time on hover the journal link": "Toon relatieve tijd wanneer je over de dagboeklink beweegt",
-    "Localized day of the week (except `Localize` mode)": "Gelokaliseerde dag van de week (behalve in de 'Lokaliseren'-modus)",
+    "Enable selected date format": "Geselecteerd datumformaat inschakelen",
     "If the day of the week is included in user date format, localize the day of the week in the date link": "Als de dag van de week is opgenomen in het door de gebruiker geselecteerde datumformaat, lokaliseer dan de dag van de week in de datumlink",
     "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Als de dag van de week niet is opgenomen in het door de gebruiker geselecteerde datumformaat, voeg de gelokaliseerde dag van de week toe aan de datumlink",
-    "Advanced options for `Localize` mode": "Geavanceerde opties voor de 'Lokaliseren'-modus",
+    "Localized day of the week (except `Localize` mode)": "Gelokaliseerde dag van de week (behalve in de 'Lokaliseren'-modus)",
+    "Open the dialog on click": "Open het dialoogvenster bij klik",
+    "Select date format  (if the above option is enabled)": "Selecteer datumformaat (indien de bovenstaande optie is ingeschakeld)",
     "Select locale": "Kies de taalregio",
-    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Dit kan niet worden gebruikt bij het maken van koppelingen. Maak het op basis van het door de gebruiker geselecteerde datumformaat.",
-    "Open the dialog on click": "Open het dialoogvenster bij klik"
+    "Shorten the day of the week": "Kort de dag van de week in",
+    "Switch to style of the selected date format": "Schakel over naar de stijl van het geselecteerde datumformaat",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Dit kan niet worden gebruikt bij het maken van koppelingen. Maak het op basis van het door de gebruiker geselecteerde datumformaat."
 }

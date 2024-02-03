@@ -1,15 +1,18 @@
 {
-    "Switch to style of the selected date format": "Mudar para o estilo do formato de data selecionado",
     "*This setting does not affect the graph or files*": "*Esta configuração não afeta o gráfico ou os arquivos*",
-    "Enable selected date format": "Ativar o formato de data selecionado",
-    "Select date format  (if the above option is enabled)": "Selecionar formato de data (se a opção acima estiver ativada)",
+    "*This setting takes precedence over other settings.*": "*Esta configuração tem precedência sobre outras configurações.*",
+    "Advanced options for `Localize` mode": "Opções avançadas para o modo `Localizar`",
     "All date format demo": "Demonstração de todos os formatos de data",
+    "Common settings": "Configurações comuns",
     "Display relative time on hover the journal link": "Mostrar hora relativa ao pairar sobre o link do jornal",
-    "Localized day of the week (except `Localize` mode)": "Dia da semana localizado (exceto no modo `Localizar`)",
+    "Enable selected date format": "Ativar o formato de data selecionado",
     "If the day of the week is included in user date format, localize the day of the week in the date link": "Se o dia da semana estiver incluído no formato de data do usuário, localize o dia da semana no link da data",
     "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Se o dia da semana não estiver incluído no formato de data do usuário, adicione o dia da semana localizado ao link da data",
-    "Advanced options for `Localize` mode": "Opções avançadas para o modo `Localizar`",
+    "Localized day of the week (except `Localize` mode)": "Dia da semana localizado (exceto no modo `Localizar`)",
+    "Open the dialog on click": "Abrir o diálogo ao clicar",
+    "Select date format  (if the above option is enabled)": "Selecionar formato de data (se a opção acima estiver ativada)",
     "Select locale": "Selecionar idioma",
-    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Não pode ser usado ao criar links. Crie com base no formato de data do usuário.",
-    "Open the dialog on click": "Abrir o diálogo ao clicar"
+    "Shorten the day of the week": "Abreviar o dia da semana",
+    "Switch to style of the selected date format": "Mudar para o estilo do formato de data selecionado",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Não pode ser usado ao criar links. Crie com base no formato de data do usuário."
 }

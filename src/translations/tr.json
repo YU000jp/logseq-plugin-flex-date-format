@@ -1,15 +1,18 @@
 {
-    "Switch to style of the selected date format": "Seçilen tarih biçimine geç",
     "*This setting does not affect the graph or files*": "*Bu ayar grafik veya dosyaları etkilemez*",
-    "Enable selected date format": "Seçilen tarih biçimini etkinleştir",
-    "Select date format  (if the above option is enabled)": "Tarih biçimini seç (yukarıdaki seçenek etkinse)",
+    "*This setting takes precedence over other settings.*": "*Bu ayar diğer ayarlardan önceliklidir.*",
+    "Advanced options for `Localize` mode": "`Yerelleştirme` modu için gelişmiş seçenekler",
     "All date format demo": "Tüm tarih biçimi demosu",
+    "Common settings": "Ortak ayarlar",
     "Display relative time on hover the journal link": "Günlük bağlantısının üzerine gelindiğinde göreli zamanı görüntüle",
-    "Localized day of the week (except `Localize` mode)": "`Yerelleştirme` modu hariç haftanın gününü yerelleştir",
+    "Enable selected date format": "Seçilen tarih biçimini etkinleştir",
     "If the day of the week is included in user date format, localize the day of the week in the date link": "Haftanın günü kullanıcı tarih biçimine dahil edilirse, tarih bağlantısındaki haftanın gününü yerelleştir",
     "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Haftanın günü kullanıcı tarih biçimine dahil edilmezse, tarih bağlantısına yerelleştirilmiş haftanın gününü ekleyin",
-    "Advanced options for `Localize` mode": "`Yerelleştirme` modu için gelişmiş seçenekler",
+    "Localized day of the week (except `Localize` mode)": "`Yerelleştirme` modu hariç haftanın gününü yerelleştir",
+    "Open the dialog on click": "Tıklamada iletişim penceresini aç",
+    "Select date format  (if the above option is enabled)": "Tarih biçimini seç (yukarıdaki seçenek etkinse)",
     "Select locale": "Yerel ayarı seç",
-    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Bağlantı oluştururken kullanılamaz. Kullanıcı tarih biçimine dayalı olarak oluşturun.",
-    "Open the dialog on click": "Tıklamada iletişim penceresini aç"
+    "Shorten the day of the week": "Haftanın gününü kısalt",
+    "Switch to style of the selected date format": "Seçilen tarih biçimine geç",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Bağlantı oluştururken kullanılamaz. Kullanıcı tarih biçimine dayalı olarak oluşturun."
 }

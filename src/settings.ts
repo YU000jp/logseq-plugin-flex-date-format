@@ -14,14 +14,14 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     {
         // 曜日の呼び名の長さ
         key: "booleanShortOrLong",
-        title: t("Shorten the day of the week"),
+        title: t("Shorten the day of the week") + " 🆕",
         type: "enum",
         enumChoices: [
             "unset", // 未設定
             "short", // 短い曜日名
             "long",  // 長い曜日名
         ],
-        default: "short",
+        default: "unset",
         //この設定が優先される
         description: t("*This setting takes precedence over other settings.*"),
     },
@@ -43,7 +43,7 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     },
     {//date format
         key: "dateFormat",
-        title: t("Select date format  (if the above option is enabled)"),
+        title: t("Select date format  (if the above option is enabled)") + " 🆙",
         type: "enum",
         //<option>E, MM/dd/yyyy</option><option>E, dd-MM-yyyy</option><option>E, dd.MM.yyyy</option><option>E, yyyy/MM/dd</option><option>EEE, MM/dd/yyyy</option><option>EEE, dd-MM-yyyy</option><option>EEE, dd.MM.yyyy</option><option>EEE, yyyy/MM/dd</option><option>EEEE, MM/dd/yyyy</option><option>EEEE, dd-MM-yyyy</option><option>EEEE, dd.MM.yyyy</option><option>EEEE, yyyy/MM/dd</option><option>MM-dd-yyyy</option><option>MM/dd/yyyy</option><option>MMM do, yyyy</option><option>MMMM do, yyyy</option><option>MM_dd_yyyy</option><option>dd-MM-yyyy</option><option>do MMM yyyy</option><option>do MMMM yyyy</option><option>yyyy-MM-dd</option><option>yyyy-MM-dd EEEE</option><option>yyyy/MM/dd</option><option>yyyyMMdd</option><option>yyyy_MM_dd</option><option>yyyy年MM月dd日</option><
         enumChoices: [
@@ -89,12 +89,12 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
 
     {//日付フォーマットのデモンストレーション
         key: "loadDateFormatDemo",
-        title: t("All date format demo"),
+        title: t("All date format demo") + " 🆙",
         type: "boolean",
         default: false,
         description: t("Open the dialog on click"),
     },
-    
+
     {//booleanRelativeTime
         key: "booleanRelativeTime",
         title: t("Display relative time on hover the journal link"),
@@ -134,7 +134,7 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     },
     {//特殊なロケールを使用する
         key: "selectLocale",
-        title: t("Select locale"),
+        title: t("Select locale") + " 🆙",
         type: "enum",
         enumChoices: [
             "default",              // Gregorian calendar (default)

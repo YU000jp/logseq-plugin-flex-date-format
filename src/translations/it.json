@@ -1,15 +1,18 @@
 {
-    "Switch to style of the selected date format": "Passa allo stile del formato data selezionato",
     "*This setting does not affect the graph or files*": "*Questa impostazione non influisce sul grafico o sui file*",
-    "Enable selected date format": "Abilita il formato data selezionato",
-    "Select date format  (if the above option is enabled)": "Seleziona il formato data (se l'opzione precedente è abilitata)",
+    "*This setting takes precedence over other settings.*": "*Questa impostazione ha la precedenza sulle altre impostazioni.*",
+    "Advanced options for `Localize` mode": "Opzioni avanzate per la modalità 'Localizza'",
     "All date format demo": "Demo di tutti i formati data",
+    "Common settings": "Impostazioni comuni",
     "Display relative time on hover the journal link": "Mostra l'orario relativo quando si passa sopra il collegamento al diario",
-    "Localized day of the week (except `Localize` mode)": "Giorno della settimana localizzato (tranne la modalità 'Localizza')",
+    "Enable selected date format": "Abilita il formato data selezionato",
     "If the day of the week is included in user date format, localize the day of the week in the date link": "Se il giorno della settimana è incluso nel formato data dell'utente, localizza il giorno della settimana nel collegamento data",
     "If the day of the week is not included in user date format, add the localized day of the week to the date link": "Se il giorno della settimana non è incluso nel formato data dell'utente, aggiungi il giorno della settimana localizzato al collegamento data",
-    "Advanced options for `Localize` mode": "Opzioni avanzate per la modalità 'Localizza'",
+    "Localized day of the week (except `Localize` mode)": "Giorno della settimana localizzato (tranne la modalità 'Localizza')",
+    "Open the dialog on click": "Apri il dialogo al clic",
+    "Select date format  (if the above option is enabled)": "Seleziona il formato data (se l'opzione precedente è abilitata)",
     "Select locale": "Seleziona la località",
-    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Non può essere utilizzato durante la creazione dei collegamenti. Crealo basandoti sul formato data dell'utente.",
-    "Open the dialog on click": "Apri il dialogo al clic"
+    "Shorten the day of the week": "Accorcia il giorno della settimana",
+    "Switch to style of the selected date format": "Passa allo stile del formato data selezionato",
+    "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Non può essere utilizzato durante la creazione dei collegamenti. Crealo basandoti sul formato data dell'utente."
 }
