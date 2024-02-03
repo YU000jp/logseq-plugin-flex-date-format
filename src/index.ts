@@ -74,29 +74,23 @@ const main = async () => {
 
 const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseInfo["settings"], oldSet: LSPluginBaseInfo["settings"]) => {
   if (newSet.booleanJournalLinkDateFormat === true
-    && newSet.dateFormat !== oldSet.dateFormat
-    || newSet.selectLocale !== oldSet.selectLocale) {
-    revertQuerySelectorAllLinks()
-    setTimeout(() => querySelectorAllLinks(), 50)
-  } else
-    if (oldSet.booleanJournalLInkDateFormat === false
-      && newSet.booleanJournalLinkDateFormat === true) {
-      querySelectorAllLinks()
-    } else
-      if (oldSet.booleanJournalLinkDateFormat === true
-        && newSet.booleanJournalLinkDateFormat === false) {
+    && oldSet.booleanJournalLinkDateFormat === false) setTimeout(() => querySelectorAllLinks(), 50)
+  else
+    if (newSet.booleanJournalLinkDateFormat === false
+      && oldSet.booleanJournalLinkDateFormat === true) revertQuerySelectorAllLinks()
+    else
+      if (newSet.dateFormat !== oldSet.dateFormat
+        || newSet.selectLocale !== oldSet.selectLocale
+        || newSet.booleanShortOrLong !== oldSet.booleanShortOrLong
+        || oldSet.booleanJournalLinkAddLocalizeDayOfWeek !== newSet.booleanJournalLinkAddLocalizeDayOfWeek
+        || oldSet.booleanJournalLinkLocalizeDayOfWeek !== newSet.booleanJournalLinkLocalizeDayOfWeek) {
         revertQuerySelectorAllLinks()
-        if (newSet.booleanJournalLinkAddLocalizeDayOfWeek === true) querySelectorAllLinks()
+        setTimeout(() => querySelectorAllLinks(), 50)
       }
   if (oldSet.loadDateFormatDemo === false
     && newSet.loadDateFormatDemo === true) {
     openStartWindow()
     setTimeout(() => logseq.updateSettings({ loadDateFormatDemo: false }), 300)
-  }
-  if (oldSet.booleanJournalLinkAddLocalizeDayOfWeek !== newSet.booleanJournalLinkAddLocalizeDayOfWeek
-    || oldSet.booleanJournalLinkLocalizeDayOfWeek !== newSet.booleanJournalLinkLocalizeDayOfWeek) {
-    revertQuerySelectorAllLinks()
-    setTimeout(() => querySelectorAllLinks(), 50)
   }
 })
 
@@ -112,8 +106,7 @@ const querySelectorAllLinks = async (): Promise<void> => {
   )
     .forEach(async (titleElement) => await journalLink(titleElement as HTMLElement, userDateFormat))
 
-  setTimeout(() => processingTitleQuery = false, 20)
-
+  setTimeout(() => processingTitleQuery = false, 30)
 }
 
 //observer

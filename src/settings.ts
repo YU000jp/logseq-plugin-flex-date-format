@@ -5,6 +5,27 @@ import { t } from 'logseq-l10n'
 // https://logseq.github.io/plugins/types/SettingSchemaDesc.html
 export const settingsTemplate = (): SettingSchemaDesc[] => [
     {
+        key: "headingCommon",
+        title: t("Common settings"),
+        type: "heading",
+        default: "",
+        description: ""
+    },
+    {
+        // 曜日の呼び名の長さ
+        key: "booleanShortOrLong",
+        title: t("Shorten the day of the week"),
+        type: "enum",
+        enumChoices: [
+            "unset", // 未設定
+            "short", // 短い曜日名
+            "long",  // 長い曜日名
+        ],
+        default: "short",
+        //この設定が優先される
+        description: t("*This setting takes precedence over other settings.*"),
+    },
+    {
         key: "headingAddLocalizeDayOfWeek",
         title: t("Switch to style of the selected date format"),
         type: "heading",
@@ -65,6 +86,7 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         default: "Localize",
         description: t("⚠️ It cannot be used when creating links. Create it based on the user date format."),
     },
+
     {//日付フォーマットのデモンストレーション
         key: "loadDateFormatDemo",
         title: t("All date format demo"),
@@ -72,6 +94,7 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         default: false,
         description: t("Open the dialog on click"),
     },
+    
     {//booleanRelativeTime
         key: "booleanRelativeTime",
         title: t("Display relative time on hover the journal link"),

@@ -29,8 +29,8 @@ export const localizeDayOfWeek = (weekday, journalDate: Date, locales?: string) 
 //titleElementの日付をローカライズする(Element書き換え)
 export function titleElementReplaceLocalizeDayOfWeek(journalDate: Date, titleElement: HTMLElement) {
   const replace = (textContent, long: string, short: string) => {
-    textContent = textContent.replace(long, localizeDayOfWeek("long", journalDate))
-    textContent = textContent.replace(short, localizeDayOfWeek("short", journalDate))
+    textContent = textContent.replace(long, localizeDayOfWeek(shortOrLong("long"), journalDate))
+    textContent = textContent.replace(short, localizeDayOfWeek(shortOrLong("short"), journalDate))
   }
   const dayOfWeek = journalDate.getDay() //journalDateで曜日を取得する
   switch (dayOfWeek) {
@@ -57,6 +57,7 @@ export function titleElementReplaceLocalizeDayOfWeek(journalDate: Date, titleEle
       break
   }
 }
+
 //相対時間表示
 export const formatRelativeDate = (targetDate: Date): string => {
   const currentDate = new Date()
@@ -76,4 +77,4 @@ export const formatRelativeDate = (targetDate: Date): string => {
   return new Intl.RelativeTimeFormat(("default"), { numeric: 'auto' }).format(diffInDays, 'day') as string
 } //formatRelativeDate end
 
-
+export const shortOrLong = (select: "short" | "long"): "short" | "long" => logseq.settings!.booleanShortOrLong === "unset" ? select : logseq.settings!.booleanShortOrLong as "short" | "long"
