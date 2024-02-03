@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.4.1...v1.5.0) (2024-2-3)
+
+
+### Features
+
+* **Add:**  long instead of short [#8](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/8) ([1a01237](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/1a01237eb33b0026e7810cab93990f9b828511a3))
+* **Add:** Additional date format ([4aae5df](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/4aae5df34d9c21f65b31a12ec15d8e0ad4d7452f))
+
 ## [1.4.1](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.4.0...v1.4.1) (2024-2-3)
 
 
