@@ -1,3 +1,17 @@
+# [1.4.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.3.0...v1.4.0) (2024-2-3)
+
+
+### Features
+
+* **Add:** New format > `d MMMM yyyy` , `dd MMMM yyyy` [#5](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/5) ([ce533c8](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/ce533c8337688006bfc97944cd0a724fcc042137))
+* **localization:** Add more locales [#8](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/8) ([0082630](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/00826307fea414cd681de966f54f049c9776eceb))
+* Show original date format on mouseover [#7](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/7) ([ba3e1c4](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/ba3e1c455f735810e42cdc53285b6b25ff1d3523))
+
+
+### Performance Improvements
+
+* reduce overhead ([3e1015d](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/3e1015d39c8725d62e7756afce24385cce801412))
+
 # [1.4.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.3.0...v1.4.0) (2024-1-30)
 
 
