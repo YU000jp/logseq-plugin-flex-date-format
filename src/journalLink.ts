@@ -35,9 +35,8 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
       ) titleElementReplaceLocalizeDayOfWeek(journalDate, journalLinkElement)
       //日付フォーマットに曜日が含まれていない場合、日誌リンクから日付を取得し、曜日を追加する
       else
-        if (journalLinkElement.classList.contains("title") === false) {//日誌ページのタイトル以外の場合のみ
+        if (journalLinkElement.classList.contains("title") === false) //日誌ページのタイトル以外の場合のみ
           journalLinkElement.textContent = `${journalLinkElement.textContent} (${localizeDayOfWeek(shortOrLong("short"), journalDate, logseq.settings!.localizeOrEnglish as string)})`//曜日を追加  
-        }
       journalLinkElement.dataset.localize = "true"
     }
 
