@@ -4,42 +4,20 @@ import { t } from 'logseq-l10n'
 /* user setting */
 // https://logseq.github.io/plugins/types/SettingSchemaDesc.html
 export const settingsTemplate = (): SettingSchemaDesc[] => [
-    {
-        key: "headingCommon",
-        title: t("Common settings"),
-        type: "heading",
-        default: "",
-        description: ""
-    },
-    {
-        // 曜日の呼び名の長さ
-        key: "booleanShortOrLong",
-        title: t("Shorten the day of the week") + " 🆕",
-        type: "enum",
-        enumChoices: [
-            "unset", // 未設定
-            "short", // 短い曜日名
-            "long",  // 長い曜日名
-        ],
-        default: "unset",
-        //この設定が優先される
-        description: t("*This setting takes precedence over other settings.*"),
-    },
+    // {
+    //     key: "headingCommon",
+    //     title: t("Common settings"),
+    //     type: "heading",
+    //     default: "",
+    //     description: ""
+    // },
     {
         key: "headingAddLocalizeDayOfWeek",
         title: t("Switch to style of the selected date format"),
         type: "heading",
         default: "",
         //グラフには影響を与えない
-        description: t("*This setting does not affect the graph or files*"),
-    },
-    {//Journal links date format
-        key: "booleanJournalLinkDateFormat",
-        title: t("Enable selected date format"),
-        type: "boolean",
-        default: true,
-        //グラフには影響を与えない
-        description: "default: `true`",
+        description: t("⚠️ It cannot be used when creating links. Create it based on the user date format.") + " " + t("*This setting does not affect the graph or files*"),
     },
     {//date format
         key: "dateFormat",
@@ -84,9 +62,8 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
             "dd MMMM yyyy",
         ],
         default: "Localize",
-        description: t("⚠️ It cannot be used when creating links. Create it based on the user date format."),
+        description: "",
     },
-
     {//日付フォーマットのデモンストレーション
         key: "loadDateFormatDemo",
         title: t("All date format demo") + " 🆙",
@@ -94,47 +71,9 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         default: false,
         description: t("Open the dialog on click"),
     },
-
-    {//booleanRelativeTime
-        key: "booleanRelativeTime",
-        title: t("Display relative time on hover the journal link"),
-        type: "boolean",
-        default: true,
-        description: "default: `true`",
-    },
-
-    {
-        key: "headingAddLocalizeDayOfWeek",
-        title: t("Localized day of the week (except `Localize` mode)"),
-        type: "heading",
-        default: "",
-        //グラフには影響を与えない
-        description: t("*This setting does not affect the graph or files*"),
-    },
-    {//Localizeを除く
-        key: "booleanJournalLinkLocalizeDayOfWeek",
-        title: t("If the day of the week is included in user date format, localize the day of the week in the date link"),
-        type: "boolean",
-        default: true,
-        description: "default: `true`",
-    },
-    {//Localizeを除く
-        key: "booleanJournalLinkAddLocalizeDayOfWeek",
-        title: t("If the day of the week is not included in user date format, add the localized day of the week to the date link"),
-        type: "boolean",
-        default: true,
-        description: "default: `true`",
-    },
-    {//header Advanced options for "Localize" mode
-        key: "headingAdvancedOptionsForLocalizeMode",
-        title: t("Advanced options for `Localize` mode"),
-        type: "heading",
-        default: "",
-        description: t(""),
-    },
     {//特殊なロケールを使用する
         key: "selectLocale",
-        title: t("Select locale") + " 🆙",
+        title: t("Advanced options > Select locale") + " 🆙",
         type: "enum",
         enumChoices: [
             "default",              // Gregorian calendar (default)
@@ -200,6 +139,33 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
             "zh-TW-u-ca-roc",        // Chinese (Taiwan) - Minguo calendar (Republic of China era)
         ],
         default: "default",
-        description: t("⚠️ It cannot be used when creating links. Create it based on the user date format."),
+        description: "",
+    },
+    {
+        key: "booleanLocalizeDayOfWeek",
+        title: t("Localize the day of the week"),
+        type: "boolean",
+        default: true,
+        description: "default: `true`",
+    },
+    {
+        // 曜日の呼び名の長さ
+        key: "booleanShortOrLong",
+        title: t("Shorten the day of the week") + " 🆕",
+        type: "enum",
+        enumChoices: [
+            "unset", // 未設定
+            "short", // 短い曜日名
+            "long",  // 長い曜日名
+        ],
+        default: "unset",
+        description: t("*This setting takes precedence over other settings.*"),//この設定が優先される
+    },
+    {//booleanRelativeTime
+        key: "booleanRelativeTime",
+        title: t("Display relative time on hover the journal link"),
+        type: "boolean",
+        default: true,
+        description: "default: `true`",
     },
 ]
