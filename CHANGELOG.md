@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.5.0...v1.6.0) (2024-2-4)
+
+
+### Features
+
+* **Add:** Icon > Add an icon to the date by the year pattern [#9](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/9) ([a1958a8](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/a1958a8341ecafa5fe7c97ee6337c279cf3f7fbf))
+
 # [1.5.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.4.1...v1.5.0) (2024-2-3)
 
 
