@@ -1,6 +1,6 @@
-import '@logseq/libs'; //https://plugins-doc.logseq.com/
+import '@logseq/libs' //https://plugins-doc.logseq.com/
 import { AppUserConfigs, LSPluginBaseInfo } from '@logseq/libs/dist/LSPlugin.user'
-import { setup as l10nSetup } from "logseq-l10n"; //https://github.com/sethyuan/logseq-l10n
+import { setup as l10nSetup } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { openStartWindow } from './demoDateFormat'
 import { journalLink } from './journalLink'
 import { settingsTemplate } from './settings'
@@ -39,9 +39,12 @@ const main = async () => {
   })
   /* user settings */
   logseq.useSettingsSchema(settingsTemplate())
-  if (!logseq.settings!.firstLoad) {
+
+  const messageId = "20240204-01"
+  if (logseq.settings!.firstLoad !== messageId) {
     setTimeout(() => logseq.showSettingsUI(), 300)
-    logseq.updateSettings({ firstLoad: "20230823no01" })
+    logseq.UI.showMsg("New setting items have been added to flexible-date-format plugin.", "info", { timeout: 5000 })
+    logseq.updateSettings({ firstLoad: messageId })
   }
 
   await checkUserDateFormat() //ユーザーの日付形式を取得
@@ -75,7 +78,12 @@ const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseIn
     if (newSet.dateFormat !== oldSet.dateFormat
       || newSet.selectLocale !== oldSet.selectLocale
       || newSet.booleanShortOrLong !== oldSet.booleanShortOrLong
-      || oldSet.booleanLocalizeDayOfWeek !== newSet.booleanLocalizeDayOfWeek) {
+      || oldSet.booleanLocalizeDayOfWeek !== newSet.booleanLocalizeDayOfWeek
+      || oldSet.booleanRelativeTime !== newSet.booleanRelativeTime
+      || oldSet.booleanAddIcon !== newSet.booleanAddIcon
+      || oldSet.booleanYearPattern !== newSet.booleanYearPattern
+      || oldSet.iconBeforeYear !== newSet.iconBeforeYear
+      || oldSet.iconAfterYear !== newSet.iconAfterYear) {
       revertQuerySelectorAllLinks()
       setTimeout(() => querySelectorAllLinks(), 50)
     }
@@ -115,7 +123,7 @@ const observerMainRight = () => {
 
 //元に戻す
 const revertQuerySelectorAllLinks = () => {
-  (parent.document.querySelectorAll("div#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], div:is(#main-content-container,#right-sidebar) a[data-ref][data-localize]:not([data-checked]), div#left-sidebar li span.page-title[data-localize], div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis[data-localize]") as NodeListOf<HTMLElement>)
+  (parent.document.querySelectorAll("div#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], div:is(#main-content-container,#right-sidebar) a[data-ref][data-localize], div#left-sidebar li span.page-title[data-localize], div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis[data-localize]") as NodeListOf<HTMLElement>)
     .forEach(async (titleElement) => {
       titleElement.removeAttribute("data-localize")
       if (titleElement.dataset.ref) titleElement.textContent = titleElement.dataset.ref
