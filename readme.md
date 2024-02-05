@@ -19,7 +19,7 @@
   1. Option: Localize day of the week in journal links 🆙
      - 2023/07/22 => 2023/07/22 (Sat)
        > `(Sat)` is the localized day of the week.
-   1. Option: Add an icon to the date by the year patter 🆕20240204
+   1. Option: Adds an icon to dates that match the year separation 🆕20240204
 
 ---
 
