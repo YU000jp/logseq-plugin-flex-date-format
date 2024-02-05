@@ -13,7 +13,7 @@
     "Icon > Year separation": "Simge > Yıl ayırma",
     "Localize the day of the week": "Haftanın gününü yerelleştir",
     "Open the dialog on click": "Tıklamada iletişim penceresini aç",
-    "Select date format  (if the above option is enabled)": "Tarih biçimini seç (yukarıdaki seçenek etkinse)",
+    "Select date format": "Tarih biçimini seç",
     "Shorten the day of the week": "Haftanın gününü kısalt",
     "Switch to style of the selected date format": "Seçilen tarih biçimine geç",
     "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Bağlantı oluştururken kullanılamaz. Kullanıcı tarih biçimine dayalı olarak oluşturun."

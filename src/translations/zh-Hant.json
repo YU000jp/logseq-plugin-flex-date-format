@@ -13,7 +13,7 @@
     "Icon > Year separation": "圖標 > 年份分隔",
     "Localize the day of the week": "本地化星期幾",
     "Open the dialog on click": "單擊時打開對話框",
-    "Select date format  (if the above option is enabled)": "選擇日期格式（如果上述選項已啟用）",
+    "Select date format": "選擇日期格式",
     "Shorten the day of the week": "縮短星期幾",
     "Switch to style of the selected date format": "切換到所選日期格式的樣式",
     "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ 創建連結時無法使用。根據用戶日期格式創建它。"

@@ -13,7 +13,7 @@
     "Icon > Year separation": "아이콘 > 연도 구분",
     "Localize the day of the week": "요일 로컬라이즈",
     "Open the dialog on click": "클릭 시 대화 상자 열기",
-    "Select date format (if the above option is enabled)": "날짜 형식 선택 (위의 옵션이 활성화된 경우)",
+    "Select date format": "날짜 형식 선택",
     "Shorten the day of the week": "요일을 줄이기",
     "Switch to style of the selected date format": "선택한 날짜 형식으로 전환",
     "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ 링크를 만들 때 사용할 수 없습니다. 사용자 날짜 형식을 기반으로 만드세요."

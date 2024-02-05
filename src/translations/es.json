@@ -13,7 +13,7 @@
     "Icon > Year separation": "Icono > Separación de años",
     "Localize the day of the week": "Localizar el día de la semana",
     "Open the dialog on click": "Abrir el diálogo al hacer clic",
-    "Select date format (if the above option is enabled)": "Seleccionar formato de fecha (si la opción anterior está habilitada)",
+    "Select date format": "Seleccionar formato de fecha",
     "Shorten the day of the week": "Acortar el día de la semana",
     "Switch to style of the selected date format": "Cambiar al estilo del formato de fecha seleccionado",
     "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ No se puede utilizar al crear enlaces. Créelo en función del formato de fecha del usuario."

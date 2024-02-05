@@ -13,7 +13,7 @@
     "Icon > Year separation": "Иконка > Разделение года",
     "Localize the day of the week": "Локализовать день недели",
     "Open the dialog on click": "Открывать диалоговое окно при нажатии",
-    "Select date format  (if the above option is enabled)": "Выберите формат даты (если включена вышеуказанная опция)",
+    "Select date format": "Выберите формат даты",
     "Shorten the day of the week": "Сократить день недели",
     "Switch to style of the selected date format": "Переключиться на стиль выбранного формата даты",
     "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ Нельзя использовать при создании ссылок. Создайте его на основе формата даты пользователя."

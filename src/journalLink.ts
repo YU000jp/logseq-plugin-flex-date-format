@@ -24,25 +24,27 @@ const replaceDateFormat = (page: { journalDay: PageEntity["journalDay"] }, journ
   journalLinkElement.title = format(journalDate, preferredDateFormat)
   //相対時間をツールチップに表示
   if (logseq.settings!.booleanRelativeTime === true) // 相対時間を表示する設定の場合
-    journalLinkElement.title += "\n" + formatRelativeDate(journalDate, (logseq.settings!.booleanLocalizeDayOfWeek === true ? logseq.settings!.selectLocale as string : "en-US")) //相対時間を追加
+    journalLinkElement.title += "\n" + formatRelativeDate(journalDate, logseq.settings!.selectLocale as string) //相対時間を追加
 
   switch (logseq.settings!.dateFormat as string) { // ユーザー指定の形式に変更
     case "Unset": //未設定の場合
       break
     case "Localize": //ローカライズされた形式の場合
-      journalLinkElement.textContent = journalDate.toLocaleDateString((logseq.settings!.booleanLocalizeDayOfWeek === true ? logseq.settings!.selectLocale as string : "en-US"), { weekday: shortOrLong("short"), year: "numeric", month: "short", day: "numeric" })
+      journalLinkElement.textContent = journalDate.toLocaleDateString(logseq.settings!.selectLocale as string, { weekday: shortOrLong("short"), year: "numeric", month: "short", day: "numeric" })
       break
     default: //ユーザー指定の形式の場合
       journalLinkElement.textContent = format(journalDate, logseq.settings!.dateFormat as string)
-      if (logseq.settings!.booleanLocalizeDayOfWeek === true // 曜日をローカライズする設定の場合
-        && (logseq.settings!.dateFormat as string).includes("E")) // 曜日が含まれている場合
-        titleElementReplaceDayOfWeek(journalDate, journalLinkElement)
-      else { // 曜日が含まれていない場合
-        journalLinkElement.textContent = `${format(journalDate, logseq.settings!.dateFormat as string)} (${localizeDayOfWeek(shortOrLong("short"), journalDate, (logseq.settings!.booleanLocalizeDayOfWeek === true ? logseq.settings!.selectLocale as string : "en-US"))})`
+      if (logseq.settings!.booleanLocalizeDayOfWeek === true) { // 曜日をローカライズする設定の場合
 
+        if ((logseq.settings!.dateFormat as string).includes("E")) // 曜日が含まれている場合
+          titleElementReplaceDayOfWeek(journalDate, journalLinkElement)
+        else  // 曜日が含まれていない場合
+          journalLinkElement.textContent += ` (${localizeDayOfWeek(shortOrLong("short"), journalDate, logseq.settings!.selectLocale as string)})`
+
+        // 「Montag」が「Montagtag」になってしまうバグの対処
+        if (logseq.settings!.selectLocale as string === "de-DE")
+          journalLinkElement.textContent = journalLinkElement.textContent!.replace("tagtag", "tag")
       }
-      // 「Montag」が「Montagtag」になってしまうバグの対処
-      if (logseq.settings!.selectLocale as string === "de-DE") journalLinkElement.textContent = journalLinkElement.textContent!.replace("tagtag", "tag")
   }
 
   if (logseq.settings!.booleanAddIcon === true) addIcon(journalDate, journalLinkElement)
@@ -78,8 +80,8 @@ const titleElementReplaceDayOfWeek = (journalDate: Date, titleElement: HTMLEleme
 }
 
 const replace = (titleElement: HTMLElement, long: string, short: string, journalDate: Date) => {
-  titleElement.textContent = titleElement.textContent!.replace(long, localizeDayOfWeek(shortOrLong("long"), journalDate, (logseq.settings!.booleanLocalizeDayOfWeek === true ? logseq.settings!.selectLocale as string : "en-US")))
-  titleElement.textContent = titleElement.textContent!.replace(short, localizeDayOfWeek(shortOrLong("short"), journalDate, (logseq.settings!.booleanLocalizeDayOfWeek === true ? logseq.settings!.selectLocale as string : "en-US")))
+  titleElement.textContent = titleElement.textContent!.replace(long, localizeDayOfWeek(shortOrLong("long"), journalDate, logseq.settings!.selectLocale as string))
+  titleElement.textContent = titleElement.textContent!.replace(short, localizeDayOfWeek(shortOrLong("short"), journalDate, logseq.settings!.selectLocale as string))
 }
 
 const shortOrLong = (select: "short" | "long"): "short" | "long" => logseq.settings!.booleanShortOrLong === "unset" ? select : logseq.settings!.booleanShortOrLong as "short" | "long"

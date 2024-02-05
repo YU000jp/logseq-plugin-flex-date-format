@@ -21,7 +21,7 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     },
     {//date format
         key: "dateFormat",
-        title: t("Select date format  (if the above option is enabled)") + " 🆙",
+        title: t("Select date format") + " 🆙",
         type: "enum",
         //<option>E, MM/dd/yyyy</option><option>E, dd-MM-yyyy</option><option>E, dd.MM.yyyy</option><option>E, yyyy/MM/dd</option><option>EEE, MM/dd/yyyy</option><option>EEE, dd-MM-yyyy</option><option>EEE, dd.MM.yyyy</option><option>EEE, yyyy/MM/dd</option><option>EEEE, MM/dd/yyyy</option><option>EEEE, dd-MM-yyyy</option><option>EEEE, dd.MM.yyyy</option><option>EEEE, yyyy/MM/dd</option><option>MM-dd-yyyy</option><option>MM/dd/yyyy</option><option>MMM do, yyyy</option><option>MMMM do, yyyy</option><option>MM_dd_yyyy</option><option>dd-MM-yyyy</option><option>do MMM yyyy</option><option>do MMMM yyyy</option><option>yyyy-MM-dd</option><option>yyyy-MM-dd EEEE</option><option>yyyy/MM/dd</option><option>yyyyMMdd</option><option>yyyy_MM_dd</option><option>yyyy年MM月dd日</option><
         enumChoices: [
@@ -198,15 +198,15 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         key: "iconBeforeYear",
         title: t("Icon > Set icon (if journal is before than that year)") + " 🆕🚧",
         type: "string",
-        default: "&#xea0b;",
-        description: "default: `&#xea0b;` or `🕰️` / "+ t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
+        default: "🕰️",
+        description: "default: `🕰️` or `&#xea0b;` / "+ t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
     },
     {//区切りより後の場合のアイコン
         key: "iconAfterYear",
         title: t("Icon > Set icon (if journal is later than that year)") + " 🆕🚧",
         type: "string",
-        default: "&#xea53;",
-        description: "default: undefined / "+t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
+        default: "",
+        description: "default: undefined or `&#xea53;` / "+t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
     }
 
 ]
