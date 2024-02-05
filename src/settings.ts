@@ -172,7 +172,7 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
 
     {//日付に合わせて、アイコンをつける
         key: "booleanAddIcon",
-        title: t("Icon > Add an icon to the date by the year pattern") + " 🆕🚧",
+        title: t("Icon > Adds an icon to dates that match that separator") + " 🆕🚧",
         type: "boolean",
         default: true,
         description: "default: `true`",
@@ -180,7 +180,7 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     },
     { // アイコンをつける日付のパターン (年の区切り)
         key: "booleanYearPattern",
-        title: t("Icon > Year pattern") + " 🆕🚧",
+        title: t("Icon > Year separation") + " 🆕🚧",
         type: "enum",
         enumChoices: [
             "same year", // 同じ年かどうか
@@ -196,14 +196,14 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     },
     {//区切りより前の場合のアイコン
         key: "iconBeforeYear",
-        title: t("Icon > Set icon for before the year") + " 🆕🚧",
+        title: t("Icon > Set icon (if journal is before than that year)") + " 🆕🚧",
         type: "string",
         default: "&#xea0b;",
         description: "default: `&#xea0b;` or `🕰️` / "+ t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
     },
     {//区切りより後の場合のアイコン
         key: "iconAfterYear",
-        title: t("Icon > Set icon for after the year or same year") + " 🆕🚧",
+        title: t("Icon > Set icon (if journal is later than that year)") + " 🆕🚧",
         type: "string",
         default: "&#xea53;",
         description: "default: undefined / "+t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
