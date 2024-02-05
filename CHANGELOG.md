@@ -1,3 +1,15 @@
+# [1.7.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.6.0...v1.7.0) (2024-2-5)
+
+
+### Bug Fixes
+
+* **bug:** German: "Montagtag" → "Montag" (replace) [#10](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/10) ([0ae3ec2](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/0ae3ec27f4521c237bba4b4cc0f6104ea01eb33b))
+
+
+### Features
+
+* for plugin settings [#9](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/9) ([37ace6a](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/37ace6a3f96794ca2c9d0203d984cc98baa5e7a7))
+
 # [1.6.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.5.0...v1.6.0) (2024-2-4)
 
 
