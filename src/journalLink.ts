@@ -37,8 +37,12 @@ const replaceDateFormat = (page: { journalDay: PageEntity["journalDay"] }, journ
       if (logseq.settings!.booleanLocalizeDayOfWeek === true // 曜日をローカライズする設定の場合
         && (logseq.settings!.dateFormat as string).includes("E")) // 曜日が含まれている場合
         titleElementReplaceDayOfWeek(journalDate, journalLinkElement)
-      else // 曜日が含まれていない場合
+      else { // 曜日が含まれていない場合
         journalLinkElement.textContent = `${format(journalDate, logseq.settings!.dateFormat as string)} (${localizeDayOfWeek(shortOrLong("short"), journalDate, (logseq.settings!.booleanLocalizeDayOfWeek === true ? logseq.settings!.selectLocale as string : "en-US"))})`
+
+      }
+      // 「Montag」が「Montagtag」になってしまうバグの対処
+      if (logseq.settings!.selectLocale as string === "de-DE") journalLinkElement.textContent = journalLinkElement.textContent!.replace("tagtag", "tag")
   }
 
   if (logseq.settings!.booleanAddIcon === true) addIcon(journalDate, journalLinkElement)
