@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.7.0...v1.7.1) (2024-2-5)
+
+
+### Bug Fixes
+
+* **bug:** bug, plugin settings item ([93764c6](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/93764c61987a43ef31d15162d993f402d7b5f19c))
+
 # [1.7.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.6.0...v1.7.0) (2024-2-5)
 
 
