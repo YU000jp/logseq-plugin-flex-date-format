@@ -106,7 +106,7 @@
 
 > Go to the [discussion](https://github.com/YU000jp/logseq-plugin-flex-date-format/discussions) tab to ask and find this kind of things.
 
-1. If the Tabler icon is not displayed correctly even if you specify it, please specify another icon. It may not be an HTML char or Logseq may not support that icon. It depends on the version of Tabler-icon applied to Logseq.
+1. To use Tabler icons, install [Tabler Picker plugin](https://github.com/yoyurec/logseq-tabler-picker). If the icon is not displayed correctly, please specify a different icon. It may not be an HTML character, or Logseq may not support that icon. It depends on the version of Tabler-icon applied to Logseq.
 1. **⚠️If using "Show Weekday and Week-number" plugin, overlapping days of the week.**
    > Turn it off in the plugin settings.
 1. This plugin relies on Logseq's DOM (Document Object Model) structure. If the DOM structure changes due to a Logseq version update, styles may not be applied. We will adjust the CSS to deal with it. If you notice something, please raise an issue.
