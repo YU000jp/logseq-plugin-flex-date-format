@@ -31,6 +31,7 @@
    - Press [`---`] on the top right toolbar to open [`Plugins`]. Select `Marketplace`. Type `Flex` in the search field, select it from the search results and install.
 
 1. Please specify the settings in the plugin settings.
+ > If use Tabler-icon, need to install and enable [`Tabler picker` plugin](https://github.com/yoyurec/logseq-tabler-picker).
 
 1. Locales
 
