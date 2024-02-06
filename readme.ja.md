@@ -27,7 +27,7 @@
 1. Logseq マーケットプレースからプラグインをインストールしてください。
    - 右上のツールバーで [`---`] を押して [`プラグイン`] を開きます。 [`マーケットプレイス`] を選択します。検索フィールドに `Flex` と入力し、検索結果から選択してインストールします。
 1. プラグイン設定で、設定をおこなってください。
-> もし、Tabler-iconのアイコンを使う場合は、 [`Tabler picker` プラグイン](https://github.com/yoyurec/logseq-tabler-picker)をインストールし、有効にしてください。
+1. もし、Tabler-iconのアイコンを使う場合は、 [`Tabler picker` プラグイン](https://github.com/yoyurec/logseq-tabler-picker)をインストールし、有効にしてください。
 1. ロケール指定
 
     | ロケール                | 説明                                                 |
