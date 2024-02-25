@@ -43,7 +43,7 @@ const replaceDateFormat = (page: { journalDay: PageEntity["journalDay"] }, journ
 
         // 「Montag」が「Montagtag」になってしまうバグの対処
         if (logseq.settings!.selectLocale as string === "de-DE")
-          journalLinkElement.textContent = journalLinkElement.textContent!.replace("tagtag", "tag")
+          journalLinkElement.textContent = journalLinkElement.textContent!.replace("tagtag", "tag").replace("Motag", "Montag")
       }
   }
 
