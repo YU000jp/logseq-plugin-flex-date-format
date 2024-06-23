@@ -1,16 +1,17 @@
 # Logseq Plugin: Flexible date format
 
-[English](https://github.com/YU000jp/logseq-plugin-flex-date-format) | [日本語](https://github.com/YU000jp/logseq-plugin-flex-date-format/blob/main/readme.ja.md)
-
 1. Localize date format
 1. Switch to style of the selected format
    - Separate the date format recorded in files from the format displayed.
 > *This plugin does not affect the graph or files*
 
-[![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
+<div align="right">
+
+[English](https://github.com/YU000jp/logseq-plugin-flex-date-format) | [日本語](https://github.com/YU000jp/logseq-plugin-flex-date-format/blob/main/readme.ja.md) [![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
 [![License](https://img.shields.io/github/license/YU000jp/logseq-plugin-flex-date-format?color=blue)](https://github.com/YU000jp/logseq-plugin-flex-date-format/LICENSE)
 [![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-flex-date-format/total.svg)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
- Published 2023/08/23
+ Published 2023/08/23 <a href="https://www.buymeacoffee.com/yu000japan"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=yu000japan&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+ </div>
 
 ## Overview
 - targets are journal links or journal titles
@@ -37,8 +38,8 @@
 
    | Locale                | Description                                          |
    |-----------------------|------------------------------------------------------|
-   | default               | Gregorian calendar (default)                        |
-   | am-ET-u-ca-ethiopic   | Amharic (Ethiopia) - Ethiopian calendar             |
+   | default               | Gregorian calendar (default)                         |
+   | am-ET-u-ca-ethiopic   | Amharic (Ethiopia) - Ethiopian calendar              |
    | ar-EG                 | Egypt                                                |
    | ar-SA                 | Arabic (Saudi Arabia) - Gregorian calendar (default) |
    | ar-SA-u-ca-islamic-umalqura | Arabic (Saudi Arabia) - Islamic (Umm al-Qura) calendar |
@@ -47,11 +48,11 @@
    | en-AU                 | Australia                                            |
    | en-CA                 | Canada (English)                                     |
    | en-GB                 | English (United Kingdom) - Gregorian calendar (default) |
-   | en-GB-u-ca-islamic   | English (United Kingdom) - Islamic calendar          |
-   | en-GB-u-ca-persian   | English (United Kingdom) - Persian calendar          |
+   | en-GB-u-ca-islamic   | English (United Kingdom) - Islamic calendar           |
+   | en-GB-u-ca-persian   | English (United Kingdom) - Persian calendar           |
    | en-US                 | English (United States) - Gregorian calendar (default) |
-   | en-US-u-ca-islamic   | English (United States) - Islamic calendar           |
-   | en-US-u-ca-persian   | English (United States) - Persian calendar           |
+   | en-US-u-ca-islamic   | English (United States) - Islamic calendar            |
+   | en-US-u-ca-persian   | English (United States) - Persian calendar            |
    | es-AR                 | Argentina                                            |
    | es-CL                 | Chile                                                |
    | es-CO                 | Colombia                                             |
@@ -70,7 +71,7 @@
    | es-UY                 | Uruguay                                              |
    | es-VE                 | Venezuela                                            |
    | fa-IR                 | Persian (Iran) - Gregorian calendar (default)        |
-   | fa-IR-u-ca-persian   | Persian (Iran) - Persian calendar (Jalali)           |
+   | fa-IR-u-ca-persian   | Persian (Iran) - Persian calendar (Jalali)            |
    | fr-CA                 | Canada (French)                                      |
    | fr-FR                 | France                                               |
    | he-IL-u-ca-hebrew    | Hebrew (Israel) - Hebrew calendar                     |
@@ -78,9 +79,9 @@
    | id-ID                 | Indonesia                                            |
    | it-IT                 | Italy                                                |
    | ja-JP                 | Japanese (Japan) - Gregorian calendar (default)      |
-   | ja-JP-u-ca-japanese   | Japanese (Japan) - Japanese calendar                  |
+   | ja-JP-u-ca-japanese   | Japanese (Japan) - Japanese calendar                 |
    | ko-KR                 | Korean (Korea) - Gregorian calendar (default)        |
-   | ko-KR-u-ca-korean     | Korean (Korea) - Korean calendar                      |
+   | ko-KR-u-ca-korean     | Korean (Korea) - Korean calendar                     |
    | ms-MY                 | Malaysia                                             |
    | nl-NL                 | Netherlands                                          |
    | pl-PL                 | Poland                                               |
@@ -94,7 +95,7 @@
    | vi-VN                 | Vietnam                                              |
    | zh-CN                 | China                                                |
    | zh-CN-u-ca-chinese   | Chinese (China) - Chinese calendar                    |
-   | zh-Hans-CN           | Chinese (China) - Gregorian calendar (default)       |
+   | zh-Hans-CN           | Chinese (China) - Gregorian calendar (default)        |
    | zh-Hant-TW-u-ca-taiwan| Chinese (Taiwan) - Gregorian calendar (default)      |
    | zh-TW                 | Taiwan                                               |
    | zh-TW-u-ca-roc       | Chinese (Taiwan) - Minguo calendar (Republic of China era) |
@@ -119,6 +120,4 @@
 
 ## Credit
 
-1. Author > [@YU000jp](https://github.com/YU000jp)
-
-<a href="https://www.buymeacoffee.com/yu000japan"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=yu000japan&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+- Author > [@YU000jp](https://github.com/YU000jp)
