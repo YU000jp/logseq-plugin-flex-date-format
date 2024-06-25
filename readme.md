@@ -1,9 +1,8 @@
 # Logseq Plugin: Flexible date format
 
 - Localize visual display for user date format
-  1. Localize date format
   1. Switch to style of the selected format
-     - Separate the date format recorded in files from the format displayed.
+     > Separate the date format recorded in files from the format displayed.
 > *This plugin does not affect the graph or files*
 
 <div align="right">
