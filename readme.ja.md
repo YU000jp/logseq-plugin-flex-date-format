@@ -5,6 +5,9 @@
      > ファイルに記録された日付形式を、表示される形式から分離します
 > *このプラグインはグラフやファイルに影響を与えません*
 
+> [!WARNING]
+>現在、このプラグインはLogseq dbバージョンでは動作しません。
+
 <div align="right">
 
 [English](https://github.com/YU000jp/logseq-plugin-flex-date-format) | [日本語](https://github.com/YU000jp/logseq-plugin-flex-date-format/blob/main/readme.ja.md) [![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)

@@ -5,6 +5,9 @@
      > Separate the date format recorded in files from the format displayed.
 > *This plugin does not affect the graph or files*
 
+> [!WARNING]
+This plugin does not work with Logseq db version now.
+
 <div align="right">
 
 [English](https://github.com/YU000jp/logseq-plugin-flex-date-format) | [日本語](https://github.com/YU000jp/logseq-plugin-flex-date-format/blob/main/readme.ja.md) [![latest release version](https://img.shields.io/github/v/release/YU000jp/logseq-plugin-flex-date-format)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
