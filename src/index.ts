@@ -95,30 +95,53 @@ const querySelectorAllLinks = async (): Promise<void> => {
   if (processingTitleQuery) return
   processingTitleQuery = true;
 
-  (parent.document.body.querySelector("div#root>div>main") as HTMLElement | null)?.querySelectorAll("div#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), div:is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), div#left-sidebar li span.page-title:not([data-localize]), div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis:not([data-localize])")
+  (parent.document.body.querySelector("#root>div>main") as HTMLElement | null)?.querySelectorAll("#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), div:is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis:not([data-localize])")
     .forEach(async (titleElement) => await journalLink(titleElement as HTMLElement, userDateFormat))
 
   setTimeout(() => processingTitleQuery = false, 30)
 }
 
-//observer
-const observer = new MutationObserver(async (): Promise<void> => {
-  observer.disconnect()
-  await querySelectorAllLinks()
-  setTimeout(() => observerMainRight(), 800)
-})
+// デバウンス関数
+const debounce = (fn: Function, delay: number) => {
+  let timeoutId: NodeJS.Timeout
+  return (...args: any[]) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => fn(...args), delay)
+  }
+}
+
+// 改善されたobserver
+const observer = new MutationObserver(
+  debounce(async (mutations: MutationRecord[]): Promise<void> => {
+    // 必要な変更のみを処理
+    const needsUpdate = mutations.some(mutation =>
+      mutation.type === 'attributes' &&
+      mutation.attributeName === 'class' &&
+      mutation.target instanceof HTMLElement &&
+      (mutation.target.querySelector('.journal') ||
+        mutation.target.querySelector('.is-journals'))
+    )
+
+    if (needsUpdate) {
+      await querySelectorAllLinks()
+    }
+  }, 100)
+)
 
 const observerMainRight = () => {
-  observer.observe(parent.document.getElementById("main-content-container") as HTMLDivElement, {
+  const config = {
     attributes: true,
     subtree: true,
     attributeFilter: ["class"],
-  })
-  observer.observe(parent.document.getElementById("right-sidebar") as HTMLDivElement, {
-    attributes: true,
-    subtree: true,
-    attributeFilter: ["class"],
-  })
+    characterData: false,
+    childList: false
+  }
+
+  const mainContent = parent.document.getElementById("main-content-container")
+  const rightSidebar = parent.document.getElementById("right-sidebar")
+
+  if (mainContent) observer.observe(mainContent, config)
+  if (rightSidebar) observer.observe(rightSidebar, config)
 }
 
 //元に戻す
