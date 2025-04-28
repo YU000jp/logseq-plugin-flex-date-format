@@ -1,3 +1,10 @@
+## [1.7.3](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.7.2...v1.7.3) (2025-04-28)
+
+
+### Performance Improvements
+
+* **ref:** Reduced filtering load by utilising queries ([3a86c72](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/3a86c7292f66f1d20415dfa819eed81da430c124))
+
 ## [1.7.2](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.7.1...v1.7.2) (2024-2-25)
 
 
