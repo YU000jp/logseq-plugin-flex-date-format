@@ -1,6 +1,7 @@
 import { PageEntity } from "@logseq/libs/dist/LSPlugin"
 import { format, subYears } from "date-fns"
 import { formatRelativeDate, getJournalDayDate, localizeDayOfWeek } from "./lib"
+import { doesPageExistAsJournal } from "./query/advancedQuery"
 
 export const journalLink = async (journalLinkElement: HTMLElement, preferredDateFormat: string): Promise<void> => {
 
@@ -8,16 +9,16 @@ export const journalLink = async (journalLinkElement: HTMLElement, preferredDate
     || journalLinkElement.dataset.localize === "true") // 既にローカライズされている場合
     return
 
-  const page = await logseq.Editor.getPage(journalLinkElement.textContent) as { journalDay: PageEntity["journalDay"] } | null
-  if (page === null) return
-  if (page.journalDay) replaceDateFormat(page, journalLinkElement, preferredDateFormat)
+  const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent) as PageEntity["journalDay"] | null
+  if (journalDay === null) return
+  if (journalDay) replaceDateFormat(journalDay, journalLinkElement, preferredDateFormat)
 
 }
 
 
-const replaceDateFormat = (page: { journalDay: PageEntity["journalDay"] }, journalLinkElement: HTMLElement, preferredDateFormat: string) => {
+const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElement: HTMLElement, preferredDateFormat: string) => {
 
-  const journalDate: Date = getJournalDayDate(String(page.journalDay)) // 日誌リンクから日付を取得
+  const journalDate: Date = getJournalDayDate(String(journalDay)) // 日誌リンクから日付を取得
   journalLinkElement.dataset.ref = journalLinkElement.textContent as string | undefined // journalLinkElement.textContentを保存
 
   //保存に使われる日付フォーマットをツールチップに表示
@@ -96,19 +97,20 @@ const addIcon = (journalDate: Date, journalLinkElement: HTMLElement) => {
 }
 
 const checkYear = (journalDate: Date): boolean => {
-  if (logseq.settings!.booleanYearPattern === "same year") return new Date().getFullYear() === journalDate.getFullYear() // journalDateの年が今年と同じ場合true
+  const currentDate = new Date()
+  if (logseq.settings!.booleanYearPattern === "same year") return currentDate.getFullYear() === journalDate.getFullYear() // journalDateの年が今年と同じ場合true
   else
     switch (logseq.settings!.booleanYearPattern) {// journalDateのほうが新しい日付の場合true
       case "1 year period":
-        return journalDate > subYears(new Date(), 1)
+        return journalDate > subYears(currentDate, 1)
       case "2 year period":
-        return journalDate > subYears(new Date(), 2)
+        return journalDate > subYears(currentDate, 2)
       case "3 year period":
-        return journalDate > subYears(new Date(), 3)
+        return journalDate > subYears(currentDate, 3)
       case "5 year period":
-        return journalDate > subYears(new Date(), 5)
+        return journalDate > subYears(currentDate, 5)
       case "10 year period":
-        return journalDate > subYears(new Date(), 10)
+        return journalDate > subYears(currentDate, 10)
       default:
         return false
     }
