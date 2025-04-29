@@ -36,7 +36,7 @@ This plugin does not work with Logseq db version now.
 2. **Configure**:
    > Open plugin settings and choose your preferences
 
-3. **Enjoy!**
+3. **Conplete!**
    > Your dates will now display in your chosen format
 
 ## Overview
