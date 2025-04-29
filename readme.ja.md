@@ -1,4 +1,6 @@
-# Logseq Plugin: Flexible date format
+# 📅 Logseq プラグイン：Flexible date format (日付表示カスタマイズ)
+
+> ファイルを変更せずに、日付の表示方法をカスタマイズできます！
 
 - ユーザー日付形式に対する視覚的な表示をローカライズする
   1. 選択した日付形式のスタイルを適用します。
@@ -15,6 +17,27 @@
 [![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-flex-date-format/total.svg)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
  Published 2023/08/23 <a href="https://www.buymeacoffee.com/yu000japan"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=yu000japan&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
  </div>
+
+## ✨ 主な機能
+
+1. **日付表示のカスタマイズ**
+   - 好みの日付形式で表示
+   - ファイルの内容はそのまま保持
+   
+2. **スマートなローカライズ**
+   - 日本語での日付表示
+   - 曜日の追加表示（例：2023/07/22 → 2023/07/22 (土)）
+
+## 🚀 かんたん始め方
+
+1. **インストール**: 
+   > プラグイン → マーケットプレース → 「Flex」で検索
+
+2. **設定**:
+   > プラグイン設定を開いて好みの表示形式を選択
+
+3. **完了！**
+   > 選択した形式で日付が表示されます
 
 ## 概要
 

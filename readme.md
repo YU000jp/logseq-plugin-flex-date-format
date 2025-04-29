@@ -1,4 +1,6 @@
-# Logseq Plugin: Flexible date format
+# 📅 Logseq Plugin: Flexible date format
+
+> Transform how dates appear in your Logseq journal - without changing your files!
 
 - Localize visual display for user date format
   1. Switch to style of the selected format
@@ -15,6 +17,27 @@ This plugin does not work with Logseq db version now.
 [![Downloads](https://img.shields.io/github/downloads/YU000jp/logseq-plugin-flex-date-format/total.svg)](https://github.com/YU000jp/logseq-plugin-flex-date-format/releases)
  Published 2023/08/23 <a href="https://www.buymeacoffee.com/yu000japan"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a pizza&emoji=🍕&slug=yu000japan&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
  </div>
+
+## ✨ Features
+
+1. **Customize Date Display**
+   - Choose from various date formats
+   - Keep your files unchanged while displaying dates differently
+   
+2. **Smart Localization**
+   - Display dates in your preferred language & format
+   - Add localized weekdays (e.g., 2023/07/22 → 2023/07/22 (Sat))
+
+## 🚀 Quick Start
+
+1. **Install**: 
+   > Plugins → Marketplace → Search "Flex"
+
+2. **Configure**:
+   > Open plugin settings and choose your preferences
+
+3. **Enjoy!**
+   > Your dates will now display in your chosen format
 
 ## Overview
 - targets are journal links or journal titles
