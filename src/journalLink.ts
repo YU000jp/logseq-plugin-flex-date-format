@@ -3,13 +3,13 @@ import { format, subYears } from "date-fns"
 import { formatRelativeDate, getJournalDayDate, localizeDayOfWeek } from "./lib"
 import { doesPageExistAsJournal } from "./query/advancedQuery"
 
-export const journalLink = async (journalLinkElement: HTMLElement, preferredDateFormat: string): Promise<void> => {
+export const journalLink = async (journalLinkElement: HTMLElement, preferredDateFormat: string, logseqVerMd: boolean): Promise<void> => {
 
   if (!journalLinkElement.textContent // journalLinkElement.textContent === null
     || journalLinkElement.dataset.localize === "true") // 既にローカライズされている場合
     return
 
-  const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent) as PageEntity["journalDay"] | null
+  const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent, logseqVerMd) as PageEntity["journalDay"] | null
   if (journalDay === null) return
   if (journalDay) replaceDateFormat(journalDay, journalLinkElement, preferredDateFormat)
 

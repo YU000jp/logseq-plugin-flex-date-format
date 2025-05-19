@@ -11,17 +11,14 @@ export const advancedQuery = async <T>(query: string, ...input: Array<string>): 
   }
 }
 
-// フィールドを取得するクエリ
-const createBaseQuery = (field: string): string => `
-  [:find (pull ?b [:block/${field}])
-   :in $ ?name
-   :where
-   [?b :block/original-name ?name]
-   [?b :block/${field} ?${field}]] 
-`
-
 // ページ名からjournalDayを取得するクエリ
-export const doesPageExistAsJournal = async (pageName: string): Promise<PageEntity["journalDay"] | null> => {
-  const result = await advancedQuery<{ "journalDay": PageEntity["journalDay"] }[]>(createBaseQuery("journal-day"), `"${pageName}"`)
+export const doesPageExistAsJournal = async (pageName: string, logseqVerMd: boolean): Promise<PageEntity["journalDay"] | null> => {
+  const result = await advancedQuery<{ "journalDay": PageEntity["journalDay"] }[]>(`
+    [:find (pull ?b [:block/journal-day])
+     :in $ ?name
+     :where
+     [?b :block/${logseqVerMd === true ? "original-name" : "title"} ?name]
+     [?b :block/journal-day ?journal-day]]`,
+    `"${pageName}"`)
   return result?.[0]?.["journal-day"] ?? null
 }

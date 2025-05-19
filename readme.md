@@ -7,8 +7,8 @@
      > Separate the date format recorded in files from the format displayed.
 > *This plugin does not affect the graph or files*
 
-> [!WARNING]
-This plugin does not work with Logseq db version now.
+> [!NOTE]
+This plugin works in Logseq db version.
 
 <div align="right">
 
