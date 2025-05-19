@@ -53,36 +53,14 @@ const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElem
   journalLinkElement.dataset.localize = "true" // フラグ
 }
 
-//titleElementの日付をローカライズする(Element書き換え)
 const titleElementReplaceDayOfWeek = (journalDate: Date, titleElement: HTMLElement) => {
-  switch (journalDate.getDay()) { //journalDateで曜日を取得する
-    case 0:
-      replace(titleElement, "Sunday", "Sun", journalDate)
-      break
-    case 1:
-      replace(titleElement, "Monday", "Mon", journalDate)
-      break
-    case 2:
-      replace(titleElement, "Tuesday", "Tue", journalDate)
-      break
-    case 3:
-      replace(titleElement, "Wednesday", "Wed", journalDate)
-      break
-    case 4:
-      replace(titleElement, "Thursday", "Thu", journalDate)
-      break
-    case 5:
-      replace(titleElement, "Friday", "Fri", journalDate)
-      break
-    case 6:
-      replace(titleElement, "Saturday", "Sat", journalDate)
-      break
-  }
-}
+  const locale = logseq.settings!.selectLocale as string
+  const longFormat = localizeDayOfWeek(shortOrLong("long"), journalDate, locale)
+  const shortFormat = localizeDayOfWeek(shortOrLong("short"), journalDate, locale)
 
-const replace = (titleElement: HTMLElement, long: string, short: string, journalDate: Date) => {
-  titleElement.textContent = titleElement.textContent!.replace(long, localizeDayOfWeek(shortOrLong("long"), journalDate, logseq.settings!.selectLocale as string))
-  titleElement.textContent = titleElement.textContent!.replace(short, localizeDayOfWeek(shortOrLong("short"), journalDate, logseq.settings!.selectLocale as string))
+  titleElement.textContent = titleElement.textContent!
+    .replace(/(?:Sunday|Sun|Monday|Mon|Tuesday|Tue|Wednesday|Wed|Thursday|Thu|Friday|Fri|Saturday|Sat)/g,
+      match => match.length > 3 ? longFormat : shortFormat)
 }
 
 const shortOrLong = (select: "short" | "long"): "short" | "long" => logseq.settings!.booleanShortOrLong === "unset" ? select : logseq.settings!.booleanShortOrLong as "short" | "long"
@@ -98,20 +76,18 @@ const addIcon = (journalDate: Date, journalLinkElement: HTMLElement) => {
 
 const checkYear = (journalDate: Date): boolean => {
   const currentDate = new Date()
-  if (logseq.settings!.booleanYearPattern === "same year") return currentDate.getFullYear() === journalDate.getFullYear() // journalDateの年が今年と同じ場合true
-  else
-    switch (logseq.settings!.booleanYearPattern) {// journalDateのほうが新しい日付の場合true
-      case "1 year period":
-        return journalDate > subYears(currentDate, 1)
-      case "2 year period":
-        return journalDate > subYears(currentDate, 2)
-      case "3 year period":
-        return journalDate > subYears(currentDate, 3)
-      case "5 year period":
-        return journalDate > subYears(currentDate, 5)
-      case "10 year period":
-        return journalDate > subYears(currentDate, 10)
-      default:
-        return false
-    }
+  if (logseq.settings!.booleanYearPattern === "same year") {
+    return currentDate.getFullYear() === journalDate.getFullYear()
+  }
+
+  const yearPatternMap: Record<string, number> = {
+    "1 year period": 1,
+    "2 year period": 2,
+    "3 year period": 3,
+    "5 year period": 5,
+    "10 year period": 10
+  }
+
+  const years = yearPatternMap[logseq.settings!.booleanYearPattern as string]
+  return years ? journalDate > subYears(currentDate, years) : false
 }
