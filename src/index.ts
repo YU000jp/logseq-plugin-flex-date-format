@@ -77,7 +77,10 @@ const main = async () => {
   })
 
   onSettingsChanged() //設定が変更されたときに実行
-
+  
+  logseq.App.onCurrentGraphChanged(async () => {
+    logseqDbGraph = await checkDbGraph()
+  })
 }/* end_main */
 
 
@@ -108,11 +111,13 @@ const querySelectorAllLinks = async (): Promise<void> => {
   processingTitleQuery = true;
 
   (parent.document.body.querySelector("div#root>div>main") as HTMLElement | null)?.querySelectorAll(
-    "#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item "
-    + (logseqVersionMd === true ?
-      "div.page-title>span+span.text-ellipsis:not([data-localize])" //md model
-      : "div.page-title>div+span.text-ellipsis:not([data-localize])" //db model
-    ))
+    logseqDbGraph === true ?
+      "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis:not([data-localize]) "
+      : "#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item "
+      + (logseqVersionMd === true ?
+        "div.page-title>span+span.text-ellipsis:not([data-localize])" //md model
+        : "div.page-title>div+span.text-ellipsis:not([data-localize])" //db model
+      ))
     .forEach(async (titleElement) => await journalLink(titleElement as HTMLElement, userDateFormat, logseqVersionMd))
 
   setTimeout(() => processingTitleQuery = false, 30)
@@ -141,10 +146,12 @@ const observerMainRight = () => {
 //元に戻す
 const revertQuerySelectorAllLinks = () => {
   (parent.document.querySelectorAll(
-    "#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item "
-    + (logseqVersionMd === true ?
-      "div.page-title>span+span.text-ellipsis[data-localize]"
-      : "div.page-title>div+span.text-ellipsis[data-localize]")) as NodeListOf<HTMLElement>)
+    logseqDbGraph === true ?
+      "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis[data-localize]"
+      : "#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item "
+      + (logseqVersionMd === true ?
+        "div.page-title>span+span.text-ellipsis[data-localize]"
+        : "div.page-title>div+span.text-ellipsis[data-localize]")) as NodeListOf<HTMLElement>)
     .forEach(async (titleElement) => {
       titleElement.removeAttribute("data-localize")
       if (titleElement.dataset.ref) titleElement.textContent = titleElement.dataset.ref
