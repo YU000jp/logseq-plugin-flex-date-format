@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.7.3...v1.8.0) (2025-05-19)
+
+
+### Features
+
+* Support Logseq db model (version) ([3e7981c](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/3e7981cc975e6cd02a498b2d3b50eb7eb66019e4))
+
 ## [1.7.3](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.7.2...v1.7.3) (2025-04-28)
 
 
