@@ -1,5 +1,5 @@
 import '@logseq/libs' //https://plugins-doc.logseq.com/
-import { AppUserConfigs, LSPluginBaseInfo } from '@logseq/libs/dist/LSPlugin.user'
+import { AppInfo, AppUserConfigs, LSPluginBaseInfo } from '@logseq/libs/dist/LSPlugin.user'
 import { setup as l10nSetup } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { openStartWindow } from './demoDateFormat'
 import { journalLink } from './journalLink'
@@ -24,6 +24,12 @@ import uk from "./translations/uk.json"
 import zhCN from "./translations/zh-CN.json"
 import zhHant from "./translations/zh-Hant.json"
 let userDateFormat: string = ""
+let logseqVersion: string = "" //バージョンチェック用
+let logseqVersionMd: boolean = false //バージョンチェック用
+let logseqDbGraph: boolean = false
+// export const getLogseqVersion = () => logseqVersion //バージョンチェック用
+export const booleanLogseqVersionMd = () => logseqVersionMd //バージョンチェック用
+export const booleanDbGraph = () => logseqDbGraph //バージョンチェック用
 
 const checkUserDateFormat = async () => {
   const { preferredDateFormat } = await logseq.App.getUserConfigs() as { preferredDateFormat: AppUserConfigs["preferredDateFormat"] }
@@ -32,6 +38,12 @@ const checkUserDateFormat = async () => {
 
 /* main */
 const main = async () => {
+
+  // バージョンチェック
+  logseqVersionMd = await checkLogseqVersion()
+  // DBグラフチェック
+  logseqDbGraph = await checkDbGraph()
+
   await l10nSetup({
     builtinTranslations: {//Full translations
       ja, af, de, es, fr, id, it, ko, "nb-NO": nbNO, nl, pl, "pt-BR": ptBR, "pt-PT": ptPT, ru, sk, tr, uk, "zh-CN": zhCN, "zh-Hant": zhHant
@@ -95,8 +107,13 @@ const querySelectorAllLinks = async (): Promise<void> => {
   if (processingTitleQuery) return
   processingTitleQuery = true;
 
-  (parent.document.body.querySelector("div#root>div>main") as HTMLElement | null)?.querySelectorAll("div#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), div:is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), div#left-sidebar li span.page-title:not([data-localize]), div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis:not([data-localize])")
-    .forEach(async (titleElement) => await journalLink(titleElement as HTMLElement, userDateFormat))
+  (parent.document.body.querySelector("div#root>div>main") as HTMLElement | null)?.querySelectorAll(
+    "#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item "
+    + (logseqVersionMd === true ?
+      "div.page-title>span+span.text-ellipsis:not([data-localize])" //md model
+      : "div.page-title>div+span.text-ellipsis:not([data-localize])" //db model
+    ))
+    .forEach(async (titleElement) => await journalLink(titleElement as HTMLElement, userDateFormat, logseqVersionMd))
 
   setTimeout(() => processingTitleQuery = false, 30)
 }
@@ -123,11 +140,46 @@ const observerMainRight = () => {
 
 //元に戻す
 const revertQuerySelectorAllLinks = () => {
-  (parent.document.querySelectorAll("div#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], div:is(#main-content-container,#right-sidebar) a[data-ref][data-localize], div#left-sidebar li span.page-title[data-localize], div#right-sidebar div.sidebar-item div.page-title>span+span.text-ellipsis[data-localize]") as NodeListOf<HTMLElement>)
+  (parent.document.querySelectorAll(
+    "#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item "
+    + (logseqVersionMd === true ?
+      "div.page-title>span+span.text-ellipsis[data-localize]"
+      : "div.page-title>div+span.text-ellipsis[data-localize]")) as NodeListOf<HTMLElement>)
     .forEach(async (titleElement) => {
       titleElement.removeAttribute("data-localize")
       if (titleElement.dataset.ref) titleElement.textContent = titleElement.dataset.ref
     })
+}
+
+// MDモデルかどうかのチェック DBモデルはfalse
+const checkLogseqVersion = async (): Promise<boolean> => {
+  const logseqInfo = (await logseq.App.getInfo("version")) as AppInfo | any
+  //  0.11.0もしくは0.11.0-alpha+nightly.20250427のような形式なので、先頭の3つの数値(1桁、2桁、2桁)を正規表現で取得する
+  const version = logseqInfo.match(/(\d+)\.(\d+)\.(\d+)/)
+  if (version) {
+    logseqVersion = version[0] //バージョンを取得
+    // console.log("logseq version: ", logseqVersion)
+
+    // もし バージョンが0.10.*系やそれ以下ならば、logseqVersionMdをtrueにする
+    if (logseqVersion.match(/0\.([0-9]|10)\.\d+/)) {
+      logseqVersionMd = true
+      // console.log("logseq version is 0.10.* or lower")
+      return true
+    } else logseqVersionMd = false
+  } else logseqVersion = "0.0.0"
+  return false
+}
+
+// DBグラフかどうかのチェック DBグラフだけtrue
+const checkDbGraph = async (): Promise<boolean> => {
+  const element = parent.document.querySelector(
+    "div.block-tags",
+  ) as HTMLDivElement | null // ページ内にClassタグが存在する  WARN:: ※DOM変更の可能性に注意
+  if (element) {
+    logseqDbGraph = true
+    return true
+  } else logseqDbGraph = false
+  return false
 }
 
 logseq.ready(main).catch(console.error)
