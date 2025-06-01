@@ -59,6 +59,9 @@ const main = async () => {
     logseq.updateSettings({ firstLoad: messageId })
   }
 
+  //100ms待機
+  await new Promise(resolve => setTimeout(resolve, 100))
+
   await checkUserDateFormat() //ユーザーの日付形式を取得
 
   //Logseqを開いたときに実行
