@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.9.0...v1.9.1) (2025-06-01)
+
+
+### Bug Fixes
+
+* **bug:** User date format not recognised correctly ([6dce945](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/6dce94501e0f398d567e497b40b72ff4da42e949))
+
 # [1.9.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.8.0...v1.9.0) (2025-05-19)
 
 
