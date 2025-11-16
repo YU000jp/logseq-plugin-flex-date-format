@@ -59,7 +59,9 @@ const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElem
   // Decide what to display as main text
   if (shouldShowRelativeInText && isInRelativeRange) {
     // Display relative date as main text, formatted date in tooltip
-    journalLinkElement.textContent = formatRelativeDate(journalDate, logseq.settings!.selectLocale as string)
+    // Add calendar icon (📅) and capitalize first letter for better design
+    const relativeText = formatRelativeDate(journalDate, logseq.settings!.selectLocale as string, true)
+    journalLinkElement.textContent = `📅 ${relativeText}`
     journalLinkElement.title = formattedDate
   } else {
     // Display formatted date as main text

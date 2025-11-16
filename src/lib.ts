@@ -27,15 +27,22 @@ export const getWeeklyNumberFromDate = (journalDate: Date, weekStartsOn: 0 | 1):
 export const localizeDayOfWeek = (weekday: "short" | "long", journalDate: Date, locales: string) => new Intl.DateTimeFormat(locales, { weekday }).format(journalDate)
 
 //相対時間表示
-export const formatRelativeDate = (targetDate: Date, locales: string): string => {
+export const formatRelativeDate = (targetDate: Date, locales: string, capitalize: boolean = false): string => {
   const currentDate = new Date()
   // 比較した結果、同じ日付だった場合は空文字を返す
   // if (targetDateOnly.getTime() === currentDateOnly.getTime()) {
   //   return '';
   // }
-  return new Intl.RelativeTimeFormat(locales, { numeric: 'auto' }).format(// 相対的な日付差をローカライズした文字列に変換
+  let relativeDate = new Intl.RelativeTimeFormat(locales, { numeric: 'auto' }).format(// 相対的な日付差をローカライズした文字列に変換
     (Math.floor(((new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate())).getTime() - (new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())).getTime()) / (1000 * 60 * 60 * 24)) as number)  // 日付を比較するために年月日の部分だけを取得し、ミリ秒単位に変換
     , 'day') as string
+  
+  // Capitalize first letter if requested
+  if (capitalize && relativeDate.length > 0) {
+    relativeDate = relativeDate.charAt(0).toUpperCase() + relativeDate.slice(1)
+  }
+  
+  return relativeDate
 }
 
 //日付が相対日付の範囲内かどうかをチェック
