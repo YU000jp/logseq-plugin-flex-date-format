@@ -98,6 +98,9 @@ const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseIn
       || newSet.booleanShortOrLong !== oldSet.booleanShortOrLong
       || oldSet.booleanLocalizeDayOfWeek !== newSet.booleanLocalizeDayOfWeek
       || oldSet.booleanRelativeTime !== newSet.booleanRelativeTime
+      || oldSet.booleanRelativeDateInText !== newSet.booleanRelativeDateInText
+      || oldSet.relativeDateDaysBefore !== newSet.relativeDateDaysBefore
+      || oldSet.relativeDateDaysAfter !== newSet.relativeDateDaysAfter
       || oldSet.booleanAddIcon !== newSet.booleanAddIcon
       || oldSet.booleanYearPattern !== newSet.booleanYearPattern
       || oldSet.iconBeforeYear !== newSet.iconBeforeYear

@@ -37,3 +37,14 @@ export const formatRelativeDate = (targetDate: Date, locales: string): string =>
     (Math.floor(((new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate())).getTime() - (new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())).getTime()) / (1000 * 60 * 60 * 24)) as number)  // 日付を比較するために年月日の部分だけを取得し、ミリ秒単位に変換
     , 'day') as string
 }
+
+//日付が相対日付の範囲内かどうかをチェック
+export const isWithinRelativeDateRange = (targetDate: Date, daysBefore: number, daysAfter: number): boolean => {
+  const currentDate = new Date()
+  const currentDateOnly = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate())
+  const targetDateOnly = new Date(targetDate.getFullYear(), targetDate.getMonth(), targetDate.getDate())
+  
+  const daysDiff = Math.floor((targetDateOnly.getTime() - currentDateOnly.getTime()) / (1000 * 60 * 60 * 24))
+  
+  return daysDiff >= -daysBefore && daysDiff <= daysAfter
+}

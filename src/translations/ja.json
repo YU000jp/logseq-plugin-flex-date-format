@@ -4,6 +4,9 @@
     "Advanced options > Select locale": "詳細オプション > ロケールを選択",
     "All date format demo": "日付形式のデモ",
     "Common settings": "共通設定",
+    "Days after current date to show as relative": "相対表示する今日からの日数（未来）",
+    "Days before current date to show as relative": "相対表示する今日からの日数（過去）",
+    "Display relative date in main text (not only in tooltip)": "相対日付をメインテキストに表示する（ツールチップだけでなく）",
     "Display relative time on hover the journal link": "日付の上にマウスを置くと相対時間を表示する",
     "Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)": "絵文字アイコン: Win + . (Windows) または Cmd + Ctrl + Space (Mac) で絵文字ピッカーを開く / Tabler Icons: https://tabler.io/icons (HTML 文字コードをコピー)",
     "Enable selected date format": "選択された日付形式を有効にする",
@@ -12,9 +15,12 @@
     "Icon > Set icon (if journal is later than that year)": "アイコン > アイコンを設定（日付がその年より後の場合）",
     "Icon > Year separation": "アイコン > 年の区切り",
     "Localize the day of the week": "曜日をローカライズする",
+    "Number of days after today to display as relative dates (e.g., 'Tomorrow', 'in 2 days')": "相対日付として表示する今日以降の日数（例：「明日」「2日後」）",
+    "Number of days before today to display as relative dates (e.g., 'Yesterday', '2 days ago')": "相対日付として表示する今日以前の日数（例：「昨日」「2日前」）",
     "Open the dialog on click": "クリックでダイアログを開く",
     "Select date format": "日付形式を選択する",
     "Shorten the day of the week": "曜日を短くする",
+    "Show 'Today', 'Tomorrow', etc. as the main text instead of the formatted date": "フォーマットされた日付の代わりに「今日」「明日」などをメインテキストとして表示する",
     "Switch to style of the selected date format": "選択された日付形式に切り替える",
     "⚠️ It cannot be used when creating links. Create it based on the user date format.": "⚠️ リンクを作成するときには使用できません。ユーザーの日付形式に基づいて作成してください。"
 }
