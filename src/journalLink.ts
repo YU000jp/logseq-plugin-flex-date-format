@@ -22,7 +22,11 @@ const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElem
   journalLinkElement.dataset.ref = journalLinkElement.textContent as string | undefined // journalLinkElement.textContentを保存
 
   // Check if we should display relative date as main text
-  const shouldShowRelativeInText = logseq.settings!.booleanRelativeDateInText === true
+  // Note: Relative dates should NOT be applied to journal page titles (h1.title or div.ls-page-title span.block-title-wrap)
+  // Only apply to journal links (a[data-ref]) and sidebar items
+  const isJournalPageTitle = journalLinkElement.tagName === 'H1' || 
+                              (journalLinkElement.tagName === 'SPAN' && journalLinkElement.closest('.ls-page-title'))
+  const shouldShowRelativeInText = logseq.settings!.booleanRelativeDateInText === true && !isJournalPageTitle
   const daysBefore = (logseq.settings!.relativeDateDaysBefore as number) || 7
   const daysAfter = (logseq.settings!.relativeDateDaysAfter as number) || 7
   const isInRelativeRange = isWithinRelativeDateRange(journalDate, daysBefore, daysAfter)
