@@ -52,6 +52,47 @@ const main = async () => {
   /* user settings */
   logseq.useSettingsSchema(settingsTemplate())
 
+  // Inject custom CSS for relative date display with Dynalist-like design
+  logseq.provideStyle({
+    key: 'relative-date-display-style',
+    style: `
+      /* Dynalist-inspired design for relative dates */
+      a[data-ref].relative-date-display {
+        display: inline-flex !important;
+        align-items: center;
+        padding: 3px 8px !important;
+        border: 1px solid var(--ls-border-color, #d3d3d3) !important;
+        border-radius: 4px !important;
+        background-color: var(--ls-secondary-background-color, #f8f9fa) !important;
+        color: var(--ls-primary-text-color, #333) !important;
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        text-decoration: none !important;
+        transition: all 0.15s ease !important;
+        white-space: nowrap !important;
+      }
+      
+      a[data-ref].relative-date-display:hover {
+        background-color: var(--ls-tertiary-background-color, #e9ecef) !important;
+        border-color: var(--ls-active-primary-color, #999) !important;
+      }
+      
+      /* For sidebar items that are spans */
+      span.relative-date-display {
+        display: inline-flex !important;
+        align-items: center;
+        padding: 3px 8px !important;
+        border: 1px solid var(--ls-border-color, #d3d3d3) !important;
+        border-radius: 4px !important;
+        background-color: var(--ls-secondary-background-color, #f8f9fa) !important;
+        color: var(--ls-primary-text-color, #333) !important;
+        font-size: 13px !important;
+        line-height: 1.4 !important;
+        white-space: nowrap !important;
+      }
+    `
+  })
+
   const messageId = "20240204-01"
   if (logseq.settings!.firstLoad !== messageId) {
     setTimeout(() => logseq.showSettingsUI(), 300)
@@ -98,6 +139,9 @@ const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseIn
       || newSet.booleanShortOrLong !== oldSet.booleanShortOrLong
       || oldSet.booleanLocalizeDayOfWeek !== newSet.booleanLocalizeDayOfWeek
       || oldSet.booleanRelativeTime !== newSet.booleanRelativeTime
+      || oldSet.booleanRelativeDateInText !== newSet.booleanRelativeDateInText
+      || oldSet.relativeDateDaysBefore !== newSet.relativeDateDaysBefore
+      || oldSet.relativeDateDaysAfter !== newSet.relativeDateDaysAfter
       || oldSet.booleanAddIcon !== newSet.booleanAddIcon
       || oldSet.booleanYearPattern !== newSet.booleanYearPattern
       || oldSet.iconBeforeYear !== newSet.iconBeforeYear

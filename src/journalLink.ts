@@ -1,6 +1,6 @@
 import { PageEntity } from "@logseq/libs/dist/LSPlugin"
 import { format, subYears } from "date-fns"
-import { formatRelativeDate, getJournalDayDate, localizeDayOfWeek } from "./lib"
+import { formatRelativeDate, getJournalDayDate, isWithinRelativeDateRange, localizeDayOfWeek } from "./lib"
 import { doesPageExistAsJournal } from "./query/advancedQuery"
 
 export const journalLink = async (journalLinkElement: HTMLElement, preferredDateFormat: string, logseqVerMd: boolean): Promise<void> => {
@@ -21,31 +21,68 @@ const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElem
   const journalDate: Date = getJournalDayDate(String(journalDay)) // 日誌リンクから日付を取得
   journalLinkElement.dataset.ref = journalLinkElement.textContent as string | undefined // journalLinkElement.textContentを保存
 
-  //保存に使われる日付フォーマットをツールチップに表示
-  journalLinkElement.title = format(journalDate, preferredDateFormat)
-  //相対時間をツールチップに表示
-  if (logseq.settings!.booleanRelativeTime === true) // 相対時間を表示する設定の場合
-    journalLinkElement.title += "\n" + formatRelativeDate(journalDate, logseq.settings!.selectLocale as string) //相対時間を追加
+  // Check if we should display relative date as main text
+  // Note: Relative dates should NOT be applied to journal page titles (h1.title or div.ls-page-title span.block-title-wrap)
+  // Only apply to journal links (a[data-ref]) and sidebar items
+  const isJournalPageTitle = journalLinkElement.tagName === 'H1' || 
+                              (journalLinkElement.tagName === 'SPAN' && journalLinkElement.closest('.ls-page-title'))
+  const shouldShowRelativeInText = logseq.settings!.booleanRelativeDateInText === true && !isJournalPageTitle
+  const daysBefore = (logseq.settings!.relativeDateDaysBefore as number) || 7
+  const daysAfter = (logseq.settings!.relativeDateDaysAfter as number) || 7
+  const isInRelativeRange = isWithinRelativeDateRange(journalDate, daysBefore, daysAfter)
 
+  let formattedDate = ""
+  
+  // Generate the formatted date based on settings
   switch (logseq.settings!.dateFormat as string) { // ユーザー指定の形式に変更
     case "Unset": //未設定の場合
+      formattedDate = format(journalDate, preferredDateFormat)
       break
     case "Localize": //ローカライズされた形式の場合
-      journalLinkElement.textContent = journalDate.toLocaleDateString(logseq.settings!.selectLocale as string, { weekday: shortOrLong("short"), year: "numeric", month: "short", day: "numeric" })
+      formattedDate = journalDate.toLocaleDateString(logseq.settings!.selectLocale as string, { weekday: shortOrLong("short"), year: "numeric", month: "short", day: "numeric" })
       break
     default: //ユーザー指定の形式の場合
-      journalLinkElement.textContent = format(journalDate, logseq.settings!.dateFormat as string)
+      formattedDate = format(journalDate, logseq.settings!.dateFormat as string)
       if (logseq.settings!.booleanLocalizeDayOfWeek === true) { // 曜日をローカライズする設定の場合
 
         if ((logseq.settings!.dateFormat as string).includes("E")) // 曜日が含まれている場合
-          titleElementReplaceDayOfWeek(journalDate, journalLinkElement)
+          formattedDate = replaceDayOfWeek(formattedDate, journalDate)
         else  // 曜日が含まれていない場合
-          journalLinkElement.textContent += ` (${localizeDayOfWeek(shortOrLong("short"), journalDate, logseq.settings!.selectLocale as string)})`
+          formattedDate += ` (${localizeDayOfWeek(shortOrLong("short"), journalDate, logseq.settings!.selectLocale as string)})`
 
         // 「Montag」が「Montagtag」になってしまうバグの対処
         if (logseq.settings!.selectLocale as string === "de-DE")
-          journalLinkElement.textContent = journalLinkElement.textContent!.replace("tagtag", "tag").replace("Motag", "Montag")
+          formattedDate = formattedDate.replace("tagtag", "tag").replace("Motag", "Montag")
       }
+  }
+
+  // Decide what to display as main text
+  if (shouldShowRelativeInText && isInRelativeRange) {
+    // Display relative date as main text, formatted date in tooltip
+    // Add calendar icon (📅) and capitalize first letter for better design
+    const relativeText = formatRelativeDate(journalDate, logseq.settings!.selectLocale as string, true)
+    journalLinkElement.textContent = `📅 ${relativeText}`
+    journalLinkElement.title = formattedDate
+    // Add custom class for styling relative dates with border (Dynalist-like design)
+    journalLinkElement.classList.add('relative-date-display')
+  } else {
+    // Display formatted date as main text
+    journalLinkElement.textContent = formattedDate
+    //保存に使われる日付フォーマットをツールチップに表示
+    journalLinkElement.title = format(journalDate, preferredDateFormat)
+    // Remove custom class if it was previously added
+    journalLinkElement.classList.remove('relative-date-display')
+  }
+  
+  //相対時間をツールチップに表示
+  if (logseq.settings!.booleanRelativeTime === true) { // 相対時間を表示する設定の場合
+    if (shouldShowRelativeInText && isInRelativeRange) {
+      // If showing relative in text, add the user date format to tooltip instead
+      journalLinkElement.title += "\n" + format(journalDate, preferredDateFormat)
+    } else {
+      // If showing formatted date, add relative time to tooltip
+      journalLinkElement.title += "\n" + formatRelativeDate(journalDate, logseq.settings!.selectLocale as string)
+    }
   }
 
   if (logseq.settings!.booleanAddIcon === true) addIcon(journalDate, journalLinkElement)
@@ -53,14 +90,13 @@ const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElem
   journalLinkElement.dataset.localize = "true" // フラグ
 }
 
-const titleElementReplaceDayOfWeek = (journalDate: Date, titleElement: HTMLElement) => {
+const replaceDayOfWeek = (text: string, journalDate: Date): string => {
   const locale = logseq.settings!.selectLocale as string
   const longFormat = localizeDayOfWeek(shortOrLong("long"), journalDate, locale)
   const shortFormat = localizeDayOfWeek(shortOrLong("short"), journalDate, locale)
 
-  titleElement.textContent = titleElement.textContent!
-    .replace(/(?:Sunday|Sun|Monday|Mon|Tuesday|Tue|Wednesday|Wed|Thursday|Thu|Friday|Fri|Saturday|Sat)/g,
-      match => match.length > 3 ? longFormat : shortFormat)
+  return text.replace(/(?:Sunday|Sun|Monday|Mon|Tuesday|Tue|Wednesday|Wed|Thursday|Thu|Friday|Fri|Saturday|Sat)/g,
+    match => match.length > 3 ? longFormat : shortFormat)
 }
 
 const shortOrLong = (select: "short" | "long"): "short" | "long" => logseq.settings!.booleanShortOrLong === "unset" ? select : logseq.settings!.booleanShortOrLong as "short" | "long"

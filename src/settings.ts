@@ -169,6 +169,27 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         default: true,
         description: "default: `true`",
     },
+    {//booleanRelativeDateInText
+        key: "booleanRelativeDateInText",
+        title: t("Display relative date in main text (not only in tooltip)") + " 🆕",
+        type: "boolean",
+        default: false,
+        description: "default: `false` " + t("Show 'Today', 'Tomorrow', etc. as the main text instead of the formatted date"),
+    },
+    {//relativeDateDaysBefore
+        key: "relativeDateDaysBefore",
+        title: t("Days before current date to show as relative") + " 🆕",
+        type: "number",
+        default: 7,
+        description: "default: `7` " + t("Number of days before today to display as relative dates (e.g., 'Yesterday', '2 days ago')"),
+    },
+    {//relativeDateDaysAfter
+        key: "relativeDateDaysAfter",
+        title: t("Days after current date to show as relative") + " 🆕",
+        type: "number",
+        default: 7,
+        description: "default: `7` " + t("Number of days after today to display as relative dates (e.g., 'Tomorrow', 'in 2 days')"),
+    },
 
     {//日付に合わせて、アイコンをつける
         key: "booleanAddIcon",
