@@ -1,3 +1,18 @@
+# [1.10.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.9.1...v1.10.0) (2025-11-16)
+
+
+### Bug Fixes
+
+* exclude journal page titles from relative date display ([fbda6eb](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/fbda6eb3b7583ec87f5a6fefae799cac1fedb924))
+
+
+### Features
+
+* add bordered design matching Dynalist style ([5bbfd79](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/5bbfd79b810753ff172fbe259f8df267bcfa1500))
+* add calendar icon and capitalize relative dates ([dd2c94a](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/dd2c94a25768fbea895e4b4e221655e2a898fea7))
+* add option to display relative dates in main text ([9c80a88](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/9c80a884485a0e3eb225231596994bf5c0be2532))
+* Merge pull request [#21](https://github.com/YU000jp/logseq-plugin-flex-date-format/issues/21) from YU000jp/copilot/add-relative-date-display-option ([ae80c0a](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/ae80c0a2c3497e55f8be1c747112f3224bdd7f59))
+
 ## [1.9.1](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.9.0...v1.9.1) (2025-06-01)
 
 
