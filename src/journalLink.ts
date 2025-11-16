@@ -63,11 +63,15 @@ const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElem
     const relativeText = formatRelativeDate(journalDate, logseq.settings!.selectLocale as string, true)
     journalLinkElement.textContent = `📅 ${relativeText}`
     journalLinkElement.title = formattedDate
+    // Add custom class for styling relative dates with border (Dynalist-like design)
+    journalLinkElement.classList.add('relative-date-display')
   } else {
     // Display formatted date as main text
     journalLinkElement.textContent = formattedDate
     //保存に使われる日付フォーマットをツールチップに表示
     journalLinkElement.title = format(journalDate, preferredDateFormat)
+    // Remove custom class if it was previously added
+    journalLinkElement.classList.remove('relative-date-display')
   }
   
   //相対時間をツールチップに表示
