@@ -40,6 +40,18 @@ export const CSS = {
 `
 }
 
+// CSS placeholder for excluding journal links from History view.
+// The user will provide the concrete CSS content later; keep a named key so
+// we can apply/remove it dynamically via `logseq.provideStyle()`.
+export const CSS_HISTORY = {
+  KEY: 'flex-date-exclude-journal-history',
+  STYLE: `
+#left-sidebar div.recent ul>li:has(span.page-title[data-ref]) {
+  display: none;
+}
+  `,
+}
+
 export const MESSAGES = {
   ID: '2024020401'
 }
@@ -197,17 +209,17 @@ export const buildTitleSelector = (dbGraph: boolean, versionMd: boolean) =>
   dbGraph === true
     ? "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis:not([data-localize]) "
     : "#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item " +
-        (versionMd === true
-          ? 'div.page-title>span+span.text-ellipsis:not([data-localize])'
-          : 'div.page-title>div+span.text-ellipsis:not([data-localize])')
+    (versionMd === true
+      ? 'div.page-title>span+span.text-ellipsis:not([data-localize])'
+      : 'div.page-title>div+span.text-ellipsis:not([data-localize])')
 
 export const buildTitleSelectorLocalized = (dbGraph: boolean, versionMd: boolean) =>
   dbGraph === true
     ? "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis[data-localize]"
     : "#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item " +
-        (versionMd === true
-          ? 'div.page-title>span+span.text-ellipsis[data-localize]'
-          : 'div.page-title>div+span.text-ellipsis[data-localize]')
+    (versionMd === true
+      ? 'div.page-title>span+span.text-ellipsis[data-localize]'
+      : 'div.page-title>div+span.text-ellipsis[data-localize]')
 
 // Backward compatibility exports
 export const CSS_KEY = CSS.KEY
@@ -230,3 +242,7 @@ export const SELECT_LOCALE_CHOICES = LOCALES.CHOICES
 export const SHORT_OR_LONG_CHOICES = SHORT_OR_LONG.CHOICES
 export const YEAR_PATTERN_CHOICES = YEAR_PATTERNS.CHOICES
 export const DEFAULT_DATE_FORMAT = DATE_FORMATS.DEFAULT
+
+// Expose history-exclude constants
+export const CSS_HISTORY_KEY = CSS_HISTORY.KEY
+export const CSS_HISTORY_STYLE = CSS_HISTORY.STYLE

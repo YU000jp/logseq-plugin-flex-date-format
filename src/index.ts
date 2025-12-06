@@ -5,7 +5,7 @@ import { openStartWindow } from './demoDateFormat'
 import { journalLink, processTimestampElement } from './journalLink'
 import { querySelectorAllLinks as domQuerySelectorAllLinks, revertQuerySelectorAllLinks as domRevertQuerySelectorAllLinks, startObservers as domStartObservers, stopObservers as domStopObservers } from './dom'
 import { getSettingsSnapshot } from './settingsManager'
-import { CSS_KEY, CSS_STYLE, MESSAGE_ID, SELECTOR_BLOCK_TAGS } from './constants'
+import { CSS_HISTORY_KEY, CSS_HISTORY_STYLE, CSS_KEY, CSS_STYLE, MESSAGE_ID, SELECTOR_BLOCK_TAGS } from './constants'
 import { settingsTemplate } from './settings'
 import af from "./translations/af.json"
 import de from "./translations/de.json"
@@ -26,6 +26,7 @@ import tr from "./translations/tr.json"
 import uk from "./translations/uk.json"
 import zhCN from "./translations/zh-CN.json"
 import zhHant from "./translations/zh-Hant.json"
+import { removeProvideStyle } from './lib'
 
 /**
  * Main plugin class that encapsulates all state and logic for better reusability and testability.
@@ -85,6 +86,10 @@ export class FlexibleDateFormatPlugin {
       logseq.UI.showMsg("New setting items have been added to flexible-date-format plugin.", "info", { timeout: 5000 })
       logseq.updateSettings({ firstLoad: MESSAGE_ID })
     }
+
+
+    if (settingsSnapshot.booleanExcludeJournalLinksFromHistory === true)
+      logseq.provideStyle({ key: CSS_HISTORY_KEY, style: CSS_HISTORY_STYLE })
 
     // Wait for DOM
     await new Promise(resolve => setTimeout(resolve, 100))
@@ -159,9 +164,17 @@ export class FlexibleDateFormatPlugin {
       if (oldSet.loadDateFormatDemo === false && newSet.loadDateFormatDemo === true) {
         openStartWindow()
         setTimeout(() => logseq.updateSettings({ loadDateFormatDemo: false }), 300)
-      } else if (this.shouldReprocessLinks(newSet, oldSet)) {
-        domRevertQuerySelectorAllLinks({ getDbGraphFlag: () => this.logseqDbGraph, getLogseqVersionMd: () => this.logseqVersionMd })
-        setTimeout(() => this.processAllLinks(), 50)
+      } else
+        if (this.shouldReprocessLinks(newSet, oldSet)) {
+          domRevertQuerySelectorAllLinks({ getDbGraphFlag: () => this.logseqDbGraph, getLogseqVersionMd: () => this.logseqVersionMd })
+          setTimeout(() => this.processAllLinks(), 50)
+        }
+      if (oldSet.booleanExcludeJournalLinksFromHistory !== newSet.booleanExcludeJournalLinksFromHistory) {
+        if (newSet.booleanExcludeJournalLinksFromHistory === true) {
+          logseq.provideStyle({ key: CSS_HISTORY_KEY, style: CSS_HISTORY_STYLE })
+        } else {
+          removeProvideStyle(CSS_HISTORY_KEY)
+        }
       }
     })
   }

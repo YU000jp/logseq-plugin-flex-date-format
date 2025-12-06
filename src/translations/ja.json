@@ -51,4 +51,6 @@
     "Second alternative date format to try parsing.": "2番目にパースを試みる代替日付形式。",
     "Alternative Date Format 3": "代替日付形式 3",
     "Third alternative date format to try parsing.": "3番目にパースを試みる代替日付形式。"
+    ,"Exclude journal links from RECENT": "履歴からジャーナルリンクを除外する",
+    "When enabled, applies a visual CSS to hide or alter journal links shown in the Left-menu RECENT.": "有効にすると、左メニューの RECENT に表示されるジャーナルリンクを非表示または変更する視覚的な CSS を適用します。"
 }

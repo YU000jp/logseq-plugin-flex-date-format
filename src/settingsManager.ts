@@ -14,7 +14,8 @@ export type PluginSettings = {
   alternativeDateFormat3: string
   weekNumberFormat?: string
   firstLoad?: string
-  loadDateFormatDemo?: boolean
+  loadDateFormatDemo?: boolean,
+  booleanExcludeJournalLinksFromHistory: boolean
 }
 
 /**
@@ -27,11 +28,13 @@ let cachedSettings: PluginSettings | null = null
 let lastSettingsCheck = 0
 const CACHE_DURATION = 1000 // 1 second
 
-export const getSettingsSnapshot = (s: Partial<PluginSettings>): PluginSettings => {
+export const getSettingsSnapshot = (): PluginSettings => {
   const now = Date.now()
   if (cachedSettings && (now - lastSettingsCheck) < CACHE_DURATION) {
     return cachedSettings
   }
+
+  const s = (logseq as any).settings as Partial<PluginSettings> | undefined
 
   cachedSettings = {
     dateFormat: s?.dateFormat ?? DEFAULT_DATE_FORMAT,
@@ -50,11 +53,9 @@ export const getSettingsSnapshot = (s: Partial<PluginSettings>): PluginSettings 
     weekNumberFormat: s?.weekNumberFormat,
     firstLoad: s?.firstLoad,
     loadDateFormatDemo: s?.loadDateFormatDemo,
+    booleanExcludeJournalLinksFromHistory: s?.booleanExcludeJournalLinksFromHistory ?? false,
   }
 
   lastSettingsCheck = now
   return cachedSettings
 }
-
-export const resolveShortOrLong = (prefs: PluginSettings, requested: 'short' | 'long') =>
-  prefs.booleanShortOrLong === 'unset' ? requested : prefs.booleanShortOrLong as 'short' | 'long'

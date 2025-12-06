@@ -44,5 +44,7 @@
     "Second alternative date format to try parsing.":  "Second alternative date format to try parsing.",
     "Alternative Date Format 3":  "Alternative Date Format 3",
     "Third alternative date format to try parsing.":  "Third alternative date format to try parsing.",
-    "Specify additional date formats to recognize for non-journal pages that contain date-like strings.":  "Specify additional date formats to recognize for non-journal pages that contain date-like strings."
+    "Specify additional date formats to recognize for non-journal pages that contain date-like strings.":  "Specify additional date formats to recognize for non-journal pages that contain date-like strings.",
+    "Exclude journal links from RECENT": "從歷史中排除日誌連結",
+    "When enabled, applies a visual CSS to hide or alter journal links shown in the Left-menu RECENT.": "啟用時，套用視覺 CSS 以隱藏或變更左側選單「RECENT」中顯示的日誌連結。"
 }

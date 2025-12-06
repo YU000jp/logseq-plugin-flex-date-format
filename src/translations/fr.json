@@ -44,5 +44,7 @@
     "Second alternative date format to try parsing.":  "Second alternative date format to try parsing.",
     "Alternative Date Format 3":  "Alternative Date Format 3",
     "Third alternative date format to try parsing.":  "Third alternative date format to try parsing.",
-    "Specify additional date formats to recognize for non-journal pages that contain date-like strings.":  "Specify additional date formats to recognize for non-journal pages that contain date-like strings."
+    "Specify additional date formats to recognize for non-journal pages that contain date-like strings.":  "Specify additional date formats to recognize for non-journal pages that contain date-like strings.",
+    "Exclude journal links from RECENT": "Exclure les liens de journal de l\u0027historique",
+    "When enabled, applies a visual CSS to hide or alter journal links shown in the Left-menu RECENT.": "Lorsque activé, applique un CSS visuel pour masquer ou modifier les liens du journal affichés dans le menu de gauche « RECENT »."
 }

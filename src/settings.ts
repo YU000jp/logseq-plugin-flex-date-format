@@ -137,4 +137,11 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         description: t("Third alternative date format to try parsing."),
     }
 
+    ,{
+        key: "booleanExcludeJournalLinksFromHistory",
+        title: t("Exclude journal links from RECENT"),
+        type: "boolean",
+        default: false,
+        description: t("When enabled, applies a visual CSS to hide or alter journal links shown in the Left-menu RECENT."),
+    }
 ]
