@@ -4,7 +4,7 @@ import { DateUtils } from "./lib"
 import { doesPageExistAsJournal } from "./query/advancedQuery"
 import { getSettingsSnapshot } from './settingsManager'
 import { DateFormatUtils } from './utils'
-import { ICON_CALENDAR, CLASS_RELATIVE_DATE } from './constants'
+import { CLASS_RELATIVE_DATE } from './constants'
 
 /**
  * Service class for processing journal links and timestamps.
@@ -87,7 +87,7 @@ export class JournalLinkProcessor {
       if (shouldShowRelativeInText && isInRelativeRange) {
         // Display relative date as main text, formatted date in tooltip
         const relativeText = DateFormatUtils.formatRelative(journalDate, settings.selectLocale as string, true)
-        journalLinkElement.textContent = `${ICON_CALENDAR} ${relativeText}`
+        journalLinkElement.textContent = `${relativeText}`
         journalLinkElement.title = formattedDate
         // Add custom class for styling relative dates with border (Dynalist-like design)
         journalLinkElement.classList.add(CLASS_RELATIVE_DATE)
@@ -144,11 +144,32 @@ export class TimestampProcessor {
       if (Number.isNaN(parsed.getTime())) return
 
       const settings = getSettingsSnapshot()
-      const formatted = DateFormatUtils.formatDateBySettings(parsed, settings, preferredDateFormat)
+      // If this element is a table cell for created-at/updated-at, suppress year when it's the same year
+      const isTableCell = timeElement.matches && (timeElement.matches('td.created-at') || timeElement.matches('td.updated-at'))
+      const formatted = DateFormatUtils.formatDateBySettings(parsed, settings, preferredDateFormat, { suppressYearIfSame: isTableCell })
 
       // Save original text so revert can restore it
       timeElement.dataset.ref = timeElement.textContent as string | undefined
-      timeElement.textContent = `${formatted}${trailing}`
+
+      // Determine whether to show relative date as main text
+      const shouldShowRelativeInText = settings.booleanRelativeDateInText === true
+      const daysBefore = settings.relativeDateDaysBefore || 7
+      const daysAfter = settings.relativeDateDaysAfter || 7
+      const isInRelativeRange = DateUtils.isWithinRelativeDateRange(parsed, daysBefore, daysAfter)
+
+      if (shouldShowRelativeInText && isInRelativeRange) {
+        // Display relative date as main text, formatted date (and trailing time) in tooltip
+        const relativeText = DateFormatUtils.formatRelative(parsed, settings.selectLocale as string, true)
+        timeElement.textContent = `${relativeText}${trailing}`
+        timeElement.title = `${formatted}${trailing}\n${format(parsed, preferredDateFormat)}`
+        timeElement.classList.add(CLASS_RELATIVE_DATE)
+      } else {
+        // Display formatted date as main text (keep trailing time)
+        timeElement.textContent = `${formatted}${trailing}`
+        timeElement.title = `${format(parsed, preferredDateFormat)}${trailing}`
+        timeElement.classList.remove(CLASS_RELATIVE_DATE)
+      }
+
       timeElement.dataset.localize = 'true'
     } catch (error) {
       console.error('Error processing timestamp element:', error, { timeElement, preferredDateFormat })

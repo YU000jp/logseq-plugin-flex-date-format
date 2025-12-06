@@ -63,27 +63,63 @@ export class DateFormatUtils {
     journalDate: Date,
     settings: PluginSettings,
     preferredDateFormat: string,
+    options?: { suppressYearIfSame?: boolean }
   ): string {
     let formattedDate = ''
 
+    const suppressYear = options?.suppressYearIfSame === true
+    const currentYear = new Date().getFullYear()
+    const isSameYear = journalDate.getFullYear() === currentYear
+
     switch (settings.dateFormat as string) {
       case 'Unset':
-        formattedDate = format(journalDate, preferredDateFormat)
+        if (suppressYear && isSameYear) {
+          formattedDate = journalDate.toLocaleDateString(settings.selectLocale as string, {
+            weekday: DateFormatUtils.shortOrLongFromSettings(settings, 'short'),
+            month: 'short',
+            day: 'numeric'
+          })
+        } else {
+          formattedDate = format(journalDate, preferredDateFormat)
+        }
         break
       case 'Localize':
-        formattedDate = journalDate.toLocaleDateString(settings.selectLocale as string, {
-          weekday: DateFormatUtils.shortOrLongFromSettings(settings, 'short'),
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric'
-        })
+        if (suppressYear && isSameYear) {
+          formattedDate = journalDate.toLocaleDateString(settings.selectLocale as string, {
+            weekday: DateFormatUtils.shortOrLongFromSettings(settings, 'short'),
+            month: 'short',
+            day: 'numeric'
+          })
+        } else {
+          formattedDate = journalDate.toLocaleDateString(settings.selectLocale as string, {
+            weekday: DateFormatUtils.shortOrLongFromSettings(settings, 'short'),
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+          })
+        }
         break
       default:
-        formattedDate = format(journalDate, settings.dateFormat as string)
-        if ((settings.dateFormat as string).includes('E'))
+        if (suppressYear && isSameYear) {
+          // Fallback to a localized month/day representation when suppressing year
+          formattedDate = journalDate.toLocaleDateString(settings.selectLocale as string, {
+            weekday: DateFormatUtils.shortOrLongFromSettings(settings, 'short'),
+            month: 'short',
+            day: 'numeric'
+          })
+        } else {
+          formattedDate = format(journalDate, settings.dateFormat as string)
+        }
+        if ((settings.dateFormat as string).includes('E')) {
           formattedDate = DateFormatUtils.replaceDayOfWeek(formattedDate, journalDate, settings.selectLocale as string, DateFormatUtils.shortOrLongFromSettings(settings, 'long'))
-        else
-          formattedDate += ` (${localizeDayOfWeek(DateFormatUtils.shortOrLongFromSettings(settings, 'short'), journalDate, settings.selectLocale as string)})`
+        } else {
+          // If we already produced a localized string that includes the weekday
+          // (e.g. when suppressing the year and using toLocaleDateString above),
+          // avoid appending the weekday again.
+          if (!(suppressYear && isSameYear)) {
+            formattedDate += ` (${localizeDayOfWeek(DateFormatUtils.shortOrLongFromSettings(settings, 'short'), journalDate, settings.selectLocale as string)})`
+          }
+        }
 
         if (settings.selectLocale === 'de-DE')
           formattedDate = formattedDate.replace('tagtag', 'tag').replace('Motag', 'Montag')

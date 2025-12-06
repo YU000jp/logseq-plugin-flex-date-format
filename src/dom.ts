@@ -86,6 +86,13 @@ export class DOMManager {
         const htmlEl = el as HTMLElement
         timestampFn(htmlEl, preferredDateFormat)
       })
+      // Process table-based created/updated timestamps (e.g., plugin or app lists)
+      const tableTimestampSelector = 'table.cp__all_pages_table>tbody>tr>td:is(.created-at,.updated-at)'
+      const tableTimestampElements = rootElement.querySelectorAll(tableTimestampSelector)
+      tableTimestampElements.forEach((el) => {
+        const htmlEl = el as HTMLElement
+        timestampFn(htmlEl, preferredDateFormat)
+      })
     }
 
     setTimeout(() => (this.processingTitleQuery = false), 30)
@@ -109,6 +116,12 @@ export class DOMManager {
     ; (parent.document.querySelectorAll('div[block-id] div.timestamp time[data-localize], div[block-id] div.timestamp a span.time-start + time[data-localize]') as NodeListOf<HTMLElement>).forEach((timeEl) => {
       timeEl.removeAttribute('data-localize')
       if (timeEl.dataset.ref) timeEl.textContent = timeEl.dataset.ref
+    })
+
+    // Revert table-based timestamps
+    ; (parent.document.querySelectorAll('table.cp__all_pages_table>tbody>tr>td.created-at[data-localize], table.cp__all_pages_table>tbody>tr>td.updated-at[data-localize]') as NodeListOf<HTMLElement>).forEach((tdEl) => {
+      tdEl.removeAttribute('data-localize')
+      if (tdEl.dataset.ref) tdEl.textContent = tdEl.dataset.ref
     })
   }
 
@@ -140,6 +153,22 @@ export class DOMManager {
     const timestampSelector = 'div[blockid]>div.timestamp span.time-start + time'
     const timestampElements = parent.document.querySelectorAll(timestampSelector)
     timestampElements.forEach((el) => {
+      const observer = new MutationObserver(async (mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'characterData' || (mutation.type === 'attributes' && mutation.attributeName === 'data-ref')) {
+            await timestampFn(el as HTMLElement, preferredDateFormatGetter())
+            break
+          }
+        }
+      })
+      observer.observe(el, { characterData: true, subtree: true, attributes: true, attributeFilter: ['data-ref'] })
+      this.timestampObservers.push(observer)
+    })
+
+    // Individual observers for table-based timestamp cells
+    const tableTimestampSelector = 'table.cp__all_pages_table>tbody>tr>td:is(.created-at,.updated-at)'
+    const tableTimestampElements = parent.document.querySelectorAll(tableTimestampSelector)
+    tableTimestampElements.forEach((el) => {
       const observer = new MutationObserver(async (mutations) => {
         for (const mutation of mutations) {
           if (mutation.type === 'characterData' || (mutation.type === 'attributes' && mutation.attributeName === 'data-ref')) {
