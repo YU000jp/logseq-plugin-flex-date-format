@@ -174,8 +174,6 @@ export class FlexibleDateFormatPlugin {
       newSet.dateFormat !== oldSet.dateFormat ||
       newSet.selectLocale !== oldSet.selectLocale ||
       newSet.booleanShortOrLong !== oldSet.booleanShortOrLong ||
-      oldSet.booleanLocalizeDayOfWeek !== newSet.booleanLocalizeDayOfWeek ||
-      oldSet.booleanRelativeTime !== newSet.booleanRelativeTime ||
       oldSet.booleanRelativeDateInText !== newSet.booleanRelativeDateInText ||
       oldSet.relativeDateDaysBefore !== newSet.relativeDateDaysBefore ||
       oldSet.relativeDateDaysAfter !== newSet.relativeDateDaysAfter ||

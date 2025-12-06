@@ -133,8 +133,8 @@ export class DOMManager {
 
     const mainContent = parent.document.getElementById(ID_MAIN_CONTENT_CONTAINER) as HTMLDivElement | null
     const rightSidebar = parent.document.getElementById(ID_RIGHT_SIDEBAR) as HTMLDivElement | null
-    if (mainContent) this.observer.observe(mainContent, { attributes: true, subtree: true, attributeFilter: ['class'], childList: true, characterData: true })
-    if (rightSidebar) this.observer.observe(rightSidebar, { attributes: true, subtree: true, attributeFilter: ['class'], childList: true, characterData: true })
+    if (mainContent) this.observer.observe(mainContent, { attributes: true, subtree: true, attributeFilter: ['class'], childList: true })
+    if (rightSidebar) this.observer.observe(rightSidebar, { attributes: true, subtree: true, attributeFilter: ['class'], childList: true })
 
     // Individual observers for timestamp elements
     const timestampSelector = 'div[blockid]>div.timestamp span.time-start + time'

@@ -2,11 +2,9 @@ export type PluginSettings = {
   dateFormat: string
   selectLocale: string
   booleanShortOrLong: 'unset' | 'short' | 'long'
-  booleanLocalizeDayOfWeek: boolean
   booleanRelativeDateInText: boolean
   relativeDateDaysBefore: number
   relativeDateDaysAfter: number
-  booleanRelativeTime: boolean
   booleanAddIcon: boolean
   booleanYearPattern: string
   iconBeforeYear: string
@@ -25,18 +23,23 @@ export type PluginSettings = {
  */
 import { DEFAULT_ICON_BEFORE, DEFAULT_ICON_AFTER, DEFAULT_DATE_FORMAT } from './constants'
 
-export const getSettingsSnapshot = (): PluginSettings => {
-  const s = (logseq as any).settings as Partial<PluginSettings> | undefined
+let cachedSettings: PluginSettings | null = null
+let lastSettingsCheck = 0
+const CACHE_DURATION = 1000 // 1 second
 
-  return {
+export const getSettingsSnapshot = (s: Partial<PluginSettings>): PluginSettings => {
+  const now = Date.now()
+  if (cachedSettings && (now - lastSettingsCheck) < CACHE_DURATION) {
+    return cachedSettings
+  }
+
+  cachedSettings = {
     dateFormat: s?.dateFormat ?? DEFAULT_DATE_FORMAT,
     selectLocale: s?.selectLocale ?? 'default',
     booleanShortOrLong: (s?.booleanShortOrLong as PluginSettings['booleanShortOrLong']) ?? 'unset',
-    booleanLocalizeDayOfWeek: s?.booleanLocalizeDayOfWeek ?? true,
     booleanRelativeDateInText: s?.booleanRelativeDateInText ?? false,
     relativeDateDaysBefore: (s?.relativeDateDaysBefore as number) ?? 7,
     relativeDateDaysAfter: (s?.relativeDateDaysAfter as number) ?? 7,
-    booleanRelativeTime: s?.booleanRelativeTime ?? true,
     booleanAddIcon: s?.booleanAddIcon ?? true,
     booleanYearPattern: s?.booleanYearPattern ?? 'same year',
     iconBeforeYear: s?.iconBeforeYear ?? DEFAULT_ICON_BEFORE,
@@ -48,6 +51,9 @@ export const getSettingsSnapshot = (): PluginSettings => {
     firstLoad: s?.firstLoad,
     loadDateFormatDemo: s?.loadDateFormatDemo,
   }
+
+  lastSettingsCheck = now
+  return cachedSettings
 }
 
 export const resolveShortOrLong = (prefs: PluginSettings, requested: 'short' | 'long') =>

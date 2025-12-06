@@ -23,10 +23,10 @@ export class JournalLinkProcessor {
 
       const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent, logseqVerMd) as PageEntity["journalDay"] | null
       let parsedJournalDay: PageEntity["journalDay"] | null = journalDay
+      const settings = getSettingsSnapshot()
 
       if (journalDay === null) {
         // Try to parse the text as a date using alternative formats
-        const settings = getSettingsSnapshot()
         const alternativeFormats = [
           settings.alternativeDateFormat1,
           settings.alternativeDateFormat2,
@@ -48,7 +48,6 @@ export class JournalLinkProcessor {
         if (parsedJournalDay === null) return
       }
 
-      const settings = getSettingsSnapshot()
       if (parsedJournalDay) JournalLinkProcessor.replaceDateFormat(parsedJournalDay, journalLinkElement, preferredDateFormat, settings)
     } catch (error) {
       // Silently handle errors to avoid disrupting the user experience
@@ -102,14 +101,12 @@ export class JournalLinkProcessor {
       }
 
       // Add relative time to tooltip
-      if (settings.booleanRelativeTime === true) {
-        if (shouldShowRelativeInText && isInRelativeRange) {
-          // If showing relative in text, add the user date format to tooltip instead
-          journalLinkElement.title += "\n" + format(journalDate, preferredDateFormat)
-        } else {
-          // If showing formatted date, add relative time to tooltip
-          journalLinkElement.title += "\n" + DateFormatUtils.formatRelative(journalDate, settings.selectLocale as string)
-        }
+      if (shouldShowRelativeInText && isInRelativeRange) {
+        // If showing relative in text, add the user date format to tooltip instead
+        journalLinkElement.title += "\n" + format(journalDate, preferredDateFormat)
+      } else {
+        // If showing formatted date, add relative time to tooltip
+        journalLinkElement.title += "\n" + DateFormatUtils.formatRelative(journalDate, settings.selectLocale as string)
       }
 
       if (settings.booleanAddIcon === true) DateFormatUtils.addIcon(journalDate, journalLinkElement, settings)

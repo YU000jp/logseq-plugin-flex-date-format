@@ -45,13 +45,6 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         description: t("Override the locale used for localized dates and weekday names."),
     },
     {
-        key: "booleanLocalizeDayOfWeek",
-        title: t("Localize weekday name"),
-        type: "boolean",
-        default: true,
-        description: "default: `true`",
-    },
-    {
         // 曜日の呼び名の長さ
         key: "booleanShortOrLong",
         title: t("Weekday length"),
@@ -59,13 +52,6 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         enumChoices: SHORT_OR_LONG_CHOICES,
         default: "unset",
         description: t("Force short or long weekday names (this overrides other options)."),//この設定が優先される
-    },
-    {//booleanRelativeTime
-        key: "booleanRelativeTime",
-        title: t("Show relative time in tooltip"),
-        type: "boolean",
-        default: true,
-        description: "default: `true`",
     },
     {//booleanRelativeDateInText
         key: "booleanRelativeDateInText",
@@ -93,8 +79,8 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         key: "booleanAddIcon",
         title: t("Display icon for dates"),
         type: "boolean",
-        default: true,
-        description: "default: `true`",
+        default: false,
+        description: "default: `false`",
         //20240204
     },
     { // アイコンをつける日付のパターン (年の区切り)

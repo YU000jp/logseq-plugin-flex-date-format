@@ -80,15 +80,13 @@ export class DateFormatUtils {
         break
       default:
         formattedDate = format(journalDate, settings.dateFormat as string)
-        if (settings.booleanLocalizeDayOfWeek === true) {
-          if ((settings.dateFormat as string).includes('E'))
-            formattedDate = DateFormatUtils.replaceDayOfWeek(formattedDate, journalDate, settings.selectLocale as string, DateFormatUtils.shortOrLongFromSettings(settings, 'long'))
-          else
-            formattedDate += ` (${localizeDayOfWeek(DateFormatUtils.shortOrLongFromSettings(settings, 'short'), journalDate, settings.selectLocale as string)})`
+        if ((settings.dateFormat as string).includes('E'))
+          formattedDate = DateFormatUtils.replaceDayOfWeek(formattedDate, journalDate, settings.selectLocale as string, DateFormatUtils.shortOrLongFromSettings(settings, 'long'))
+        else
+          formattedDate += ` (${localizeDayOfWeek(DateFormatUtils.shortOrLongFromSettings(settings, 'short'), journalDate, settings.selectLocale as string)})`
 
-          if (settings.selectLocale === 'de-DE')
-            formattedDate = formattedDate.replace('tagtag', 'tag').replace('Motag', 'Montag')
-        }
+        if (settings.selectLocale === 'de-DE')
+          formattedDate = formattedDate.replace('tagtag', 'tag').replace('Motag', 'Montag')
     }
 
     return formattedDate
