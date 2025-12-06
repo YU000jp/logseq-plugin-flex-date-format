@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.10.0...v1.11.0) (2025-12-06)
+
+
+### Features
+
+* **Add:** For SCHEDULED and DEADLINE ([e6258b8](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/e6258b85768a30e0fbee737d3579fcffd5e82e46))
+
 # [1.10.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.9.1...v1.10.0) (2025-11-16)
 
 
