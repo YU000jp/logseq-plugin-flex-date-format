@@ -1,4 +1,5 @@
 import { getISOWeekYear, getISOWeek, getWeekYear, getWeek } from "date-fns"
+import { WEEK_FORMAT_ISO } from './constants'
 
 export const getJournalDayDate = (str: string): Date => new Date(
   Number(str.slice(0, 4)), //year
@@ -7,10 +8,17 @@ export const getJournalDayDate = (str: string): Date => new Date(
 )
 
 //日付から週番号を求める
-export const getWeeklyNumberFromDate = (journalDate: Date, weekStartsOn: 0 | 1): { year: number, weekString: string } => {
+/**
+ * Calculate a week number and year for a date.
+ *
+ * @param journalDate date to evaluate
+ * @param weekStartsOn 0 (Sunday) or 1 (Monday)
+ * @param weekNumberFormat optional string; if 'ISO(EU) format' is supplied then ISO week/year are used
+ */
+export const getWeeklyNumberFromDate = (journalDate: Date, weekStartsOn: 0 | 1, weekNumberFormat?: string): { year: number, weekString: string } => {
   let year: number
   let week: number
-  if (logseq.settings!.weekNumberFormat === "ISO(EU) format") {
+  if (weekNumberFormat === WEEK_FORMAT_ISO) {
     year = getISOWeekYear(journalDate)
     week = getISOWeek(journalDate)
   } else {

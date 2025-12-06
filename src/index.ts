@@ -3,6 +3,9 @@ import { AppInfo, AppUserConfigs, LSPluginBaseInfo } from '@logseq/libs/dist/LSP
 import { setup as l10nSetup } from "logseq-l10n" //https://github.com/sethyuan/logseq-l10n
 import { openStartWindow } from './demoDateFormat'
 import { journalLink } from './journalLink'
+import { querySelectorAllLinks as domQuerySelectorAllLinks, revertQuerySelectorAllLinks as domRevertQuerySelectorAllLinks, startObservers as domStartObservers, stopObservers as domStopObservers } from './dom'
+import { getSettingsSnapshot } from './settingsManager'
+import { CSS_KEY, CSS_STYLE, MESSAGE_ID, SELECTOR_BLOCK_TAGS } from './constants'
 import { settingsTemplate } from './settings'
 import af from "./translations/af.json"
 import de from "./translations/de.json"
@@ -53,51 +56,14 @@ const main = async () => {
   logseq.useSettingsSchema(settingsTemplate())
 
   // Inject custom CSS for relative date display with Dynalist-like design
-  logseq.provideStyle({
-    key: 'relative-date-display-style',
-    style: `
-      /* Dynalist-inspired design for relative dates */
-      a[data-ref].relative-date-display {
-        display: inline-flex !important;
-        align-items: center;
-        padding: 3px 8px !important;
-        border: 1px solid var(--ls-border-color, #d3d3d3) !important;
-        border-radius: 4px !important;
-        background-color: var(--ls-secondary-background-color, #f8f9fa) !important;
-        color: var(--ls-primary-text-color, #333) !important;
-        font-size: 13px !important;
-        line-height: 1.4 !important;
-        text-decoration: none !important;
-        transition: all 0.15s ease !important;
-        white-space: nowrap !important;
-      }
-      
-      a[data-ref].relative-date-display:hover {
-        background-color: var(--ls-tertiary-background-color, #e9ecef) !important;
-        border-color: var(--ls-active-primary-color, #999) !important;
-      }
-      
-      /* For sidebar items that are spans */
-      span.relative-date-display {
-        display: inline-flex !important;
-        align-items: center;
-        padding: 3px 8px !important;
-        border: 1px solid var(--ls-border-color, #d3d3d3) !important;
-        border-radius: 4px !important;
-        background-color: var(--ls-secondary-background-color, #f8f9fa) !important;
-        color: var(--ls-primary-text-color, #333) !important;
-        font-size: 13px !important;
-        line-height: 1.4 !important;
-        white-space: nowrap !important;
-      }
-    `
-  })
+  logseq.provideStyle({ key: CSS_KEY, style: CSS_STYLE })
 
-  const messageId = "20240204-01"
-  if (logseq.settings!.firstLoad !== messageId) {
+  // use typed settings snapshot instead of accessing logseq.settings directly
+  const settingsSnapshot = getSettingsSnapshot()
+  if (settingsSnapshot.firstLoad !== MESSAGE_ID) {
     setTimeout(() => logseq.showSettingsUI(), 300)
     logseq.UI.showMsg("New setting items have been added to flexible-date-format plugin.", "info", { timeout: 5000 })
-    logseq.updateSettings({ firstLoad: messageId })
+    logseq.updateSettings({ firstLoad: MESSAGE_ID })
   }
 
   //100ms待機
@@ -106,18 +72,18 @@ const main = async () => {
   await checkUserDateFormat() //ユーザーの日付形式を取得
 
   //Logseqを開いたときに実行
-  setTimeout(() => querySelectorAllLinks(), 100)
-  setTimeout(() => observerMainRight(), 2000) //スクロール用
+  setTimeout(() => domQuerySelectorAllLinks(journalLink, userDateFormat, () => logseqDbGraph, () => logseqVersionMd), 100)
+  setTimeout(() => domStartObservers(journalLink, () => userDateFormat, () => logseqDbGraph, () => logseqVersionMd), 2000) //スクロール用
 
   //ほかのページを開いたときに実行
-  logseq.App.onRouteChanged(() => setTimeout(() => querySelectorAllLinks(), 50))
-  logseq.App.onPageHeadActionsSlotted(() => setTimeout(() => querySelectorAllLinks(), 50))
+  logseq.App.onRouteChanged(() => setTimeout(() => domQuerySelectorAllLinks(journalLink, userDateFormat, () => logseqDbGraph, () => logseqVersionMd), 50))
+  logseq.App.onPageHeadActionsSlotted(() => setTimeout(() => domQuerySelectorAllLinks(journalLink, userDateFormat, () => logseqDbGraph, () => logseqVersionMd), 50))
   //サイドバーを開いたときに実行
-  logseq.App.onSidebarVisibleChanged(() => setTimeout(() => querySelectorAllLinks(), 50))
+  logseq.App.onSidebarVisibleChanged(() => setTimeout(() => domQuerySelectorAllLinks(journalLink, userDateFormat, () => logseqDbGraph, () => logseqVersionMd), 50))
   //修了する前に実行
   logseq.beforeunload(async () => {
-    observer.disconnect()//監視を終了
-    revertQuerySelectorAllLinks()//元に戻す
+    domStopObservers()
+    domRevertQuerySelectorAllLinks(() => logseqDbGraph, () => logseqVersionMd)
   })
 
   onSettingsChanged() //設定が変更されたときに実行
@@ -146,64 +112,12 @@ const onSettingsChanged = () => logseq.onSettingsChanged((newSet: LSPluginBaseIn
       || oldSet.booleanYearPattern !== newSet.booleanYearPattern
       || oldSet.iconBeforeYear !== newSet.iconBeforeYear
       || oldSet.iconAfterYear !== newSet.iconAfterYear) {
-      revertQuerySelectorAllLinks()
-      setTimeout(() => querySelectorAllLinks(), 50)
+      domRevertQuerySelectorAllLinks(() => logseqDbGraph, () => logseqVersionMd)
+      setTimeout(() => domQuerySelectorAllLinks(journalLink, userDateFormat, () => logseqDbGraph, () => logseqVersionMd), 50)
     }
 })
 
-//querySelectorAll
-let processingTitleQuery: boolean = false
-const querySelectorAllLinks = async (): Promise<void> => {
-  if (processingTitleQuery) return
-  processingTitleQuery = true;
-
-  (parent.document.body.querySelector("div#root>div>main") as HTMLElement | null)?.querySelectorAll(
-    logseqDbGraph === true ?
-      "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis:not([data-localize]) "
-      : "#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item "
-      + (logseqVersionMd === true ?
-        "div.page-title>span+span.text-ellipsis:not([data-localize])" //md model
-        : "div.page-title>div+span.text-ellipsis:not([data-localize])" //db model
-      ))
-    .forEach(async (titleElement) => await journalLink(titleElement as HTMLElement, userDateFormat, logseqVersionMd))
-
-  setTimeout(() => processingTitleQuery = false, 30)
-}
-
-//observer
-const observer = new MutationObserver(async (): Promise<void> => {
-  observer.disconnect()
-  await querySelectorAllLinks()
-  setTimeout(() => observerMainRight(), 800)
-})
-
-const observerMainRight = () => {
-  observer.observe(parent.document.getElementById("main-content-container") as HTMLDivElement, {
-    attributes: true,
-    subtree: true,
-    attributeFilter: ["class"],
-  })
-  observer.observe(parent.document.getElementById("right-sidebar") as HTMLDivElement, {
-    attributes: true,
-    subtree: true,
-    attributeFilter: ["class"],
-  })
-}
-
-//元に戻す
-const revertQuerySelectorAllLinks = () => {
-  (parent.document.querySelectorAll(
-    logseqDbGraph === true ?
-      "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis[data-localize]"
-      : "#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item "
-      + (logseqVersionMd === true ?
-        "div.page-title>span+span.text-ellipsis[data-localize]"
-        : "div.page-title>div+span.text-ellipsis[data-localize]")) as NodeListOf<HTMLElement>)
-    .forEach(async (titleElement) => {
-      titleElement.removeAttribute("data-localize")
-      if (titleElement.dataset.ref) titleElement.textContent = titleElement.dataset.ref
-    })
-}
+// DOM handling (query, revert and observer) now lives in src/dom.ts
 
 // MDモデルかどうかのチェック DBモデルはfalse
 const checkLogseqVersion = async (): Promise<boolean> => {
@@ -227,7 +141,7 @@ const checkLogseqVersion = async (): Promise<boolean> => {
 // DBグラフかどうかのチェック DBグラフだけtrue
 const checkDbGraph = async (): Promise<boolean> => {
   const element = parent.document.querySelector(
-    "div.block-tags",
+    SELECTOR_BLOCK_TAGS,
   ) as HTMLDivElement | null // ページ内にClassタグが存在する  WARN:: ※DOM変更の可能性に注意
   if (element) {
     logseqDbGraph = true

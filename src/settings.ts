@@ -1,5 +1,6 @@
 import { SettingSchemaDesc } from '@logseq/libs/dist/LSPlugin.user'
 import { t } from 'logseq-l10n'
+import { DATE_FORMAT_CHOICES, SELECT_LOCALE_CHOICES, SHORT_OR_LONG_CHOICES, YEAR_PATTERN_CHOICES, DEFAULT_DATE_FORMAT, DEFAULT_ICON_BEFORE, DEFAULT_ICON_AFTER, YEAR_PATTERN_SAME } from './constants'
 
 /* user setting */
 // https://logseq.github.io/plugins/types/SettingSchemaDesc.html
@@ -13,138 +14,39 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     // },
     {
         key: "headingAddLocalizeDayOfWeek",
-        title: t("Switch to style of the selected date format"),
+        title: t("Apply date format style"),
         type: "heading",
         default: "",
         //グラフには影響を与えない
-        description: t("⚠️ It cannot be used when creating links. Create it based on the user date format.") + " " + t("*This setting does not affect the graph or files*"),
+        description: t("Apply the visual style (weekday/format) of the selected date format in the UI only. Does not change page names or files."),
     },
     {//date format
         key: "dateFormat",
-        title: t("Select date format") + " 🆙",
+        title: t("Date format"),
         type: "enum",
         //<option>E, MM/dd/yyyy</option><option>E, dd-MM-yyyy</option><option>E, dd.MM.yyyy</option><option>E, yyyy/MM/dd</option><option>EEE, MM/dd/yyyy</option><option>EEE, dd-MM-yyyy</option><option>EEE, dd.MM.yyyy</option><option>EEE, yyyy/MM/dd</option><option>EEEE, MM/dd/yyyy</option><option>EEEE, dd-MM-yyyy</option><option>EEEE, dd.MM.yyyy</option><option>EEEE, yyyy/MM/dd</option><option>MM-dd-yyyy</option><option>MM/dd/yyyy</option><option>MMM do, yyyy</option><option>MMMM do, yyyy</option><option>MM_dd_yyyy</option><option>dd-MM-yyyy</option><option>do MMM yyyy</option><option>do MMMM yyyy</option><option>yyyy-MM-dd</option><option>yyyy-MM-dd EEEE</option><option>yyyy/MM/dd</option><option>yyyyMMdd</option><option>yyyy_MM_dd</option><option>yyyy年MM月dd日</option><
-        enumChoices: [
-            "Unset",
-            "Localize",
-            "E, d MMMM yyyy",
-            "E, MM/dd/yyyy",
-            "E, dd-MM-yyyy",
-            "E, dd.MM.yyyy",
-            "E, yyyy/MM/dd",
-            "EEE, MM/dd/yyyy",
-            "EEE, dd-MM-yyyy",
-            "EEE, dd.MM.yyyy",
-            "EEE, yyyy/MM/dd",
-            "EEEE, MM/dd/yyyy",
-            "EEEE, dd-MM-yyyy",
-            "EEEE, dd.MM.yyyy",
-            "EEEE, yyyy/MM/dd",
-            "MM-dd-yyyy",
-            "MM/dd/yyyy",
-            "dd-MM-yyyy",
-            "dd.MM.yyyy",
-            "yyyy/MM/dd",
-            "MM-dd-yyyy",
-            "MM/dd/yyyy",
-            "MMM do, yyyy",
-            "MMMM do, yyyy",
-            "MM_dd_yyyy",
-            "dd-MM-yyyy",
-            "do MMM yyyy",
-            "do MMMM yyyy",
-            "yyyy-MM-dd",
-            "yyyy-MM-dd EEEE",
-            "yyyy/MM/dd",
-            "yyyyMMdd",
-            "yyyy_MM_dd",
-            "yyyy年MM月dd日",
-            "d MMMM yyyy",
-            "dd MMMM yyyy",
-        ],
-        default: "Localize",
-        description: "",
+        enumChoices: DATE_FORMAT_CHOICES,
+        default: DEFAULT_DATE_FORMAT,
+        description: t("Choose how dates are formatted for display in the UI."),
     },
     {//日付フォーマットのデモンストレーション
         key: "loadDateFormatDemo",
-        title: t("All date format demo") + " 🆙",
+        title: t("Show date format examples"),
         type: "boolean",
         default: false,
-        description: t("Open the dialog on click"),
+        description: t("Open a dialog that shows examples of each date format."),
     },
     {//特殊なロケールを使用する
         key: "selectLocale",
-        title: t("Advanced options > Select locale") + " 🆙",
+        title: t("Locale (advanced)"),
         type: "enum",
-        enumChoices: [
-            "default",              // Gregorian calendar (default)
-            "am-ET-u-ca-ethiopic",   // Amharic (Ethiopia) - Ethiopian calendar
-            "ar-EG",   // Egypt
-            "ar-SA",   // Arabic (Saudi Arabia) - Gregorian calendar (default)
-            "ar-SA-u-ca-islamic-umalqura",   // Arabic (Saudi Arabia) - Islamic (Umm al-Qura) calendar
-            "bn-BD",   // Bangladesh
-            "de-DE",   // Germany
-            "en-AU",   // Australia
-            "en-CA",   // Canada (English)
-            "en-GB",   // English (United Kingdom) - Gregorian calendar (default)
-            "en-GB-u-ca-islamic",   // English (United Kingdom) - Islamic calendar
-            "en-GB-u-ca-persian",   // English (United Kingdom) - Persian calendar
-            "en-US",   // English (United States) - Gregorian calendar (default)
-            "en-US-u-ca-islamic",   // English (United States) - Islamic calendar
-            "en-US-u-ca-persian",   // English (United States) - Persian calendar
-            "es-AR",   // Argentina
-            "es-CL",   // Chile
-            "es-CO",   // Colombia
-            "es-CR",   // Costa Rica
-            "es-DO",   // Dominican Republic
-            "es-EC",   // Ecuador
-            "es-ES",   // Spain
-            "es-GT",   // Guatemala
-            "es-HN",   // Honduras
-            "es-MX",   // Mexico
-            "es-NI",   // Nicaragua
-            "es-PA",   // Panama
-            "es-PE",   // Peru
-            "es-PR",   // Puerto Rico
-            "es-SV",   // El Salvador
-            "es-UY",   // Uruguay
-            "es-VE",   // Venezuela
-            "fa-IR",   // Persian (Iran) - Gregorian calendar (default)
-            "fa-IR-u-ca-persian",    // Persian (Iran) - Persian calendar (Jalali)
-            "fr-CA",   // Canada (French)
-            "fr-FR",   // France
-            "he-IL-u-ca-hebrew",     // Hebrew (Israel) - Hebrew calendar
-            "hi-IN",   // India
-            "id-ID",   // Indonesia
-            "it-IT",   // Italy
-            "ja-JP",   // Japanese (Japan) - Gregorian calendar (default)
-            "ja-JP-u-ca-japanese",   // Japanese (Japan) - Japanese calendar
-            "ko-KR",   // Korean (Korea) - Gregorian calendar (default)
-            "ko-KR-u-ca-korean",    // Korean (Korea) - Korean calendar
-            "ms-MY",   // Malaysia
-            "nl-NL",   // Netherlands
-            "pl-PL",   // Poland
-            "pt-BR",   // Brazil
-            "pt-PT",   // Portugal
-            "ru-RU",   // Russia
-            "th-TH",   // Thailand
-            "th-TH-u-ca-buddhist",   // Thai (Thailand) - Buddhist calendar
-            "th-TH-u-nu-thai",       // Thai (Thailand) - Thai digits
-            "tr-TR",   // Turkey
-            "vi-VN",   // Vietnam
-            "zh-CN",   // China
-            "zh-CN-u-ca-chinese",    // Chinese (China) - Chinese calendar
-            "zh-Hans-CN",            // Chinese (China) - Gregorian calendar (default)
-            "zh-Hant-TW-u-ca-taiwan",// Chinese (Taiwan) - Gregorian calendar (default)
-            "zh-TW",   // Taiwan
-            "zh-TW-u-ca-roc",        // Chinese (Taiwan) - Minguo calendar (Republic of China era)
-        ],
-        default: "default",
-        description: "",
+        enumChoices: SELECT_LOCALE_CHOICES,
+        default: 'default',
+        description: t("Override the locale used for localized dates and weekday names."),
     },
     {
         key: "booleanLocalizeDayOfWeek",
-        title: t("Localize the day of the week"),
+        title: t("Localize weekday name"),
         type: "boolean",
         default: true,
         description: "default: `true`",
@@ -152,48 +54,44 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     {
         // 曜日の呼び名の長さ
         key: "booleanShortOrLong",
-        title: t("Shorten the day of the week") + " 🆕",
+        title: t("Weekday length"),
         type: "enum",
-        enumChoices: [
-            "unset", // 未設定
-            "short", // 短い曜日名
-            "long",  // 長い曜日名
-        ],
+        enumChoices: SHORT_OR_LONG_CHOICES,
         default: "unset",
-        description: t("*This setting takes precedence over other settings.*"),//この設定が優先される
+        description: t("Force short or long weekday names (this overrides other options)."),//この設定が優先される
     },
     {//booleanRelativeTime
         key: "booleanRelativeTime",
-        title: t("Display relative time on hover the journal link"),
+        title: t("Show relative time in tooltip"),
         type: "boolean",
         default: true,
         description: "default: `true`",
     },
     {//booleanRelativeDateInText
         key: "booleanRelativeDateInText",
-        title: t("Display relative date in main text (not only in tooltip)") + " 🆕",
+        title: t("Use relative date as main text"),
         type: "boolean",
         default: false,
-        description: "default: `false` " + t("Show 'Today', 'Tomorrow', etc. as the main text instead of the formatted date"),
+        description: t("Show relative labels (e.g. 'Today', 'Tomorrow') as the main text in eligible elements."),
     },
     {//relativeDateDaysBefore
         key: "relativeDateDaysBefore",
-        title: t("Days before current date to show as relative") + " 🆕",
+        title: t("Relative days — past"),
         type: "number",
         default: 7,
-        description: "default: `7` " + t("Number of days before today to display as relative dates (e.g., 'Yesterday', '2 days ago')"),
+        description: t("How many past days should be shown as relative labels (e.g., 'Yesterday')."),
     },
     {//relativeDateDaysAfter
         key: "relativeDateDaysAfter",
-        title: t("Days after current date to show as relative") + " 🆕",
+        title: t("Relative days — future"),
         type: "number",
         default: 7,
-        description: "default: `7` " + t("Number of days after today to display as relative dates (e.g., 'Tomorrow', 'in 2 days')"),
+        description: t("How many future days should be shown as relative labels (e.g., 'Tomorrow')."),
     },
 
     {//日付に合わせて、アイコンをつける
         key: "booleanAddIcon",
-        title: t("Icon > Adds an icon to dates that match that separator") + " 🆕🚧",
+        title: t("Display icon for dates"),
         type: "boolean",
         default: true,
         description: "default: `true`",
@@ -201,33 +99,25 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
     },
     { // アイコンをつける日付のパターン (年の区切り)
         key: "booleanYearPattern",
-        title: t("Icon > Year separation") + " 🆕🚧",
+        title: t("Year range for icons"),
         type: "enum",
-        enumChoices: [
-            "same year", // 同じ年かどうか
-            "1 year period", // 1年区切り
-            "2 year period", // 2年区切り
-            "3 year period", // 3年区切り 
-            "5 year period", // 5年区切り
-            "10 year period", // 10年区切り
-
-        ],
-        default: "same year",
+        enumChoices: YEAR_PATTERN_CHOICES,
+        default: YEAR_PATTERN_SAME,
         description: "",
     },
     {//区切りより前の場合のアイコン
         key: "iconBeforeYear",
-        title: t("Icon > Set icon (if journal is before than that year)") + " 🆕🚧",
+        title: t("Icon for older dates" ),
         type: "string",
-        default: "🕰️",
+        default: DEFAULT_ICON_BEFORE,
         description: "default: `🕰️` or `&#xea0b;` / "+ t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
     },
     {//区切りより後の場合のアイコン
         key: "iconAfterYear",
-        title: t("Icon > Set icon (if journal is later than that year)") + " 🆕🚧",
+        title: t("Icon for newer dates"),
         type: "string",
-        default: "",
-        description: "default: undefined or `&#xea53;` / "+t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
+        default: DEFAULT_ICON_AFTER,
+        description: "default: ` ` or `&#xea53;` / "+t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
     }
 
 ]
