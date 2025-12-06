@@ -1,8 +1,8 @@
 // Centralized constants and helper functions for flexible-date-format plugin
 
-export const CSS_KEY = 'relative-date-display-style'
-
-export const CSS_STYLE = `
+export const CSS = {
+  KEY: 'relative-date-display-style',
+  STYLE: `
   /* Dynalist-inspired design for relative dates */
   a[data-ref].relative-date-display {
     display: inline-flex !important;
@@ -38,21 +38,159 @@ export const CSS_STYLE = `
     white-space: nowrap !important;
   }
 `
+}
 
-export const MESSAGE_ID = '20240204-01'
+export const MESSAGES = {
+  ID: '2024020401'
+}
 
-export const ROOT_QUERY = 'div#root>div>main'
-export const SELECTOR_BLOCK_TAGS = 'div.block-tags'
-export const ID_MAIN_CONTENT_CONTAINER = 'main-content-container'
-export const ID_RIGHT_SIDEBAR = 'right-sidebar'
+export const SELECTORS = {
+  ROOT_QUERY: 'div#root>div>main',
+  BLOCK_TAGS: 'div.block-tags',
+  MAIN_CONTENT_CONTAINER: 'main-content-container',
+  RIGHT_SIDEBAR: 'right-sidebar'
+}
 
-export const CLASS_RELATIVE_DATE = 'relative-date-display'
-export const ICON_CALENDAR = '📅'
+export const CLASSES = {
+  RELATIVE_DATE: 'relative-date-display',
+  ICON_ELEMENT: 'icon pr-2'
+}
 
-export const DEFAULT_ICON_BEFORE = '🕰️'
-export const DEFAULT_ICON_AFTER = ''
+export const ICONS = {
+  CALENDAR: '📅',
+  DEFAULT_BEFORE: '🕰️',
+  DEFAULT_AFTER: ''
+}
 
-export const WEEK_FORMAT_ISO = 'ISO(EU) format'
+export const DATE_FORMATS = {
+  WEEK_FORMAT_ISO: 'ISO(EU) format',
+  DEFAULT: 'Localize',
+  CHOICES: [
+    'Unset',
+    'Localize',
+    'E, d MMMM yyyy',
+    'E, MM/dd/yyyy',
+    'E, dd-MM-yyyy',
+    'E, dd.MM.yyyy',
+    'E, yyyy/MM/dd',
+    'EEE, MM/dd/yyyy',
+    'EEE, dd-MM-yyyy',
+    'EEE, dd.MM.yyyy',
+    'EEE, yyyy/MM/dd',
+    'EEEE, MM/dd/yyyy',
+    'EEEE, dd-MM-yyyy',
+    'EEEE, dd.MM.yyyy',
+    'EEEE, yyyy/MM/dd',
+    'MM-dd-yyyy',
+    'MM/dd/yyyy',
+    'dd-MM-yyyy',
+    'dd.MM.yyyy',
+    'yyyy/MM/dd',
+    'MMM do, yyyy',
+    'MMMM do, yyyy',
+    'MM_dd_yyyy',
+    'do MMM yyyy',
+    'do MMMM yyyy',
+    'yyyy-MM-dd',
+    'yyyy-MM-dd EEEE',
+    'yyyyMMdd',
+    'yyyy_MM_dd',
+    'yyyy年MM月dd日',
+    'd MMMM yyyy',
+    'dd MMMM yyyy',
+  ]
+}
+
+export const ALTERNATIVE_DATE_FORMAT_CHOICES = DATE_FORMATS.CHOICES.filter(choice => choice !== 'Localize')
+
+export const LOCALES = {
+  CHOICES: [
+    'default',
+    'am-ET-u-ca-ethiopic',
+    'ar-EG',
+    'ar-SA',
+    'ar-SA-u-ca-islamic-umalqura',
+    'bn-BD',
+    'de-DE',
+    'en-AU',
+    'en-CA',
+    'en-GB',
+    'en-GB-u-ca-islamic',
+    'en-GB-u-ca-persian',
+    'en-US',
+    'en-US-u-ca-islamic',
+    'en-US-u-ca-persian',
+    'es-AR',
+    'es-CL',
+    'es-CO',
+    'es-CR',
+    'es-DO',
+    'es-EC',
+    'es-ES',
+    'es-GT',
+    'es-HN',
+    'es-MX',
+    'es-NI',
+    'es-PA',
+    'es-PE',
+    'es-PR',
+    'es-SV',
+    'es-UY',
+    'es-VE',
+    'fa-IR',
+    'fa-IR-u-ca-persian',
+    'fr-CA',
+    'fr-FR',
+    'he-IL-u-ca-hebrew',
+    'hi-IN',
+    'id-ID',
+    'it-IT',
+    'ja-JP',
+    'ja-JP-u-ca-japanese',
+    'ko-KR',
+    'ko-KR-u-ca-korean',
+    'ms-MY',
+    'nl-NL',
+    'pl-PL',
+    'pt-BR',
+    'pt-PT',
+    'ru-RU',
+    'th-TH',
+    'th-TH-u-ca-buddhist',
+    'th-TH-u-nu-thai',
+    'tr-TR',
+    'vi-VN',
+    'zh-CN',
+    'zh-CN-u-ca-chinese',
+    'zh-Hans-CN',
+    'zh-Hant-TW-u-ca-taiwan',
+    'zh-TW',
+    'zh-TW-u-ca-roc',
+  ]
+}
+
+export const SHORT_OR_LONG = {
+  CHOICES: ['unset', 'short', 'long']
+}
+
+export const YEAR_PATTERNS = {
+  SAME: 'same year',
+  MAP: {
+    '1 year period': 1,
+    '2 year period': 2,
+    '3 year period': 3,
+    '5 year period': 5,
+    '10 year period': 10,
+  },
+  CHOICES: [
+    'same year',
+    '1 year period',
+    '2 year period',
+    '3 year period',
+    '5 year period',
+    '10 year period',
+  ]
+}
 
 /** Build selector string used to find title / link nodes for localization. */
 export const buildTitleSelector = (dbGraph: boolean, versionMd: boolean) =>
@@ -71,131 +209,24 @@ export const buildTitleSelectorLocalized = (dbGraph: boolean, versionMd: boolean
           ? 'div.page-title>span+span.text-ellipsis[data-localize]'
           : 'div.page-title>div+span.text-ellipsis[data-localize]')
 
-export const YEAR_PATTERN_SAME = 'same year'
-
-export const YEAR_PATTERN_MAP: Record<string, number> = {
-  '1 year period': 1,
-  '2 year period': 2,
-  '3 year period': 3,
-  '5 year period': 5,
-  '10 year period': 10,
-}
-
-export const ICON_ELEMENT_CLASS = 'icon pr-2'
-
-// Settings-related constant lists so UI choices live in one place
-export const DATE_FORMAT_CHOICES = [
-  'Unset',
-  'Localize',
-  'E, d MMMM yyyy',
-  'E, MM/dd/yyyy',
-  'E, dd-MM-yyyy',
-  'E, dd.MM.yyyy',
-  'E, yyyy/MM/dd',
-  'EEE, MM/dd/yyyy',
-  'EEE, dd-MM-yyyy',
-  'EEE, dd.MM.yyyy',
-  'EEE, yyyy/MM/dd',
-  'EEEE, MM/dd/yyyy',
-  'EEEE, dd-MM-yyyy',
-  'EEEE, dd.MM.yyyy',
-  'EEEE, yyyy/MM/dd',
-  'MM-dd-yyyy',
-  'MM/dd/yyyy',
-  'dd-MM-yyyy',
-  'dd.MM.yyyy',
-  'yyyy/MM/dd',
-  'MM-dd-yyyy',
-  'MM/dd/yyyy',
-  'MMM do, yyyy',
-  'MMMM do, yyyy',
-  'MM_dd_yyyy',
-  'dd-MM-yyyy',
-  'do MMM yyyy',
-  'do MMMM yyyy',
-  'yyyy-MM-dd',
-  'yyyy-MM-dd EEEE',
-  'yyyy/MM/dd',
-  'yyyyMMdd',
-  'yyyy_MM_dd',
-  'yyyy年MM月dd日',
-  'd MMMM yyyy',
-  'dd MMMM yyyy',
-]
-
-export const SELECT_LOCALE_CHOICES = [
-  'default',
-  'am-ET-u-ca-ethiopic',
-  'ar-EG',
-  'ar-SA',
-  'ar-SA-u-ca-islamic-umalqura',
-  'bn-BD',
-  'de-DE',
-  'en-AU',
-  'en-CA',
-  'en-GB',
-  'en-GB-u-ca-islamic',
-  'en-GB-u-ca-persian',
-  'en-US',
-  'en-US-u-ca-islamic',
-  'en-US-u-ca-persian',
-  'es-AR',
-  'es-CL',
-  'es-CO',
-  'es-CR',
-  'es-DO',
-  'es-EC',
-  'es-ES',
-  'es-GT',
-  'es-HN',
-  'es-MX',
-  'es-NI',
-  'es-PA',
-  'es-PE',
-  'es-PR',
-  'es-SV',
-  'es-UY',
-  'es-VE',
-  'fa-IR',
-  'fa-IR-u-ca-persian',
-  'fr-CA',
-  'fr-FR',
-  'he-IL-u-ca-hebrew',
-  'hi-IN',
-  'id-ID',
-  'it-IT',
-  'ja-JP',
-  'ja-JP-u-ca-japanese',
-  'ko-KR',
-  'ko-KR-u-ca-korean',
-  'ms-MY',
-  'nl-NL',
-  'pl-PL',
-  'pt-BR',
-  'pt-PT',
-  'ru-RU',
-  'th-TH',
-  'th-TH-u-ca-buddhist',
-  'th-TH-u-nu-thai',
-  'tr-TR',
-  'vi-VN',
-  'zh-CN',
-  'zh-CN-u-ca-chinese',
-  'zh-Hans-CN',
-  'zh-Hant-TW-u-ca-taiwan',
-  'zh-TW',
-  'zh-TW-u-ca-roc',
-]
-
-export const SHORT_OR_LONG_CHOICES = ['unset', 'short', 'long']
-
-export const YEAR_PATTERN_CHOICES = [
-  YEAR_PATTERN_SAME,
-  '1 year period',
-  '2 year period',
-  '3 year period',
-  '5 year period',
-  '10 year period',
-]
-
-export const DEFAULT_DATE_FORMAT = 'Localize'
+// Backward compatibility exports
+export const CSS_KEY = CSS.KEY
+export const CSS_STYLE = CSS.STYLE
+export const MESSAGE_ID = MESSAGES.ID
+export const ROOT_QUERY = SELECTORS.ROOT_QUERY
+export const SELECTOR_BLOCK_TAGS = SELECTORS.BLOCK_TAGS
+export const ID_MAIN_CONTENT_CONTAINER = SELECTORS.MAIN_CONTENT_CONTAINER
+export const ID_RIGHT_SIDEBAR = SELECTORS.RIGHT_SIDEBAR
+export const CLASS_RELATIVE_DATE = CLASSES.RELATIVE_DATE
+export const ICON_CALENDAR = ICONS.CALENDAR
+export const DEFAULT_ICON_BEFORE = ICONS.DEFAULT_BEFORE
+export const DEFAULT_ICON_AFTER = ICONS.DEFAULT_AFTER
+export const WEEK_FORMAT_ISO = DATE_FORMATS.WEEK_FORMAT_ISO
+export const YEAR_PATTERN_SAME = YEAR_PATTERNS.SAME
+export const YEAR_PATTERN_MAP = YEAR_PATTERNS.MAP
+export const ICON_ELEMENT_CLASS = CLASSES.ICON_ELEMENT
+export const DATE_FORMAT_CHOICES = DATE_FORMATS.CHOICES
+export const SELECT_LOCALE_CHOICES = LOCALES.CHOICES
+export const SHORT_OR_LONG_CHOICES = SHORT_OR_LONG.CHOICES
+export const YEAR_PATTERN_CHOICES = YEAR_PATTERNS.CHOICES
+export const DEFAULT_DATE_FORMAT = DATE_FORMATS.DEFAULT

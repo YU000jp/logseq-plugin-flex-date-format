@@ -1,6 +1,6 @@
 import { SettingSchemaDesc } from '@logseq/libs/dist/LSPlugin.user'
 import { t } from 'logseq-l10n'
-import { DATE_FORMAT_CHOICES, SELECT_LOCALE_CHOICES, SHORT_OR_LONG_CHOICES, YEAR_PATTERN_CHOICES, DEFAULT_DATE_FORMAT, DEFAULT_ICON_BEFORE, DEFAULT_ICON_AFTER, YEAR_PATTERN_SAME } from './constants'
+import { DATE_FORMAT_CHOICES, SELECT_LOCALE_CHOICES, SHORT_OR_LONG_CHOICES, YEAR_PATTERN_CHOICES, ALTERNATIVE_DATE_FORMAT_CHOICES, DEFAULT_DATE_FORMAT, DEFAULT_ICON_BEFORE, DEFAULT_ICON_AFTER, YEAR_PATTERN_SAME } from './constants'
 
 /* user setting */
 // https://logseq.github.io/plugins/types/SettingSchemaDesc.html
@@ -118,6 +118,37 @@ export const settingsTemplate = (): SettingSchemaDesc[] => [
         type: "string",
         default: DEFAULT_ICON_AFTER,
         description: "default: ` ` or `&#xea53;` / "+t("Emoji icon: Win + . (Windows) or Cmd + Ctrl + Space (Mac) to open the emoji picker / Tabler Icons: https://tabler.io/icons (Copy HTML char code)"),
+    },
+    {
+        key: "headingAlternativeDateFormats",
+        title: t("Alternative Date Formats"),
+        type: "heading",
+        default: "",
+        description: t("Specify additional date formats to recognize for non-journal pages that contain date-like strings."),
+    },
+    {
+        key: "alternativeDateFormat1",
+        title: t("Alternative Date Format 1"),
+        type: "enum",
+        enumChoices: ALTERNATIVE_DATE_FORMAT_CHOICES,
+        default: "Unset",
+        description: t("First alternative date format to try parsing."),
+    },
+    {
+        key: "alternativeDateFormat2",
+        title: t("Alternative Date Format 2"),
+        type: "enum",
+        enumChoices: ALTERNATIVE_DATE_FORMAT_CHOICES,
+        default: "Unset",
+        description: t("Second alternative date format to try parsing."),
+    },
+    {
+        key: "alternativeDateFormat3",
+        title: t("Alternative Date Format 3"),
+        type: "enum",
+        enumChoices: ALTERNATIVE_DATE_FORMAT_CHOICES,
+        default: "Unset",
+        description: t("Third alternative date format to try parsing."),
     }
 
 ]

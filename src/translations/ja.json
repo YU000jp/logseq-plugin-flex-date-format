@@ -44,5 +44,13 @@
     "Display icon for dates": "日付にアイコンを表示",
     "Year range for icons": "アイコン表示の年範囲",
     "Icon for older dates": "古い日付用のアイコン",
-    "Icon for newer dates": "新しい日付用のアイコン"
+    "Icon for newer dates": "新しい日付用のアイコン",
+    "Alternative Date Formats": "代替日付形式",
+    "Specify additional date formats to recognize for non-journal pages that contain date-like strings.": "日付のような文字列を含む非ジャーナルページで認識する追加の日付形式を指定します。",
+    "Alternative Date Format 1": "代替日付形式 1",
+    "First alternative date format to try parsing.": "最初にパースを試みる代替日付形式。",
+    "Alternative Date Format 2": "代替日付形式 2",
+    "Second alternative date format to try parsing.": "2番目にパースを試みる代替日付形式。",
+    "Alternative Date Format 3": "代替日付形式 3",
+    "Third alternative date format to try parsing.": "3番目にパースを試みる代替日付形式。"
 }

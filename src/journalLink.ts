@@ -1,96 +1,164 @@
 import { PageEntity } from "@logseq/libs/dist/LSPlugin"
-import { format } from "date-fns"
-import { getJournalDayDate, isWithinRelativeDateRange, localizeDayOfWeek } from "./lib"
+import { format, parse } from "date-fns"
+import { DateUtils } from "./lib"
 import { doesPageExistAsJournal } from "./query/advancedQuery"
 import { getSettingsSnapshot } from './settingsManager'
-import { replaceDayOfWeek, shortOrLongFromSettings, addIcon as addIconUtil, checkYear as checkYearUtil, formatRelative as formatRelativeUtil } from './utils'
+import { DateFormatUtils } from './utils'
 import { ICON_CALENDAR, CLASS_RELATIVE_DATE } from './constants'
 
-export const journalLink = async (journalLinkElement: HTMLElement, preferredDateFormat: string, logseqVerMd: boolean): Promise<void> => {
+/**
+ * Service class for processing journal links and timestamps.
+ */
+export class JournalLinkProcessor {
+  /**
+   * Process a journal link element.
+   */
+  static async processJournalLink(
+    journalLinkElement: HTMLElement,
+    preferredDateFormat: string,
+    logseqVerMd: boolean
+  ): Promise<void> {
+    try {
+      if (!journalLinkElement.textContent || journalLinkElement.dataset.localize === 'true') return
 
-  if (!journalLinkElement.textContent || journalLinkElement.dataset.localize === 'true') return
+      const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent, logseqVerMd) as PageEntity["journalDay"] | null
+      let parsedJournalDay: PageEntity["journalDay"] | null = journalDay
 
-  const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent, logseqVerMd) as PageEntity["journalDay"] | null
-  if (journalDay === null) return
+      if (journalDay === null) {
+        // Try to parse the text as a date using alternative formats
+        const settings = getSettingsSnapshot()
+        const alternativeFormats = [
+          settings.alternativeDateFormat1,
+          settings.alternativeDateFormat2,
+          settings.alternativeDateFormat3
+        ].filter(fmt => fmt !== 'Unset') as string[]
 
-  const settings = getSettingsSnapshot()
-  if (journalDay) replaceDateFormat(journalDay, journalLinkElement, preferredDateFormat, settings)
+        for (const fmt of alternativeFormats) {
+          try {
+            const parsedDate = parse(journalLinkElement.textContent!, fmt, new Date())
+            if (!Number.isNaN(parsedDate.getTime())) {
+              parsedJournalDay = DateUtils.getJournalDayFromDate(parsedDate)
+              break
+            }
+          } catch {
+            // Ignore parsing errors
+          }
+        }
 
-}
-
-
-const replaceDateFormat = (journalDay: PageEntity["journalDay"], journalLinkElement: HTMLElement, preferredDateFormat: string, settings: ReturnType<typeof getSettingsSnapshot>) => {
-
-  const journalDate: Date = getJournalDayDate(String(journalDay)) // 日誌リンクから日付を取得
-  journalLinkElement.dataset.ref = journalLinkElement.textContent as string | undefined // journalLinkElement.textContentを保存
-
-  // Check if we should display relative date as main text
-  // Note: Relative dates should NOT be applied to journal page titles (h1.title or div.ls-page-title span.block-title-wrap)
-  // Only apply to journal links (a[data-ref]) and sidebar items
-  const isJournalPageTitle = journalLinkElement.tagName === 'H1' || (journalLinkElement.tagName === 'SPAN' && journalLinkElement.closest('.ls-page-title'))
-  const shouldShowRelativeInText = settings.booleanRelativeDateInText === true && !isJournalPageTitle
-  const daysBefore = settings.relativeDateDaysBefore || 7
-  const daysAfter = settings.relativeDateDaysAfter || 7
-  const isInRelativeRange = isWithinRelativeDateRange(journalDate, daysBefore, daysAfter)
-
-  let formattedDate = ""
-  
-  // Generate the formatted date based on settings
-  switch (settings.dateFormat as string) { // ユーザー指定の形式に変更
-    case "Unset": //未設定の場合
-      formattedDate = format(journalDate, preferredDateFormat)
-      break
-    case 'Localize': //ローカライズされた形式の場合
-      formattedDate = journalDate.toLocaleDateString(settings.selectLocale as string, { weekday: shortOrLongFromSettings(settings, 'short'), year: 'numeric', month: 'short', day: 'numeric' })
-      break
-    default: //ユーザー指定の形式の場合
-      formattedDate = format(journalDate, settings.dateFormat as string)
-      if (settings.booleanLocalizeDayOfWeek === true) { // 曜日をローカライズする設定の場合
-
-        if ((settings.dateFormat as string).includes('E')) // 曜日が含まれている場合
-          formattedDate = replaceDayOfWeek(formattedDate, journalDate, settings.selectLocale as string, shortOrLongFromSettings(settings, 'long'))
-        else // 曜日が含まれていない場合
-          formattedDate += ` (${localizeDayOfWeek(shortOrLongFromSettings(settings, 'short'), journalDate, settings.selectLocale as string)})`
-
-        // 「Montag」が「Montagtag」になってしまうバグの対処
-        if (settings.selectLocale === 'de-DE')
-          formattedDate = formattedDate.replace('tagtag', 'tag').replace('Motag', 'Montag')
+        if (parsedJournalDay === null) return
       }
-  }
 
-  // Decide what to display as main text
-  if (shouldShowRelativeInText && isInRelativeRange) {
-    // Display relative date as main text, formatted date in tooltip
-    // Add calendar icon and capitalize first letter for better design
-    const relativeText = formatRelativeUtil(journalDate, settings.selectLocale as string, true)
-    journalLinkElement.textContent = `${ICON_CALENDAR} ${relativeText}`
-    journalLinkElement.title = formattedDate
-    // Add custom class for styling relative dates with border (Dynalist-like design)
-    journalLinkElement.classList.add(CLASS_RELATIVE_DATE)
-  } else {
-    // Display formatted date as main text
-    journalLinkElement.textContent = formattedDate
-    //保存に使われる日付フォーマットをツールチップに表示
-    journalLinkElement.title = format(journalDate, preferredDateFormat)
-    // Remove custom class if it was previously added
-    journalLinkElement.classList.remove(CLASS_RELATIVE_DATE)
-  }
-  
-  //相対時間をツールチップに表示
-  if (settings.booleanRelativeTime === true) { // 相対時間を表示する設定の場合
-    if (shouldShowRelativeInText && isInRelativeRange) {
-      // If showing relative in text, add the user date format to tooltip instead
-      journalLinkElement.title += "\n" + format(journalDate, preferredDateFormat)
-    } else {
-      // If showing formatted date, add relative time to tooltip
-      journalLinkElement.title += "\n" + formatRelativeUtil(journalDate, settings.selectLocale as string)
+      const settings = getSettingsSnapshot()
+      if (parsedJournalDay) JournalLinkProcessor.replaceDateFormat(parsedJournalDay, journalLinkElement, preferredDateFormat, settings)
+    } catch (error) {
+      // Silently handle errors to avoid disrupting the user experience
     }
-
   }
 
-  if (settings.booleanAddIcon === true) addIconUtil(journalDate, journalLinkElement, settings)
+  /**
+   * Replace the date format in a journal link element.
+   */
+  private static replaceDateFormat(
+    journalDay: PageEntity["journalDay"],
+    journalLinkElement: HTMLElement,
+    preferredDateFormat: string,
+    settings: ReturnType<typeof getSettingsSnapshot>
+  ): void {
+    try {
+      const journalDate: Date = DateUtils.getJournalDayDate(String(journalDay))
+      if (Number.isNaN(journalDate.getTime())) {
+        return
+      }
 
-  journalLinkElement.dataset.localize = "true" // フラグ
+      journalLinkElement.dataset.ref = journalLinkElement.textContent as string | undefined
+
+      // Check if we should display relative date as main text
+      const isJournalPageTitle = journalLinkElement.tagName === 'H1' || (journalLinkElement.tagName === 'SPAN' && journalLinkElement.closest('.ls-page-title'))
+      const shouldShowRelativeInText = settings.booleanRelativeDateInText === true && !isJournalPageTitle
+      const daysBefore = settings.relativeDateDaysBefore || 7
+      const daysAfter = settings.relativeDateDaysAfter || 7
+      const isInRelativeRange = DateUtils.isWithinRelativeDateRange(journalDate, daysBefore, daysAfter)
+
+      let formattedDate = ""
+
+      // Generate the formatted date based on settings
+      formattedDate = DateFormatUtils.formatDateBySettings(journalDate, settings, preferredDateFormat)
+
+      // Decide what to display as main text
+      if (shouldShowRelativeInText && isInRelativeRange) {
+        // Display relative date as main text, formatted date in tooltip
+        const relativeText = DateFormatUtils.formatRelative(journalDate, settings.selectLocale as string, true)
+        journalLinkElement.textContent = `${ICON_CALENDAR} ${relativeText}`
+        journalLinkElement.title = formattedDate
+        // Add custom class for styling relative dates with border (Dynalist-like design)
+        journalLinkElement.classList.add(CLASS_RELATIVE_DATE)
+      } else {
+        // Display formatted date as main text
+        journalLinkElement.textContent = formattedDate
+        // Save original date format to tooltip
+        journalLinkElement.title = format(journalDate, preferredDateFormat)
+        // Remove custom class if it was previously added
+        journalLinkElement.classList.remove(CLASS_RELATIVE_DATE)
+      }
+
+      // Add relative time to tooltip
+      if (settings.booleanRelativeTime === true) {
+        if (shouldShowRelativeInText && isInRelativeRange) {
+          // If showing relative in text, add the user date format to tooltip instead
+          journalLinkElement.title += "\n" + format(journalDate, preferredDateFormat)
+        } else {
+          // If showing formatted date, add relative time to tooltip
+          journalLinkElement.title += "\n" + DateFormatUtils.formatRelative(journalDate, settings.selectLocale as string)
+        }
+      }
+
+      if (settings.booleanAddIcon === true) DateFormatUtils.addIcon(journalDate, journalLinkElement, settings)
+
+      journalLinkElement.dataset.localize = "true"
+    } catch (error) {
+      // Silently handle errors to avoid disrupting the user experience
+    }
+  }
 }
 
-// NOTE: helpers moved to src/utils.ts to improve reusability
+/**
+ * Process a timestamp DOM element that contains a leading date.
+ */
+export class TimestampProcessor {
+  /**
+   * Process a timestamp element.
+   */
+  static async processTimestampElement(timeElement: HTMLElement, preferredDateFormat: string): Promise<void> {
+    try {
+      if (!timeElement.textContent || timeElement.dataset.localize === 'true') return
+
+      const text = timeElement.textContent.trim()
+      // Capture a leading date in YYYY-MM-DD or YYYY/MM/DD form
+      const m = text.match(/^(\d{4}[-/]\d{2}[-/]\d{2})(.*)$/)
+      if (!m) return
+
+      const datePart = m[1]
+      let trailing = m[2] || ''
+
+      // Remove weekday names from trailing text (e.g., " Fri " -> " ")
+      trailing = trailing.replace(/\b(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\b\s*/g, '')
+
+      const parsed = new Date(datePart)
+      if (Number.isNaN(parsed.getTime())) return
+
+      const settings = getSettingsSnapshot()
+      const formatted = DateFormatUtils.formatDateBySettings(parsed, settings, preferredDateFormat)
+
+      // Save original text so revert can restore it
+      timeElement.dataset.ref = timeElement.textContent as string | undefined
+      timeElement.textContent = `${formatted}${trailing}`
+      timeElement.dataset.localize = 'true'
+    } catch (error) {
+      console.error('Error processing timestamp element:', error, { timeElement, preferredDateFormat })
+    }
+  }
+}
+
+// Backward compatibility exports
+export const journalLink = JournalLinkProcessor.processJournalLink
+export const processTimestampElement = TimestampProcessor.processTimestampElement

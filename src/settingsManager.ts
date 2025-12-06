@@ -11,6 +11,9 @@ export type PluginSettings = {
   booleanYearPattern: string
   iconBeforeYear: string
   iconAfterYear: string
+  alternativeDateFormat1: string
+  alternativeDateFormat2: string
+  alternativeDateFormat3: string
   weekNumberFormat?: string
   firstLoad?: string
   loadDateFormatDemo?: boolean
@@ -38,7 +41,12 @@ export const getSettingsSnapshot = (): PluginSettings => {
     booleanYearPattern: s?.booleanYearPattern ?? 'same year',
     iconBeforeYear: s?.iconBeforeYear ?? DEFAULT_ICON_BEFORE,
     iconAfterYear: s?.iconAfterYear ?? DEFAULT_ICON_AFTER,
+    alternativeDateFormat1: s?.alternativeDateFormat1 ?? 'Unset',
+    alternativeDateFormat2: s?.alternativeDateFormat2 ?? 'Unset',
+    alternativeDateFormat3: s?.alternativeDateFormat3 ?? 'Unset',
     weekNumberFormat: s?.weekNumberFormat,
+    firstLoad: s?.firstLoad,
+    loadDateFormatDemo: s?.loadDateFormatDemo,
   }
 }
 
