@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.11.0...v1.11.1) (2026-10-03)
+
+
+### Bug Fixes
+
+* グラフ種別とアプリ世代の検出ロジックを分離しDBグラフ誤検出を修正 ([8a6421d](https://github.com/YU000jp/logseq-plugin-flex-date-format/commit/8a6421d3501bd06c173d714173f49254a0aa02cd))
+
 # [1.11.0](https://github.com/YU000jp/logseq-plugin-flex-date-format/compare/v1.10.0...v1.11.0) (2025-12-06)
 
 
