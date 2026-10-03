@@ -5,7 +5,7 @@ import { openStartWindow } from './demoDateFormat'
 import { journalLink, processTimestampElement } from './journalLink'
 import { querySelectorAllLinks as domQuerySelectorAllLinks, revertQuerySelectorAllLinks as domRevertQuerySelectorAllLinks, startObservers as domStartObservers, stopObservers as domStopObservers } from './dom'
 import { getSettingsSnapshot } from './settingsManager'
-import { CSS_HISTORY_KEY, CSS_HISTORY_STYLE, CSS_KEY, CSS_STYLE, MESSAGE_ID, SELECTOR_BLOCK_TAGS } from './constants'
+import { CSS_HISTORY_KEY, CSS_HISTORY_STYLE, CSS_KEY, CSS_STYLE, MESSAGE_ID } from './constants'
 import { settingsTemplate } from './settings'
 import af from "./translations/af.json"
 import de from "./translations/de.json"
@@ -34,21 +34,28 @@ import { removeProvideStyle } from './lib'
 export class FlexibleDateFormatPlugin {
   private userDateFormat: string = ""
   private logseqVersion: string = ""
-  private logseqVersionMd: boolean = false
-  private logseqDbGraph: boolean = false
+  private appDbEra: boolean = false // 新UI世代(DB系アプリ: 0.11.x以降 / 2.x)か
+  private isDbGraph: boolean = false // 現在のグラフがDBグラフか
 
   /**
-   * Get the current Logseq version MD flag.
+   * Get the file-graph flag (現在のグラフがファイルベースか)。
    */
   public getLogseqVersionMd(): boolean {
-    return this.logseqVersionMd
+    return !this.isDbGraph
   }
 
   /**
    * Get the current DB graph flag.
    */
   public getDbGraph(): boolean {
-    return this.logseqDbGraph
+    return this.isDbGraph
+  }
+
+  /**
+   * Get the app generation flag (新UI世代か)。
+   */
+  public getAppDbEra(): boolean {
+    return this.appDbEra
   }
 
   /**
@@ -63,8 +70,8 @@ export class FlexibleDateFormatPlugin {
    */
   public async initialize(): Promise<void> {
     // Version and graph checks
-    this.logseqVersionMd = await this.checkLogseqVersion()
-    this.logseqDbGraph = await this.checkDbGraph()
+    await this.fetchAppInfo()
+    await this.checkDbGraph()
 
     // Localization setup
     await l10nSetup({
@@ -124,7 +131,7 @@ export class FlexibleDateFormatPlugin {
       journalLink,
       processTimestampElement,
       this.userDateFormat,
-      { getDbGraphFlag: () => this.logseqDbGraph, getLogseqVersionMd: () => this.logseqVersionMd }
+      { getAppDbEra: () => this.appDbEra, getFileGraph: () => !this.isDbGraph }
     )
   }
 
@@ -136,7 +143,7 @@ export class FlexibleDateFormatPlugin {
       journalLink,
       processTimestampElement,
       () => this.userDateFormat,
-      { getDbGraphFlag: () => this.logseqDbGraph, getLogseqVersionMd: () => this.logseqVersionMd }
+      { getAppDbEra: () => this.appDbEra, getFileGraph: () => !this.isDbGraph }
     )
   }
 
@@ -149,10 +156,10 @@ export class FlexibleDateFormatPlugin {
     logseq.App.onSidebarVisibleChanged(() => setTimeout(() => this.processAllLinks(), 50))
     logseq.beforeunload(async () => {
       domStopObservers()
-      domRevertQuerySelectorAllLinks({ getDbGraphFlag: () => this.logseqDbGraph, getLogseqVersionMd: () => this.logseqVersionMd })
+      domRevertQuerySelectorAllLinks({ getAppDbEra: () => this.appDbEra, getFileGraph: () => !this.isDbGraph })
     })
     logseq.App.onCurrentGraphChanged(async () => {
-      this.logseqDbGraph = await this.checkDbGraph()
+      await this.checkDbGraph()
     })
   }
 
@@ -166,7 +173,7 @@ export class FlexibleDateFormatPlugin {
         setTimeout(() => logseq.updateSettings({ loadDateFormatDemo: false }), 300)
       } else
         if (this.shouldReprocessLinks(newSet, oldSet)) {
-          domRevertQuerySelectorAllLinks({ getDbGraphFlag: () => this.logseqDbGraph, getLogseqVersionMd: () => this.logseqVersionMd })
+          domRevertQuerySelectorAllLinks({ getAppDbEra: () => this.appDbEra, getFileGraph: () => !this.isDbGraph })
           setTimeout(() => this.processAllLinks(), 50)
         }
       if (oldSet.booleanExcludeJournalLinksFromHistory !== newSet.booleanExcludeJournalLinksFromHistory) {
@@ -198,37 +205,29 @@ export class FlexibleDateFormatPlugin {
   }
 
   /**
-   * Check Logseq version and determine if it's MD model.
+   * Fetch app version and determine the app generation (バージョン解析のみ。
+   * グラフ種別の判定には使わない)。
    */
-  private async checkLogseqVersion(): Promise<boolean> {
-    const logseqInfo = (await logseq.App.getInfo("version")) as AppInfo | any
-    const version = logseqInfo.match(/(\d+)\.(\d+)\.(\d+)/)
-    if (version) {
-      this.logseqVersion = version[0]
-      if (this.logseqVersion.match(/0\.([0-9]|10)\.\d+/)) {
-        this.logseqVersionMd = true
-        return true
-      } else {
-        this.logseqVersionMd = false
-      }
-    } else {
-      this.logseqVersion = "0.0.0"
-    }
-    return false
+  private async fetchAppInfo(): Promise<void> {
+    const info = (await logseq.App.getInfo()) as AppInfo | null
+    const version = typeof info?.version === "string" ? info.version : "0.0.0"
+    const m = version.match(/(\d+)\.(\d+)\.(\d+)/)
+    this.logseqVersion = m ? m[0] : version
+    // 0.11.x以降 or 2.x = DB系アプリ(新UI)。OG 1.xは旧UI系統なので対象外
+    this.appDbEra = m !== null && (Number(m[1]) >= 2 || (Number(m[1]) === 0 && Number(m[2]) >= 11))
   }
 
   /**
-   * Check if current graph is DB graph.
+   * Check if current graph is DB graph (公式API。0.10.xホストでは未実装のため false)。
    */
   private async checkDbGraph(): Promise<boolean> {
-    const element = parent.document.querySelector(SELECTOR_BLOCK_TAGS) as HTMLDivElement | null
-    if (element) {
-      this.logseqDbGraph = true
-      return true
-    } else {
-      this.logseqDbGraph = false
-      return false
+    try {
+      const value = await logseq.App.checkCurrentIsDbGraph()
+      this.isDbGraph = typeof value === "boolean" ? value : false
+    } catch {
+      this.isDbGraph = false // API非搭載ホスト = DBグラフを開けない旧アプリ
     }
+    return this.isDbGraph
   }
 }
 

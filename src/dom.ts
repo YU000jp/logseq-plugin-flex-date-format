@@ -12,7 +12,7 @@ import { ROOT_QUERY, buildTitleSelector, buildTitleSelectorLocalized, ID_MAIN_CO
  * Interface for journal link processing function.
  */
 export interface JournalLinkProcessor {
-  (journalLinkElement: HTMLElement, preferredDateFormat: string, logseqVerMd: boolean): Promise<void>
+  (journalLinkElement: HTMLElement, preferredDateFormat: string, isFileGraph: boolean): Promise<void>
 }
 
 /**
@@ -26,8 +26,10 @@ export interface TimestampProcessor {
  * Interface for flag getters.
  */
 export interface FlagGetters {
-  getDbGraphFlag(): boolean
-  getLogseqVersionMd(): boolean
+  /** アプリ世代が新UI(DB系アプリ)か — DOMセレクタ分岐用 */
+  getAppDbEra(): boolean
+  /** 現在のグラフがファイルベースか — クエリ分岐用 */
+  getFileGraph(): boolean
 }
 
 /**
@@ -51,13 +53,13 @@ export class DOMManager {
     if (this.processingTitleQuery) return
     this.processingTitleQuery = true
 
-    const logseqDbGraph = flagGetters.getDbGraphFlag()
-    const logseqVersionMd = flagGetters.getLogseqVersionMd()
+    const appDbEra = flagGetters.getAppDbEra()
+    const isFileGraph = flagGetters.getFileGraph()
 
     // Process journal links
     const rootElement = parent.document.body.querySelector(ROOT_QUERY) as HTMLElement | null
     if (rootElement) {
-      const journalSelector = buildTitleSelector(logseqDbGraph, logseqVersionMd)
+      const journalSelector = buildTitleSelector(appDbEra, !appDbEra)
       const journalElements = rootElement.querySelectorAll(journalSelector)
 
       // Filter elements that contain 4-digit numbers in their text content
@@ -74,7 +76,7 @@ export class DOMManager {
 
       filteredJournalElements.forEach((el, index) => {
         const htmlEl = el as HTMLElement
-        journalLinkFn(htmlEl, preferredDateFormat, logseqVersionMd)
+        journalLinkFn(htmlEl, preferredDateFormat, isFileGraph)
       })
     }
 
@@ -102,12 +104,11 @@ export class DOMManager {
    * Revert all processed links and timestamps.
    */
   public revertQuerySelectorAllLinks(flagGetters: FlagGetters): void {
-    const logseqDbGraph = flagGetters.getDbGraphFlag()
-    const logseqVersionMd = flagGetters.getLogseqVersionMd()
+    const appDbEra = flagGetters.getAppDbEra()
 
     // Revert journal links
     ; (parent.document.querySelectorAll(
-      buildTitleSelectorLocalized(logseqDbGraph, logseqVersionMd)) as NodeListOf<HTMLElement>).forEach(async (titleElement) => {
+      buildTitleSelectorLocalized(appDbEra, !appDbEra)) as NodeListOf<HTMLElement>).forEach(async (titleElement) => {
         titleElement.removeAttribute('data-localize')
         if (titleElement.dataset.ref) titleElement.textContent = titleElement.dataset.ref
       })
@@ -182,15 +183,15 @@ export class DOMManager {
     })
 
     // Individual observers for journal link elements
-    const logseqDbGraph = flagGetters.getDbGraphFlag()
-    const logseqVersionMd = flagGetters.getLogseqVersionMd()
-    const journalSelector = buildTitleSelector(logseqDbGraph, logseqVersionMd)
+    const appDbEra = flagGetters.getAppDbEra()
+    const isFileGraph = flagGetters.getFileGraph()
+    const journalSelector = buildTitleSelector(appDbEra, !appDbEra)
     const journalElements = parent.document.querySelectorAll(journalSelector)
     journalElements.forEach((el) => {
       const observer = new MutationObserver(async (mutations) => {
         for (const mutation of mutations) {
           if (mutation.type === 'characterData' || (mutation.type === 'attributes' && mutation.attributeName === 'data-ref')) {
-            await journalLinkFn(el as HTMLElement, preferredDateFormatGetter(), logseqVersionMd)
+            await journalLinkFn(el as HTMLElement, preferredDateFormatGetter(), isFileGraph)
             break
           }
         }
