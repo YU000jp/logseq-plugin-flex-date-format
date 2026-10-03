@@ -204,20 +204,24 @@ export const YEAR_PATTERNS = {
   ]
 }
 
-/** Build selector string used to find title / link nodes for localization. */
-export const buildTitleSelector = (dbGraph: boolean, versionMd: boolean) =>
-  dbGraph === true
+/** Build selector string used to find title / link nodes for localization.
+ *  DOM構造はアプリ世代(新UI/旧UI)で分岐する。グラフ種別ではないことに注意。
+ *  @param isDbEraApp DB系アプリ世代(0.11.x以降 / 2.x、新UI)か
+ *  @param isMdEraApp 旧UI世代(0.10.x / OG 1.x)か
+ */
+export const buildTitleSelector = (isDbEraApp: boolean, isMdEraApp: boolean) =>
+  isDbEraApp === true
     ? "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis:not([data-localize]) "
     : "#main-content-container div:is(.journal,.is-journals) h1.title:not([data-localize]), :is(#main-content-container,#right-sidebar) a[data-ref]:not([data-localize]), #left-sidebar li span.page-title:not([data-localize]), #right-sidebar div.sidebar-item " +
-    (versionMd === true
+    (isMdEraApp === true
       ? 'div.page-title>span+span.text-ellipsis:not([data-localize])'
       : 'div.page-title>div+span.text-ellipsis:not([data-localize])')
 
-export const buildTitleSelectorLocalized = (dbGraph: boolean, versionMd: boolean) =>
-  dbGraph === true
+export const buildTitleSelectorLocalized = (isDbEraApp: boolean, isMdEraApp: boolean) =>
+  isDbEraApp === true
     ? "#main-content-container div:is(#journals,.is-journals) div.ls-page-title span.block-title-wrap[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item div.page-title>div+span.text-ellipsis[data-localize]"
     : "#main-content-container div:is(.journal,.is-journals) h1.title[data-localize], :is(#main-content-container,#right-sidebar) a[data-ref][data-localize], #left-sidebar li span.page-title[data-localize], #right-sidebar div.sidebar-item " +
-    (versionMd === true
+    (isMdEraApp === true
       ? 'div.page-title>span+span.text-ellipsis[data-localize]'
       : 'div.page-title>div+span.text-ellipsis[data-localize]')
 

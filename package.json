@@ -18,7 +18,7 @@
         "prod": "vite build"
     },
     "dependencies": {
-        "@logseq/libs": "^0.0.17",
+        "@logseq/libs": "^0.2.12",
         "date-fns": "^4.1.0",
         "logseq-l10n": "^0.2.0"
     },

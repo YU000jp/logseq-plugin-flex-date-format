@@ -16,12 +16,12 @@ export class JournalLinkProcessor {
   static async processJournalLink(
     journalLinkElement: HTMLElement,
     preferredDateFormat: string,
-    logseqVerMd: boolean
+    isFileGraph: boolean
   ): Promise<void> {
     try {
       if (!journalLinkElement.textContent || journalLinkElement.dataset.localize === 'true') return
 
-      const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent, logseqVerMd) as PageEntity["journalDay"] | null
+      const journalDay = await doesPageExistAsJournal(journalLinkElement.textContent, isFileGraph) as PageEntity["journalDay"] | null
       let parsedJournalDay: PageEntity["journalDay"] | null = journalDay
       const settings = getSettingsSnapshot()
 

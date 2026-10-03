@@ -12,12 +12,13 @@ export const advancedQuery = async <T>(query: string, ...input: Array<string>): 
 }
 
 // ページ名からjournalDayを取得するクエリ
-export const doesPageExistAsJournal = async (pageName: string, logseqVerMd: boolean): Promise<PageEntity["journalDay"] | null> => {
+// isFileGraph: 現在のグラフがファイルベースか(ファイルグラフでは :block/original-name を使う)
+export const doesPageExistAsJournal = async (pageName: string, isFileGraph: boolean): Promise<PageEntity["journalDay"] | null> => {
   const result = await advancedQuery<{ "journalDay": PageEntity["journalDay"] }[]>(`
     [:find (pull ?b [:block/journal-day])
      :in $ ?name
      :where
-     [?b :block/${logseqVerMd === true ? "original-name" : "title"} ?name]
+     [?b :block/${isFileGraph === true ? "original-name" : "title"} ?name]
      [?b :block/journal-day ?journal-day]]`,
     `"${pageName}"`)
   return result?.[0]?.["journal-day"] ?? null
